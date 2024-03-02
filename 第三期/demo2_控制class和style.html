@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <style>
+        .s1{
+            width: 200px;
+            height: 200px;
+            border: 3px solid cadetblue;
+            font-size: 20px;
+        }
+
+        .pink{
+            background-color: red;
+        }
+        .big{
+            width: 500px;
+            height: 500px;
+        }
+
+
+    </style>
+    <div id="app_1" >
+
+        <div v-for="item in div_1" :key="item.id">
+
+            <div :class="{s1:true,pink:item.id==index}" @click="index=item.id">
+                {{item.name}}
+            </div>
+        </div>
+
+    </div>
+
+
+<!--    <div id="app">-->
+<!--            <div :class="{s1:class1.s1,pink:class1.pink}">-->
+<!--                框1-->
+<!--            </div>-->
+<!--            <div :class="class2">-->
+<!--                    框2-->
+<!--            </div>-->
+<!--    </div>-->
+
+</head>
+<body>
+
+
+<script>
+<!--点击高亮设计-->
+    let vue1= new Vue({
+        el:"#app_1",
+        data:{
+            index:3,
+            div_1:[
+                {id:1,name:"一号"},
+                {id:2,name:"二号"},
+                {id:3,name:"三号"},
+            ]
+        },
+        methods:{
+            bd(){
+                console.log("组织")
+            },
+            DJ(e){
+                console.log("回车")
+                console.log(e)
+            }
+
+        },
+    })
+
+
+
+
+
+   let vue= new Vue({
+        el:"#app",
+       data:{
+            class1:{s1:true,pink:false,big:false},  //通过对象加
+            class2:["s1","pink"]  //通过数组加
+       },
+       methods:{
+            bd(){
+                console.log("组织")
+            },
+            DJ(e){
+                console.log("回车")
+                console.log(e)
+            }
+
+       },
+    })
+
+
+
+
+</script>
+</body>
+</html>

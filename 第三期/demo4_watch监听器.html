@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<!--    请求器-->
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+    <style>
+        .s1{
+            width: 200px;
+            height: 100px;
+            border: 3px solid cadetblue;
+            font-size: 20px;
+        }
+
+        .pink{
+            background-color: red;
+        }
+        .big{
+            width: 500px;
+            height: 500px;
+        }
+
+
+    </style>
+    <div id="app_1" >
+
+        <div v-for="item in div_1" :key="item.id">
+
+            <div :class="{s1:true,pink:true}">
+                {{item.name}}&nbsp;&nbsp;&nbsp;剩余数量:{{item.sum}}
+            </div>
+        </div>
+
+        <div>
+            <p>当前一共剩余:{{suanSum}}</p>
+        </div>
+         <br>
+        <div>
+           <input v-model="text.text_1" type="text" style="width: 100px;height: 100px">
+            <br>
+            <br>
+           <input v-model="text.text_2" type="text" style="width: 100px;height: 100px">
+        </div>
+
+    </div>
+
+
+
+</head>
+<body>
+
+
+<script>
+<!--点击高亮设计-->
+    let vue1= new Vue({
+        el:"#app_1",
+        data:{
+            index:3,
+            div_1:[
+                {id:1,name:"篮球",sum:1},
+                {id:2,name:"足球",sum:7},
+                {id:3,name:"台球",sum:4},
+            ],
+            text:{
+                text_1:"",
+                text_2:"",
+            },
+            sum:0,
+
+        },
+        // 监听器如果发生改变就使用当前的这个
+        watch:{
+            //这个是监听对象如果对象里面任何一个发生改变那边这里都会拿到
+            'div_1':{
+                deep:true, //标识监听整个对象有没有发生改变里面有一个改变就改变
+                immediate:true,  //加了这个在一进界面就进行界面的刷新
+                handler(xing){
+                    console.log("修改了")
+                    console.log(xing);
+                }
+
+
+            },
+            async 'text.text_1'(xing, jiu) {
+                console.log("text->>新值:" + xing + "  旧值：" + jiu)
+
+
+             let data=await axios({
+                 url:"http://127.0.0.1:21000/cc",
+                 params:{
+                     name:xing
+                 },
+                 headers: {
+                     "Content-Type": "application/json", // 设置请求头的Content-Type字段为application/json
+                     "Authorization": "Bearer token" // 设置请求头的Authorization字段为Bearer token，其中token是你的身份验证令牌
+                 }
+
+             })
+
+                console.log(data);
+                console.log(data.data);
+
+                this.text.text_2 = "修改了" + this.sum + "次";
+                this.sum++;
+
+
+            }
+
+        },
+        computed:{
+            //计算一共值值 如果上面的依赖变了立刻重写计算
+            suanSum(){
+                console.log("执行计算属性更新")
+                let sum=0;
+                for(let i of this.div_1){
+                    sum+=i.sum;
+                }
+                return sum;
+            },
+        },
+
+    })
+
+
+
+
+
+</script>
+</body>
+</html>

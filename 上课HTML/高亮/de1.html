@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/androidstudio.min.css">
+</head>
+<body>
+
+
+<pre><code class="language-java"><span class="hljs-keyword">import</span> java.sql.Connection;
+    <span class="hljs-keyword">import</span> java.sql.DriverManager;
+    <span class="hljs-keyword">import</span> java.sql.SQLException;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DatabaseConnector</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">DATABASE_URL</span> <span class="hljs-operator">=</span> <span class="hljs-string">"jdbc:mysql://localhost:3306/mydb"</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">DATABASE_USER</span> <span class="hljs-operator">=</span> <span class="hljs-string">"root"</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">DATABASE_PASSWORD</span> <span class="hljs-operator">=</span> <span class="hljs-string">"root"</span>;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
+    <span class="hljs-type">Connection</span> <span class="hljs-variable">connection</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// Load the MySQL JDBC driver</span>
+    Class.forName(<span class="hljs-string">"com.mysql.jdbc.Driver"</span>);
+
+    <span class="hljs-comment">// Create a connection to the database</span>
+    connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
+
+    <span class="hljs-keyword">if</span> (connection != <span class="hljs-literal">null</span>) {
+    System.out.println(<span class="hljs-string">"Successfully connected to MySQL database test"</span>);
+    }
+
+    } <span class="hljs-keyword">catch</span> (ClassNotFoundException e) {
+    System.out.println(<span class="hljs-string">"Could not find database driver "</span> + e.getMessage());
+    } <span class="hljs-keyword">catch</span> (SQLException e) {
+    System.out.println(<span class="hljs-string">"Could not connect to database "</span> + e.getMessage());
+    } <span class="hljs-keyword">finally</span> {
+    <span class="hljs-keyword">if</span> (connection != <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">try</span> {
+    connection.close();
+    } <span class="hljs-keyword">catch</span> (SQLException e) {
+    System.out.println(<span class="hljs-string">"Could not close database connection "</span> + e.getMessage());
+    }
+    }
+    }
+    }
+    }
+</code></pre>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js">
+</script>
+<script>hljs.highlightAll();</script>
+</body>
+
+</html>
+

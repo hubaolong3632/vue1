@@ -1,0 +1,51 @@
+<!--
+v-html 是动态设置当前元素innerhtml
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<!--
+v-show 最简单的控制显示隐藏 隐藏了之后还在
+v-if 显示的时候界面有隐藏的时候在整个都移除了
+v-else
+v-else-if
+
+-->
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<body>
+    <div id="app">
+
+            <div v-show="flag">我是盒子show</div>
+            <div v-if="flag">我是盒子if1</div>
+             <div v-else="k">我是盒子else if</div>
+
+
+                <div v-if="k<10">成绩不及格</div>
+                <div v-else-if="k<60">我及格了</div>
+               <div v-else-if="k<90">我优秀了</div>
+               <div v-else-if="k<=100">超级优秀</div>
+    </div>
+
+<script>
+
+    const app=new Vue({
+        el:"#app",
+        data:{
+            flag:false,
+            k:90,
+        }
+
+    })
+
+
+</script>
+
+
+</body>
+</html>

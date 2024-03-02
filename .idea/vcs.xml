@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/第四期/Esp32Vehicle/vehicle" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/第四期/比赛项目一/xm1" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/第四期/比赛项目二/demo1" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/第四期/项目1/demo2" vcs="Git" />
+  </component>
+</project>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <style>
+        .s1{
+            width: 200px;
+            height: 100px;
+            border: 3px solid cadetblue;
+            font-size: 20px;
+        }
+
+        .pink{
+            background-color: red;
+        }
+        .big{
+            width: 500px;
+            height: 500px;
+        }
+
+
+    </style>
+    <div id="app_1" >
+
+        <div v-for="item in div_1" :key="item.id">
+
+            <div :class="{s1:true,pink:true}">
+                {{item.name}}&nbsp;&nbsp;&nbsp;剩余数量:{{item.sum}}
+            </div>
+        </div>
+
+        <div>
+            <p>当前一共剩余:{{suanSum}}</p>
+            <p>当前一共剩余:{{suanSum=2}}</p>
+        </div>
+
+    </div>
+
+
+
+</head>
+<body>
+
+
+<script>
+<!--点击高亮设计-->
+    let vue1= new Vue({
+        el:"#app_1",
+        data:{
+            index:3,
+            div_1:[
+                {id:1,name:"篮球",sum:1},
+                {id:2,name:"足球",sum:7},
+                {id:3,name:"台球",sum:4},
+            ]
+        },
+        methods:{
+            bd(){
+                console.log("组织")
+            },
+            DJ(e){
+                console.log("回车")
+                console.log(e)
+            }
+
+        },
+        //用这个是不能加括号的
+        computed:{
+            //计算一共值值 如果上面的依赖变了立刻重写计算
+            suanSum(){
+                console.log("sd")
+                let sum=0;
+                for(let i of this.div_1){
+                    sum+=i.sum;
+                }
+                return sum;
+            },
+        },
+    })
+
+
+
+
+
+</script>
+</body>
+</html>

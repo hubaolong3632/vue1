@@ -1,0 +1,45 @@
+<!--
+v-html 是动态设置当前元素innerhtml
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<body>
+    <div id="app">
+            <h1>{{msg}}</h1>
+            <h5>{{id}}</h5>
+            <h5>{{shuzi>12?"大于":"等于"}}</h5>
+            <h5>{{cs1.name}}</h5>
+        字符：
+            <div v-html="html_h1"></div>
+    </div>
+
+<script>
+
+    const app=new Vue({
+        el:"#app",
+        data:{
+            msg:"halo",
+            id:"12",
+            shuzi:12,
+            cs1:{name:"张三",age:"18"},
+            html_h1:`<a href="http://www.baidu.com">
+                    官网
+                    `
+        }
+    })
+
+    app.$data.msg="asjkdasjdhkaj"
+
+</script>
+
+
+</body>
+</html>

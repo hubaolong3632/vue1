@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <div id="app">
+<!--        带两个监听函数-->
+        <input @keyup.enter="DJ" @keyup.esc="DJ" :value="text1" type="text">
+<!--        连续的绑定-->
+        <input @keyup.shift.enter="DJ" :value="text2" type="text">
+
+        <input @click.stop="bd()" value="阻止事件冒泡" type="button">
+        <a @click.prevent href="https://www.baidu.com">阻止超链接跳转</a>
+        <br>
+        <br>
+        首尾空格:<input v-model.trim="tx1">
+<!--        转成int类型-->
+        转int:<input v-model.number="tx2">
+
+    </div>
+
+</head>
+<body>
+
+
+<script>
+   let vue= new Vue({
+        el:"#app",
+       data:{
+            text1:"enter或者esc",
+            text2:"shift+enter触发",
+            tx1:"",
+            tx2:"",
+
+       },
+       methods:{
+            bd(){
+                console.log("组织")
+            },
+            DJ(e){
+                console.log("回车")
+                console.log(e)
+            }
+
+       },
+    })
+
+
+
+
+</script>
+</body>
+</html>

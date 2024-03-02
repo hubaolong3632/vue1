@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<!--
+v-on:click="count++" 加加功能
+@click="count++ 方法加
+-->
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<body>
+    <div id="app">
+        <span>{{count}}</span>
+        <button v-on:click="count++">减</button>
+        <button v-on:click="count++">（方法1加号）</button>
+        <button @click="count++">（方法2加号）</button>
+
+        <br>
+        <br>
+        <button @click="h1">隐藏属性</button>
+        <p v-show="no">我是要被隐藏的动画</p>
+    </div>
+
+<script>
+
+    const app=new Vue({
+        el:"#app",
+        data:{
+            count:0,
+            no:true,
+        },
+        methods:{
+            h1(){
+                // app.no=false;
+                this.no=!this.no;
+                console.log("调用到函数")
+            }
+
+        }
+
+    })
+
+
+</script>
+</body>
+</html>

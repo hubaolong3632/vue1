@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<head>
+    <title>Highlight.js Example</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/androidstudio.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad(); //启用
+    </script>
+</head>
+<body>
+<p>下面是一个使用highlight.js库高亮显示的代码块：</p>
+<pre>
+<!--    <code class="language-javascript">-->
+<!--    <code class="language-java">-->
+    <code class="language-java">
+        你哈啊
+    @Resource
+    GptImageServer gptImageServer;
+    @Test
+    @DisplayName("标清")
+    void contextLoads3() {
+        ImageRequsetModel imageRequsetModel = new ImageRequsetModel()
+                .setModel("dall-e-3")
+//                .setSize("1792x1024")
+//                .setSize("1024x1024")
+                .setSize("1024x1792")
+                .setN(2)
+                .setPrompt("""
+
+                    音乐网站主页 手机版的，做的和主页一样就可以，直接显示网站
+
+
+
+                        """)
+                .setStyle("vivid")//自然
+//                .setStyle("natural") //生动
+                .setQuality("standard"); //标清
+//                .setQuality("hd"); //高清
+
+        ImageResponseModel imageResponseModel = gptImageServer.image40(imageRequsetModel);
+//        System.out.println(UtioY.JSON(imageResponseModel));
+        for (ImageResponseDateModel datum : imageResponseModel.getData()) {
+            System.out.println(datum.getUrl());
+        }
+    }
+  </code></pre>
+</body>
+</html>

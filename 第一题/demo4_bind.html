@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<!--
+ v-bind  动态设置src地址
+ :src="src_1"  也可以改成这个
+-->
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<body>
+    <div id="app">
+         <img v-bind:src="src_1" >
+         <img :src="src_1" >
+
+
+        <button @click="index++">上一张</button>
+<!--        <button v-show="index<list.length-1" @click="index&#45;&#45;">下一张</button>-->
+        <button  @click="index--">下一张</button>
+        <img :src="list[index]" >
+    </div>
+
+<script>
+
+    const app=new Vue({
+        el:"#app",
+        data:{
+            src_1:"image/tp1.jpg",
+            index:3,
+            list:[
+                'image/tp2.png',
+                'image/tp3.png',
+                'image/tp4.png',
+                'image/tp5.png',
+            ]
+        },
+        methods:{
+            h1(){
+            }
+
+        }
+
+    })
+
+
+</script>
+</body>
+</html>

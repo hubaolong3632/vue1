@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+  <title>Highlight.js Example</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/androidstudio.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+</head>
+<body>
+<pre>
+<!--    class="language-html"-->
+    <code style="font-size: 5px">
+    <!--    <code class="language-javascript">-->
+<!--    <code class="language-java">-->
+
+
+import requests
+import re
+
+src = requests.get('http://www.wxjsxy.com/')
+text = src.content.decode()
+
+title = r' KH-a href="/xxdt/content_[0-9]{5}" target="_blank" title="标题：(.*?)&#xD;&#xA;点击数：'
+title_list = re.findall(title, text, re.S)
+
+for i in title_list:
+    print(i)
+
+
+  </code></pre>
+</body>
+</html>

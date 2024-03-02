@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+
+    <style>
+        .s1{
+            width: 200px;
+            height: 100px;
+            border: 3px solid cadetblue;
+            font-size: 20px;
+        }
+
+        .pink{
+            background-color: red;
+        }
+        .big{
+            width: 500px;
+            height: 500px;
+        }
+
+
+    </style>
+    <div id="app_1" >
+
+        <input type="button" value="➖" @click="sum--">
+        <span>{{sum}}</span>
+        <input type="button" value="➕" @click="sum++">
+
+    </div>
+
+
+
+</head>
+<body>
+
+
+<script>
+<!--点击高亮设计-->
+    let vue1= new Vue({
+        el:"#app_1",
+        data:{
+            sum:3,
+        },
+        //点击按钮
+        methods:{
+
+
+        },
+        //用这个是不能加括号的
+        computed:{
+
+
+
+        },
+        //事件监听
+        wait:{
+
+
+
+
+        },
+
+    //    这里都是钩子
+    //    创建阶段（准备数据）
+        beforeCreate(){
+            console.log("创建之前",this.sum) //在这里拿数据的话在创建之前那肯定拿不到数据的
+        },
+
+        //创建之后
+        created(){
+            console.log("创建之后",this.sum) //数据拿到之后就可以开始了
+        },
+    //     挂载阶段（渲染模板）
+        beforeMount(){
+
+            //渲染之前就只有模板 <span>{{sum}}</span>
+            console.log("挂载之前",document.querySelector('body').innerHTML)
+        },
+        async mounted() {
+            //渲染之后就可以看到放进去了 <span>3</span>
+            console.log("挂载之后", document.querySelector('body').innerHTML)
+
+        },
+    //    更新阶段
+    //    更新之前
+        beforeUpdate(){
+            console.log("更新之前: 数据为",this.sum)
+
+        },
+        // 更新之后
+        updated(){
+            console.log("更新之后: 数据为",this.sum)
+        },
+
+
+        //卸载阶段
+        async beforeDestroy() {
+            console.log("卸载前")
+
+
+            let data = await axios({
+                url: "http://127.0.0.1:21000/cc",
+                params: {
+                    name: "卸载前1"
+                },
+                // headers: {
+                //     "Content-Type": "application/json", // 设置请求头的Content-Type字段为application/json
+                //     "Authorization": "Bearer token" // 设置请求头的Authorization字段为Bearer token，其中token是你的身份验证令牌
+                // }
+
+            })
+            console.log(data.data);
+
+        },
+
+        //卸载之后
+        async destroyed() {
+
+            // vue1.$destroy()  这个函数可以执行卸载操作
+            console.log("卸载之后")
+
+            let data = await axios({
+                url: "http://127.0.0.1:21000/cc",
+                params: {
+                    name: "卸载之后1"
+                },
+
+
+            })
+            console.log(data.data)
+        },
+
+
+
+
+
+
+    })
+
+
+
+
+</script>
+</body>
+</html>

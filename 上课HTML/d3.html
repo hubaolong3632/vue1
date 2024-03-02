@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .triangle-div {
+            width: 100px;
+            height: 100px;
+            background-color: #f2f2f2;
+            position: relative;
+        }
+        .triangle-div::before,
+        .triangle-div::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+        .triangle-div::before {
+            top: 0;
+            border-width: 0 50px 50px 50px;
+            border-color: transparent transparent rgba(255, 9, 166, 0.38) transparent; /* 边框颜色 RGBA 颜色 */
+        }
+        .triangle-div::after {
+            bottom: 0;
+            border-width: 50px 50px 0 50px;
+            border-color: rgba(255, 9, 166, 0.38) transparent transparent transparent; /* 边框颜色 RGBA 颜色 */
+        }
+    </style>
+</head>
+<body>
+<div class="triangle-div"></div>
+</body>
+</html>

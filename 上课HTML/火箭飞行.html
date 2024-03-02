@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+    .m2{
+        position: absolute; /*开启 相对定位*/
+        top: 80%;
+        left: 50%;
+        height:100px;
+        width:100px;
+    }
+
+</style>
+<div class="div1">
+    <img id="huoGian" class="m2" src="image/c2.gif" >
+</div>
+<button onclick="start()">启动</button>
+
+<script>
+let interVar;
+let huoGian=document.getElementById("huoGian")
+let sum=80;
+function start(){
+    interVar=setInterval(()=>{
+        huoGian.style.top=sum+"%";
+        sum--;
+
+        if(sum==-10){
+            clearInterval(interVar)
+            huoGian.style.top=80+"%";
+            sum=80;
+        }
+    },10)
+}
+</script>
+
+</body>
+</html>

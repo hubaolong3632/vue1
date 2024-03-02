@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+</head>
+<body>
+<!--
+
+
+  :key="time.id"加这个会移除对应的样式
+
+
+
+  -->
+
+<div id="app">
+    <ol>
+        <!-- 创建一个   todo-item 组件的实例 -->
+        <todo-item>111</todo-item>
+    </ol>
+</div>
+
+<div id="app-7">
+    <div v-for="(time,index) of groceryList" :key="time.id">
+        <tr>{{time.id}}</tr>
+        <tr>{{time.text}}</tr>
+        <tr><button @click="abc(time,index)">删除</button></tr>
+    </div>
+
+</div>
+
+
+<script>
+
+
+    var app7 = new Vue({
+        el: '#app-7',
+        data: {
+            groceryList: [
+                { id: 4, text: '蔬菜' },
+                { id: 5, text: '奶酪'},
+                { id: 6, text: '对象'},
+                { id: 7, text: '阿吧啊吧'}
+            ],
+        },methods:{  //最基本的方法
+            abc(id,index){
+                this.groceryList.splice(index,1)
+            }
+
+        }
+    })
+
+
+
+
+
+</script>
+
+</body>
+</html>

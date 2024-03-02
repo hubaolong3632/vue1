@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<style>
+
+</style>
+
+
+<div id="fd" style="position: absolute;background-color: red;height: 100px;width: 300px  ">
+    <button onclick="alert(`成功`)">点击打开</button>
+</div>
+
+<script>
+    let innerHeight=window.innerHeight  //高
+    let innerWidth = window.innerWidth;//宽
+     let fd=  document.getElementById(`fd`)
+
+    let top1=0
+    let left1=0;
+     let topBool=0,leftBool=0;
+
+     console.log(innerHeight)
+    setInterval(()=> {
+
+        if(top1<=10){
+            topBool=10;
+        }else if(top1>=innerHeight-100){
+            topBool=-10;
+        }
+
+        if(left1<=10){
+            leftBool=10;
+
+        }else if(left1>=innerWidth-300){
+            leftBool=-10;
+        }
+
+
+
+        left1+=leftBool;
+        top1+=topBool;
+        fd.style.top=`${top1}px`
+        fd.style.left=`${left1}px`
+
+    },10);
+
+</script>
+
+
+</body>
+</html>
