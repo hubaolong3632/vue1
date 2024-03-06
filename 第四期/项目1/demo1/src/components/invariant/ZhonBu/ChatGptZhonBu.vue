@@ -1,9 +1,17 @@
 <template>
 <div>
-
+<!--    <hig-hlight-v1></hig-hlight-v1>-->
+<!--  <hig-hlight-v2></hig-hlight-v2>-->
     <!--设置电脑和手机默认都兼容-->
 <!--    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
 
+  <!--  <pre v-highlightjs>-->
+  <!--    <code class="html">-->
+  <!--      &lt;hahaha&gt;-->
+  <!--      -->
+  <!--      -->
+  <!--     </code>-->
+  <!--  </pre> -->
 
     <el-container>
 
@@ -15,23 +23,23 @@
 <!--      右边-->
       <el-container  style="height: 93vh">
 
-        <!--      右边 上面-->
-        <el-main style="background-color: rgba(204,0,0,0.03);  overflow: auto;">
+        <!--      右边 上面   在这里设置选择-->
+        <div  style="overflow: auto;  height: 100vh">
+          <el-main  ref="messageShow">
 
+            <div :style="{'margin-top':index==0?null:'100px'}"   class="tuBiao1" v-for="(time,index) of drawingClass" :key="time.id">
+              <!--              用户问题-->
+              <el-row :gutter="20" >
+                <el-col :span="2" >
 
-          <div :style="{'margin-top':index==0?null:'100px'}"   class="tuBiao1" v-for="(time,index) of drawingClass" :key="time.id">
-            <!--              用户问题-->
-            <el-row :gutter="20" >
-              <el-col :span="2" >
+                  <div class="el-icon-user" style="margin-top: 15px"></div>
 
-                <div class="el-icon-user" style="margin-top: 15px"></div>
-
-              </el-col>
-              <el-col :span="22">
-                <div style=" text-align: left;">
+                </el-col>
+                <el-col :span="22">
+                  <div style=" text-align: left;">
 
                     <!--  显示当前回答的文字-->
-                      <span style="font-size: 15px;color:#a9a8a8 ;" >
+                    <span style="font-size: 15px;color:#a9a8a8 ;" >
                          <span v-if="time.bol==false">
 
                             {{time.userMessage.slice(0,text.textSize)}}{{time.userMessage.length>text.textSize?".......":""}}
@@ -42,52 +50,54 @@
                          </span>
                       </span>
 
-                  <el-popover placement="top-start" trigger="hover" content="显示全部">
-                    <div  @click="time.bol=!time.bol"   class="el-icon-caret-bottom tuBiao" style="margin-left: 40px" slot="reference" v-if="time.userMessage.length>text.textSize"></div>
-                  </el-popover>
-                  <!-- 显示更多-->
-
-
-                </div>
-              </el-col>
-            </el-row>
-
-            <el-divider></el-divider>
-
-
-            <el-row :gutter="20" >
-              <el-col :span="2">
-
-
-                <el-popover placement="right-start" trigger="hover" content="复制回答文字" >
-                  <div class="el-icon-document-copy tuBiao copy" slot="reference" :data-clipboard-text="time.AIMessage">
+                    <el-popover placement="top-start" trigger="hover" content="显示全部">
+                      <div  @click="time.bol=!time.bol"   class="el-icon-caret-bottom tuBiao" style="margin-left: 40px" slot="reference" v-if="time.userMessage.length>text.textSize"></div>
+                    </el-popover>
+                    <!-- 显示更多-->
 
 
                   </div>
+                </el-col>
+              </el-row>
 
-                </el-popover>
-                <br>
-                <el-popover placement="right-start" trigger="hover" content="重新生成答案" >
-                  <div class="el-icon-refresh-right tuBiao" slot="reference" @click="anew(time.userMessage)"></div>
-                </el-popover>
+              <el-divider></el-divider>
 
 
-              </el-col>
-              <el-col :span="22">
-                <blockquote style="font-size: 15px;color:rgba(0,0,0,0.68); text-align: left;" v-html="time.AIMessage">
-
-                </blockquote>
-                <div>
-
-                </div>
-              </el-col>
-            </el-row>
+              <el-row :gutter="20" >
+                <el-col :span="2">
 
 
-          </div>
+                  <el-popover placement="right-start" trigger="hover" content="复制回答文字" >
+                    <div class="el-icon-document-copy tuBiao copy" slot="reference" :data-clipboard-text="time.AIMessage">
 
 
-        </el-main>
+                    </div>
+
+                  </el-popover>
+                  <br>
+                  <el-popover placement="right-start" trigger="hover" content="重新生成答案" >
+                    <div class="el-icon-refresh-right tuBiao" slot="reference" @click="anew(time.userMessage)"></div>
+                  </el-popover>
+
+
+                </el-col>
+                <el-col :span="22">
+                  <blockquote style="font-size: 15px;color:rgba(0,0,0,0.68); text-align: left;" v-html="time.AIMessage">
+
+                  </blockquote>
+                  <div>
+
+                  </div>
+                </el-col>
+              </el-row>
+
+
+            </div>
+
+
+          </el-main>
+
+        </div>
 
 <!--        右边下面-->
         <el-footer style="background-color: rgba(0,0,0,0.11);height: 100px ">
@@ -125,45 +135,55 @@
       </el-container>
 
     </el-container>
-  <br>
-  <br>
-  <br>
-  <br>
+
+
+
+
 </div>
 </template>
 
 <script>
 import FunctionalZone from "@/components/alter/AI/ChatGptZhon/functionalZone";
-import Clipboard from 'clipboard'
-import ClipboardJS from "clipboard";
 import CheShi from "@/components/alter/AI/ChatGptZhon/Cs";
 import requestData from "@/router/requestData";
+import HigHlightV1 from "@/components/alter/AI/ChatGptZhon/HigHlightV1";
+import hljs from "highlight.js";
+import HigHlightV2 from "@/components/alter/AI/ChatGptZhon/HigHlightV2";
+
+
+
 export default {
   name: "ChatGptZhonBu",
-  components: {CheShi, FunctionalZone},
+  components: {HigHlightV2, HigHlightV1, CheShi, FunctionalZone},
+  mounted() {
+    console.log("查看所有元素")
+    let c1=document.getElementsByTagName("cc1")
+
+    for(let cc of c1){
+      console.log(cc)
+    }
+
+    // hljs.highlightBlock(c1);
+    // hljs.highlightBlock(this.$refs.codeBlock);
+
+  },
   data() {
     return {
+
       textarea: '',
       // originalText: "这是一个超过50个字符的示例文本，用于演示下拉显示更多的功能。asa多的功能。asa多的功能。asa多的功能。asa多的功能。asaaaaaaaaaa",
       expanded: false,
       text: {
-        // textSize: 100,   //字体长度
-        textSize: 15,   //字体长度
+        textSize: 100,   //字体长度
       },
       gpt:{
-        MessageLength:1, //聊天消息长度
+        MessageLength:0, //聊天消息长度
         content:"你会认真回答我的问题",
 
       },
-
-
-
       drawingID: "msg:1111",
       drawingClass:[
-        {id:"msg_id:13242",bol:false,userMessage: "我是测试1234567890我是测试1234567890我是测试1234567890我是测试1234567890我是测试1234567890我是测试1234567890我是测试1234567890我是测试1234567890我是测试1234567890我是测试1234567890我是测试1234567890结束", AIMessage: "sas", edition: "gpt-4.0"},
-        {id:"msg_id:43252",bol:false,userMessage: "测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2结束", AIMessage: "你好!2", edition: "gpt-4.0"},
-        {id:"msg_id:23242",bol:false,userMessage: "测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3结束", AIMessage: "你好!3", edition: "gpt-4.0"},
-        {id:"msg_id:16242",bol:false,userMessage: "测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3结束", AIMessage: "你好!4", edition: "gpt-4.0"},
+        {id:"msg_id:13242",bol:false,userMessage: "你好,我是你的人工智能", AIMessage: "请对我进行提问吧，我会你想要的任何东西", edition: "gpt-4.0"},
 
       ],
 
@@ -171,6 +191,135 @@ export default {
   },
 
   methods:{
+  kk(item){
+    const cc1Element = item.parentNode.querySelector('[name="cc1"]');
+    console.log("节点",cc1Element)
+
+
+
+    // hljs.highlightBlock(item);
+    hljs.highlightBlock(cc1Element);
+
+  },
+
+    //发送数据
+    async button_send() {
+      if (this.textarea.trim() === "") { //如果输入的内容为空
+        this.$message({
+          message: '警告,请先输入内容',
+          type: 'warning'
+        });
+        return;
+      }
+      this.$refs.messageShow.scrollTop = 0 //滚动到最上面方便用户查看
+      // console.log("发送:", this.textarea)
+      let id1 = Math.floor(10000 + Math.random() * 900000);
+      //添加一个往数组最开头添加
+      let drawingClass =
+          {
+            id: "msg_id:" + id1,
+            bol: false,
+            userMessage: this.textarea,  //提问的问题
+            AIMessage:'', //回答
+            edition: "gpt-4.0"
+          };
+      //数组添加
+      this.drawingClass.unshift(drawingClass)
+
+      //执行修改里面的内容
+      let data1 = {
+        "sum": this.gpt.MessageLength,
+        "g2": {
+          "role": "system",
+          "content": this.gpt.content
+        },
+        "g3": {
+          "role": "user",
+          "content": this.textarea   //问题
+          // "content":"你是谁"
+
+        },
+        "social_uid": "abcddd1241",
+        "stream": true
+      }
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': "1111"
+        },
+        body: JSON.stringify(data1)
+      };
+
+      this.textarea = "";
+      console.log(data1)
+
+      //错误的
+      const fetchPromise = fetch(requestData.ip()+"gptChat/gpt4.0.all", requestOptions); // 创建fetch请求的Promise实例
+      const timeoutPromise = new Promise((resolve, reject) => { // 创建超时的Promise实例
+        setTimeout(() => {
+          reject(new Error('请求超时'));
+        }, 10000); // 设置超时时间为10秒
+      });
+      const response = await Promise.race([fetchPromise, timeoutPromise]); // 使用Promise.race()并行执行fetch请求和超时的Promise实例
+
+      if (response instanceof Response) { // 如果response是fetch请求的响应对象
+        const reader = response.body.getReader();
+        let result = await reader.read();
+
+
+        let bol=false;
+
+        while (!result.done) {
+          let text = new TextDecoder("utf-8").decode(result.value).replace(/\s/g, '\u00A0').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/{{END}}/g, '\n');
+
+
+          //改成每次进3-5个内容的时候在进行扫描有没有```符号有的话就进行操作
+          let regex = /```/g;
+          if(regex.exec(text)){
+            // onmouseover="kk(this)
+            if(bol==false){
+              text=text.replace(/```/g, `
+                   <div>
+<!--                       <button onmouseover="kk(this)" >测试</button>-->
+                       <pre  onmouseover="kk(this)" style="background: rgb(0,0,0);color: #ffffff" name="cc1" >
+                          <code>
+                  `)
+                  bol=true;
+
+            }else{
+
+                  text=text.replace(/```/g, `
+                        </code>
+                     </pre>
+                   </div>
+                  `)
+                  bol=false;
+
+            }
+
+          }
+
+
+          drawingClass.AIMessage +=text;
+
+          this.code=drawingClass.AIMessage;
+
+          result = await reader.read();
+        }
+      } else { // 如果response是超时的错误信息
+        console.error(response.message);
+      }
+      console.log("输出完成")
+
+
+
+      //更新内存
+      localStorage.setItem(this.drawingID, JSON.stringify(this.drawingClass))
+
+
+
+    },
 
     //获取传递过来的id
     drawingIDClick(drawingID){
@@ -188,120 +337,6 @@ export default {
       this.textarea=text;
     },
 
-    //发送数据
-     async button_send() {
-       console.log("发送", this.textarea)
-
-       let id1 = Math.floor(10000 + Math.random() * 900000);
-       //添加一个往数组最开头添加
-       let drawingClass =
-           {
-             id: "msg_id:" + id1,
-             bol: false,
-             userMessage: this.textarea,  //提问的问题
-             AIMessage:'', //回答
-             edition: "gpt-4.0"
-           };
-
-
-       console.log("1")
-       //数组添加
-       this.drawingClass.unshift(drawingClass)
-       console.log("1.1")
-       // console.log(this.drawing)
-
-       //执行修改里面的内容
-       let data1 = {
-         "sum": this.gpt.MessageLength,
-         "g2": {
-           "role": "system",
-           "content": this.gpt.content
-         },
-         "g3": {
-           "role": "user",
-           "content": this.textarea   //问题
-           // "content":"你是谁"
-
-         },
-         "social_uid": "abcddd1241",
-         "stream": true
-       }
-
-       const requestOptions = {
-         method: 'POST',
-         headers: {
-           'Content-Type': 'application/json',
-           'Authorization': "1111"
-         },
-         body: JSON.stringify(data1)
-       };
-
-
-       this.textarea = "";
-       console.log(data1)
-
-
-       //错误的
-       const fetchPromise = fetch(requestData.ip()+"gptChat/gpt4.0.all", requestOptions); // 创建fetch请求的Promise实例
-
-       console.log("2")
-
-       //正确的
-       // const fetchPromise = fetch(requestData.ip()+"gptChat/gpt4.0.0613", requestOptions); // 创建fetch请求的Promise实例
-
-       const timeoutPromise = new Promise((resolve, reject) => { // 创建超时的Promise实例
-         setTimeout(() => {
-           reject(new Error('请求超时'));
-         }, 10000); // 设置超时时间为10秒
-       });
-       const response = await Promise.race([fetchPromise, timeoutPromise]); // 使用Promise.race()并行执行fetch请求和超时的Promise实例
-       console.log("3")
-
-       if (response instanceof Response) { // 如果response是fetch请求的响应对象
-         const reader = response.body.getReader();
-         let result = await reader.read();
-
-         while (!result.done) {
-
-           // innerTextGPT.innerText += new TextDecoder("utf-8").decode(result.value).replace(/\s/g,'\u00A0').replace(/{{END}}/g, '\n');
-           let text = new TextDecoder("utf-8").decode(result.value).replace(/\s/g, '\u00A0');
-
-
-           drawingClass.AIMessage += text;
-
-
-           if(text=="\n"){
-             console.log("输出回车")
-
-           }else {
-             drawingClass.AIMessage += '<br>';
-             console.log(text)
-
-           }
-
-
-
-           result = await reader.read();
-         }
-       } else { // 如果response是超时的错误信息
-         console.error(response.message);
-       }
-       console.log("4")
-
-
-       console.log("输出完成")
-
-
-
-       //更新内存
-       localStorage.setItem(this.drawingID, JSON.stringify(this.drawingClass))
-
-
-
-       console.log("5")
-
-
-     },
     //设置显示文字数量
     displayText(text) {
       if (text.length > this.text.textSize ) {
@@ -314,18 +349,16 @@ export default {
 
 
   },
-  // created() {
-  //   console.log("输出:",this.drawing[0])
-  //   if(this.drawing.length==0){
-  //     console.log("输出2")
-  //     this.drawingClass={id:1,name:"消息一",message: []}
-  //
-  //   }else{
-  //     let ai=this.drawing[0];
-  //     this.drawingClass=ai;
-  //   }
-  //
-  // },
+  created() {
+    window.kk=this.kk;
+
+    // hljs.addPlugin( {
+    //   'after:highlightElement': ({el, result}) => {
+    //     // move the language from the result into the dataset
+    //     el.dataset.language = result.language }
+    // })
+
+  },
 
 
   watch:{
@@ -353,11 +386,13 @@ export default {
     //
     //   }
     // }
-  }
+  },
+
 }
 </script>
 
 <style scoped>
+
 
 .fade-enter-active, .fade-leave-active {
   transition: opacity 1s;

@@ -16,19 +16,26 @@
     <!--    <code class="language-javascript">-->
 <!--    <code class="language-java">-->
 
+         @PostMapping("/gpt4.0.all")
+    public void gpt40All(@RequestBody GptStareamModel data,HttpServletRequest request, HttpServletResponse response){
 
-import requests
-import re
+        System.out.println(UtioY.JSON(data));
 
-src = requests.get('http://www.wxjsxy.com/')
-text = src.content.decode()
+        if(data.getSum()>10){ //如果最大超过10次连接
+             data.setSum(10);
+        }
 
-title = r' KH-a href="/xxdt/content_[0-9]{5}" target="_blank" title="标题：(.*?)&#xD;&#xA;点击数：'
-title_list = re.findall(title, text, re.S)
+//        data.setModel("gpt-4-all"); //设置默认3.5回答模65
+        data.setModel("gpt-3.5-turbo-0125"); //设置默认3.5回答模65
+//        data.setModel("gpt-4-0125-preview"); //设置默认3.5回答模65
+        data.setGptUrl("gpt4"); //设置请求4.0接口
 
-for i in title_list:
-    print(i)
 
+
+
+
+        G2_SonModel g2_sonModel = gptServer.gptStream(data, request, response); //
+        System.out.println("输出"+UtioY.JSON(g2_sonModel));
 
   </code></pre>
 </body>

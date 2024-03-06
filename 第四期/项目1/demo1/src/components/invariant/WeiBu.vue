@@ -1,6 +1,7 @@
 <template>
 <!--  <div style=" background: url('@/components/image/logo/imagetp.png')">-->
   <div >
+
     <el-container>
       <el-container>
         <el-main>

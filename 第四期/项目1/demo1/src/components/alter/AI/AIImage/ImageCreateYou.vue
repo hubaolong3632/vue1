@@ -38,7 +38,7 @@
           </div>
       </div>
 
-      <div v-else style="height: 70vh" >
+      <div v-else style="height: 100vh" >
 <!--        <h2 v-if="progressBar.bool==false">请操作右侧生成图片</h2>-->
         <div v-if="progressBar.bool===false">
 

@@ -14,16 +14,19 @@
         <el-row>
 
 <!--          创建聊天-->
-            <el-col :span="24" class="style_drawing">
-              <el-button type="text" @click="createChat">
+          <div @click="createChat">
+            <el-col :span="24" class="style_drawing" >
+              <el-button type="text" >
                 <span><img src="@/components/image/logo/plusSign.png" style="width:30px; margin-bottom: 10px; "></span>
                 <span>&nbsp;&nbsp;&nbsp;新建聊天</span>
               </el-button>
             </el-col>
 
+          </div>
+
         </el-row>
         <el-row>
-          <el-col :span="24" class="style_functionalZone"  style=" margin-top: 15px" v-for="item of drawing" :key="item.name">
+          <el-col :span="24" class="style_functionalZone"  style=" margin-top: 15px" v-for="(item,index) of drawing" :key="index">
             <div @click="createMessage(item.id)">
               <span><img src="@/components/image/logo/message.png" style="width:18px; margin-bottom: 10px; "></span>
               <span>&nbsp;&nbsp;&nbsp;{{item.name}}</span>
@@ -36,7 +39,7 @@
 
 <!--角色扮演功能区域-->
     <el-row>
-      <el-card shadow="always" style="margin-bottom: 2px ;height: 45vh;">
+      <el-card shadow="always" style="margin-bottom: 2px ;height: 45vh;   overflow: auto;  ">
         <el-row>
           <el-col :span="24" class="style_functionalZone" v-for="item of functionalZone" :key="item.id" >
             <div @click="functionalZoneClick(item.clickName)">
@@ -72,10 +75,12 @@ export default {
       gptUserImage:require("@/components/image/logo/userImage.png"),
 
       //显示我当前选着的输出答案
-      drawing: [
-      ],
+      // drawing: [
+      //
+      //
+      // ],
 
-
+      drawing:[{"id":"msg:693563","name":"聊天22一"}],
 
     }
   },
@@ -99,6 +104,7 @@ export default {
         cancelButtonText: '取消',
       }).then(({ value }) => {
         this.saveChatSon(value)
+        this.createMessage(this.drawing[0].id);
 
 
       }).catch(() => {
@@ -137,14 +143,11 @@ export default {
       // ];
 
       let drawingClass = [
-        {id:"msg_id:13242",bol:false,userMessage: "我是测试1234567890我是测试1234567890我是测试1234567890我是测试1234567890我是测试1234567890我是测试1234567890我是测试1234567890我是测试1234567890我是测试1234567890我是测试1234567890我是测试1234567890结束", AIMessage: "sas", edition: "gpt-4.0"},
-        {id:"msg_id:43252",bol:false,userMessage: "测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2结束", AIMessage: "你好!2", edition: "gpt-4.0"},
-        {id:"msg_id:23242",bol:false,userMessage: "测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3结束", AIMessage: "你好!3", edition: "gpt-4.0"},
-        {id:"msg_id:16242",bol:false,userMessage: "测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3结束", AIMessage: "你好!4", edition: "gpt-4.0"},
+        {id:"msg_id:1",bol:false,userMessage: "--------------------------------------------", AIMessage: `当前所在分组:  <span style="color: red">${value}</span>  请开始提问吧`, edition: "gpt-4.0"},
       ];
 
-
       localStorage.setItem(addDrawing.id, JSON.stringify(drawingClass));
+
     },
 
 
@@ -158,14 +161,15 @@ export default {
     if (drawing == null) {
       console.log("为空")
       this.saveChatSon("聊天一")
+
+
+    }else {
+      this.drawing=JSON.parse(drawing);
     }
 
-   let drawingLocal=JSON.parse(localStorage.getItem("drawing"))
-    this.drawing=drawingLocal;
+    //显示最开始哪个内容
+    this.createMessage(this.drawing[0].id);
 
-
-    //告诉他我当前选择的id
-    this.$emit('drawingID',this.drawing[0].id);
 
 
 

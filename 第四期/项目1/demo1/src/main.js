@@ -14,6 +14,21 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import router from "@/router";
 
+
+
+
+
+//引入高亮  不同的类型引入不同的对象
+import VueHighlightJS from 'vue-highlightjs'
+import 'highlight.js/styles/atom-one-dark.css'
+// import 'highlight.js/styles/idea.css'
+Vue.use(VueHighlightJS)
+
+
+
+
+
+
 //告诉当前是什么环境如果是true代表生成生产环境 为false就是开发环境
 Vue.config.productionTip = false
 Vue.use(ElementUI);
