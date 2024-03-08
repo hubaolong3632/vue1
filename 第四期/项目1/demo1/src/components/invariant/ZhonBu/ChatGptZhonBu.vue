@@ -239,8 +239,9 @@ export default {
           // "content":"你是谁"
 
         },
-        "social_uid": "abcddd1241",
-        "stream": true
+        social_uid: "abcddd1241",
+        model:"gpt-3.5-turbo-0125",
+        stream: true
       }
       const requestOptions = {
         method: 'POST',
@@ -270,6 +271,8 @@ export default {
 
         let bol=false;
 
+
+        let sum=0;
         while (!result.done) {
           let text = new TextDecoder("utf-8").decode(result.value).replace(/\s/g, '\u00A0').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/{{END}}/g, '\n');
 
@@ -281,7 +284,7 @@ export default {
             if(bol==false){
               text=text.replace(/```/g, `
                    <div>
-<!--                       <button onmouseover="kk(this)" >测试</button>-->
+                       <button onmouseover="kk(this)" >测试</button>
                        <pre  onmouseover="kk(this)" style="background: rgb(0,0,0);color: #ffffff" name="cc1" >
                           <code>
                   `)
