@@ -24,8 +24,8 @@
       <el-container  style="height: 93vh">
 
         <!--      右边 上面   在这里设置选择-->
-        <div  style="overflow: auto;  height: 100vh">
-          <el-main  ref="messageShow">
+        <div  style="overflow: auto;  height: 100vh"  ref="messageShow">
+          <el-main >
 
             <div :style="{'margin-top':index==0?null:'100px'}"   class="tuBiao1" v-for="(time,index) of drawingClass" :key="time.id">
               <!--              用户问题-->
@@ -68,7 +68,7 @@
 
 
                   <el-popover placement="right-start" trigger="hover" content="复制回答文字" >
-                    <div class="el-icon-document-copy tuBiao copy" slot="reference" :data-clipboard-text="time.AIMessage">
+                    <div class="el-icon-document-copy tuBiao copy" slot="reference" :data-clipboard-text="time.AIMessage.replace(/\u00A0/g, ' ')">
 
 
                     </div>
@@ -156,16 +156,8 @@ export default {
   name: "ChatGptZhonBu",
   components: {HigHlightV2, HigHlightV1, CheShi, FunctionalZone},
   mounted() {
-    console.log("查看所有元素")
-    let c1=document.getElementsByTagName("cc1")
-
-    for(let cc of c1){
-      console.log(cc)
-    }
-
-    // hljs.highlightBlock(c1);
-    // hljs.highlightBlock(this.$refs.codeBlock);
-
+    console.log("你好")
+    // let highlight = document.getElementById("messageShow").querySelectorAll('pre code');
   },
   data() {
     return {
@@ -177,7 +169,7 @@ export default {
         textSize: 100,   //字体长度
       },
       gpt:{
-        MessageLength:0, //聊天消息长度
+        MessageLength:5, //聊天消息长度
         content:"你会认真回答我的问题",
 
       },
@@ -192,13 +184,39 @@ export default {
 
   methods:{
   kk(item){
-    const cc1Element = item.parentNode.querySelector('[name="cc1"]');
-    console.log("节点",cc1Element)
+    let bol=false;
+    let highlightBlocks = item.parentNode.querySelectorAll('pre code');
+    highlightBlocks.forEach((block) => {
+      if (!block.classList.contains('hljs')) {
+        hljs.highlightElement(block);
+        block.classList.add('hljs'); // 添加类名标记为已经高亮
+        bol=true;
+      }
+    });
 
 
+    // let highlight = item.parentNode.parentNode.parentNode.parentNode.querySelectorAll('pre code');
+    // highlight.forEach((block) => {
+    //   if (!block.classList.contains('hljs')) {
+    //     hljs.highlightElement(block);
+    //     block.classList.add('hljs'); // 添加类名标记为已经高亮
+    //     bol=true;
+    //   }
+    // });
 
-    // hljs.highlightBlock(item);
-    hljs.highlightBlock(cc1Element);
+
+    //先找到最开始哪个 给他修改代码
+    // hljs.highlightElement(item.parentNode.querySelector('[name="cc1"]'));
+
+
+    // let highlight = item.parentNode.parentNode.parentNode.parentNode.querySelectorAll('pre code');
+    // // let highlight = item.parentNode.querySelectorAll('pre code');
+    // highlight.forEach((block) => {
+    //   // Deprecated as of 10.7.0. highlightBlock will be removed entirely in v12.0
+    //   // Deprecated as of 10.7.0. Please use highlightElement now.
+    //   hljs.highlightElement(block);
+    // })
+
 
   },
 
@@ -239,7 +257,7 @@ export default {
           // "content":"你是谁"
 
         },
-        social_uid: "abcddd1241",
+        social_uid: this.drawingID, //问题id
         model:"gpt-3.5-turbo-0125",
         stream: true
       }
@@ -247,7 +265,7 @@ export default {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': "1111"
+          'Authorization': "zhangsan"
         },
         body: JSON.stringify(data1)
       };
@@ -270,38 +288,43 @@ export default {
 
 
         let bol=false;
-
-
-        let sum=0;
+        let regex = /```/g; //正则表达式匹配
         while (!result.done) {
           let text = new TextDecoder("utf-8").decode(result.value).replace(/\s/g, '\u00A0').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/{{END}}/g, '\n');
 
 
           //改成每次进3-5个内容的时候在进行扫描有没有```符号有的话就进行操作
-          let regex = /```/g;
-          if(regex.exec(text)){
-            // onmouseover="kk(this)
+          if(regex.exec(drawingClass.AIMessage)){
+
             if(bol==false){
-              text=text.replace(/```/g, `
-                   <div>
-                       <button onmouseover="kk(this)" >测试</button>
-                       <pre  onmouseover="kk(this)" style="background: rgb(0,0,0);color: #ffffff" name="cc1" >
+              result = await reader.read();
+
+
+              drawingClass.AIMessage=drawingClass.AIMessage.replace(/```/g, `
+                   <div style="background-color: #000000">
+                       <span onclick="copy(this)" style="color: #cccccc;border: red 1px ridge;cursor: pointer; font-size: 1vw">复制<span/>
+                       <pre  onmouseover="kk(this)"  style="color: #ffffff;" name="cc1" >
                           <code>
                   `)
-                  bol=true;
+              bol=true;
 
             }else{
 
-                  text=text.replace(/```/g, `
+              drawingClass.AIMessage=drawingClass.AIMessage.replace(/```/g, `
                         </code>
                      </pre>
                    </div>
                   `)
-                  bol=false;
-
+              bol=false;
             }
 
           }
+
+
+        if(bol==false){
+          text =text.replace(/\n/g, '<br>');
+        }
+
 
 
           drawingClass.AIMessage +=text;
@@ -313,15 +336,38 @@ export default {
       } else { // 如果response是超时的错误信息
         console.error(response.message);
       }
+
+
       console.log("输出完成")
-
-
-
       //更新内存
       localStorage.setItem(this.drawingID, JSON.stringify(this.drawingClass))
+    },
+
+    async copy(item) {
+      let clipboardObj = navigator.clipboard;
+      try {
+        let dom = item.parentNode.querySelector('[name="cc1"]');
+        let text = dom?.innerText || '';
+
+        // 删除首行内容
+        text=text.trim();
+        text = text.replace(/.*\n/, '');
+        text = text.replace(/\u00A0/g, ' ');
+
+        let res = await clipboardObj.writeText(text); //执行复制功能
+        this.$notify({
+          message: '复制成功',
+          type: 'success'
+        });
 
 
-
+      } catch (error) {
+        this.$notify.error({
+          title: '复制失败',
+          message:error
+        });
+        console.error('复制失败: ', error);
+      }
     },
 
     //获取传递过来的id
@@ -336,7 +382,6 @@ export default {
 
     //重新生成答案
     anew(text){
-        console.log("nihoa ")
       this.textarea=text;
     },
 
@@ -354,6 +399,7 @@ export default {
   },
   created() {
     window.kk=this.kk;
+    window.copy=this.copy;
 
     // hljs.addPlugin( {
     //   'after:highlightElement': ({el, result}) => {
@@ -395,7 +441,15 @@ export default {
 </script>
 
 <style scoped>
+/*>>> .ccc1{*/
+/*  background-color: #070000;*/
+/*  background-color: rgba(0, 0, 0, 0.07);*/
 
+/*}*/
+
+/*>>> .ccc1:hover{*/
+/*  background-color: rgba(0, 0, 0, 0.07);*/
+/*}*/
 
 .fade-enter-active, .fade-leave-active {
   transition: opacity 1s;

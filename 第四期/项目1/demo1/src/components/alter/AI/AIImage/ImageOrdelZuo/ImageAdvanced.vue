@@ -173,7 +173,7 @@ export default {
   data(){
     return{
       textarea:"", //用户输入
-      textarea40:"22",//4.0润色
+      textarea40:"",//4.0润色
       region1:2,
       form: {
         sum:1,
@@ -354,7 +354,7 @@ export default {
           "role":"user",
           "content":textContent
         },
-        "social_uid":"abcddd124",
+        "social_uid":"image-101",
         "stream":true
       }
 
@@ -385,7 +385,7 @@ export default {
         while (!result.done) {
 
           // innerTextGPT.innerText += new TextDecoder("utf-8").decode(result.value).replace(/\s/g,'\u00A0').replace(/{{END}}/g, '\n');
-          let text=new TextDecoder("utf-8").decode(result.value).replace(/\s/g,'\u00A0');
+          let text=new TextDecoder("utf-8").decode(result.value).replace(/\s/g,'\u00A0').replace(/{{END}}/g, '\n');
           // console.log(text)
 
           this.textarea40+=text;
