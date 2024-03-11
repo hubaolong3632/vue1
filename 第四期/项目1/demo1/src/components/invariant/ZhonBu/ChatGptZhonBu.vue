@@ -17,7 +17,7 @@
 
       <!--  左边-->
       <el-aside  style="width:250px;">
-         <functional-zone @drawingID="drawingIDClick"></functional-zone>
+         <functional-zone @drawingID="drawingIDClick" @gptrefresh="gptrefresh" @settingUp="settingUp" @gptSwitch="gptSwitch1"></functional-zone>
       </el-aside>
 
 <!--      右边-->
@@ -83,8 +83,9 @@
                 </el-col>
                 <el-col :span="22">
                   <blockquote style="font-size: 15px;color:rgba(0,0,0,0.68); text-align: left;" v-html="time.AIMessage">
-
                   </blockquote>
+
+
                   <div>
 
                   </div>
@@ -106,11 +107,11 @@
 
               <el-col :span="20" class="style_drawing">
 <!--                <span @keyup.enter.shift="button_send"  @keyup.enter.ctrl.shift="button_send">-->
-                <span @keyup.enter.shift.exact="button_send"  @keyup.enter.ctrl.shift.exact="button_send">
+                <span @keyup.shift.enter.exact="button_send()"  @keyup.ctrl.enter.exact="button_send()">
                   <el-input
                       type="textarea"
                       :rows="4"
-                      placeholder="请输入需要提问的内容 Ctrl+Enter 或者Shift+Enter发送..."
+                      :placeholder="`请输入需要提问的内容 Ctrl+Enter 或者Shift+Enter发送...  \n当前信息:[ 上下文长度: ${this.gpt.MessageLength} , 窗口名称: ${this.drawingID.name} , 当前模型: ${this.gpt.model} ]    `"
                       v-model="textarea">
                 </el-input>
                 </span>
@@ -120,10 +121,17 @@
                 <el-row>
                     <el-button @click="button_send()" type="info" plain>发送</el-button>
                 </el-row>
-                <el-row>
-                    <el-button type="danger" plain>换3.5</el-button>
-                </el-row>
+              </el-col>
 
+              <el-col :span="4" class="style_drawing">
+                <el-row>
+<!--                  <el-button @click="file_send()" type="info" plain>上传文件</el-button>-->
+                    <div>
+                      <input type="file" ref="fileInput" style="display: none" @change="onFileChange">
+                      <el-button @click="file_send()" type="info" plain>上传文件{{fileSum}}</el-button>
+<!--                      <img :src="require('@/components/image/c1.png')" @click="triggerFileInput">-->
+                    </div>
+                </el-row>
               </el-col>
 
             </el-row>
@@ -149,7 +157,7 @@ import requestData from "@/router/requestData";
 import HigHlightV1 from "@/components/alter/AI/ChatGptZhon/HigHlightV1";
 import hljs from "highlight.js";
 import HigHlightV2 from "@/components/alter/AI/ChatGptZhon/HigHlightV2";
-
+import axios from "axios";
 
 
 export default {
@@ -161,7 +169,8 @@ export default {
   },
   data() {
     return {
-
+      fileSum:"",
+      placeholder:`请输入需要提问的内容 Ctrl+Enter 或者Shift+Enter发送  当前上下文长度... `,
       textarea: '',
       // originalText: "这是一个超过50个字符的示例文本，用于演示下拉显示更多的功能。asa多的功能。asa多的功能。asa多的功能。asa多的功能。asaaaaaaaaaa",
       expanded: false,
@@ -169,8 +178,9 @@ export default {
         textSize: 100,   //字体长度
       },
       gpt:{
-        MessageLength:5, //聊天消息长度
+        MessageLength:3, //聊天消息长度
         content:"你会认真回答我的问题",
+        model:"gpt-3.5-turbo-0125"
 
       },
       drawingID: "msg:1111",
@@ -178,11 +188,173 @@ export default {
         {id:"msg_id:13242",bol:false,userMessage: "你好,我是你的人工智能", AIMessage: "请对我进行提问吧，我会你想要的任何东西", edition: "gpt-4.0"},
 
       ],
+      gptSwitch:[
+        {id:1,name:"gpt4.0ALL可联网 分析文件 (0.1$/次)",model:"gpt-4-all"},
+        {id:2,name:"gpt4 2024年1月25号模型 (0.1$/次)",model:"gpt-4-0125-preview"},
+        {id:3,name:"gpt3.5 支持4千字上下文(0.001$/次)",model:"gpt-3.5-turbo-0125"},
+        {id:3,name:"gpt3.5 16K 支持1w6千字上下文(0.005$/次)",model:"gpt-3.5-turbo-16k-0613"},
+      ]
 
     }
   },
 
   methods:{
+
+
+    //如果点击上传文件
+    async onFileChange(e) {
+      this.file = e.target.files[0];
+      if(this.file==null){
+        return;
+      }
+      if (this.file.size > 20 * 1024 * 1024) { // 20MB 的限制
+        alert("文件大小不能超过20MB");
+        return;
+      }
+      // if (!this.file.type.startsWith('image/')) { //如果不为图片
+      //   alert("请上传图片文件");
+      //   return;
+      // }
+      console.log("上传文件1")
+
+      let formData = new FormData();
+      formData.append('file', this.file);
+      formData.append('bucketName', 'my-bucketname');
+      formData.append('userName', 'zhangsan');
+
+      let {data} = await axios.post('http://file.00000.work:11001/test/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        onUploadProgress: progressEvent => {
+          console.log("上传文件进度"+1)
+
+          this.fileSum = `:${Math.round((100 * progressEvent.loaded) / progressEvent.total)}%`;
+        }
+      })
+      console.log("上传文件2")
+
+
+      console.log(data)
+      console.log("上传文件4")
+
+      // this.messageData.picture = data.data.url;
+      console.log(data.data.url)
+
+
+      this.textarea =`${data.data.url}  \n ${this.textarea}`;
+      this.fileSum="";
+
+
+    },
+
+    file_send(){ //点击上传按钮
+
+      this.$notify({
+        title: '上传提示',
+        message: '请确保选择的模型为【gpt-4-all】 并且在上传之前请【刷新一下缓存】，问题问完之后在【刷新缓存】确保消息不会出现问题，文件会以链接的方式放入进去在链接后面编写文件提示功能就可以',
+        type: 'warning'
+      });
+      this.$refs.fileInput.click();
+    },
+
+
+    settingUp(){ //当点击长度设置的时候
+      this.$prompt('请输入上下文长度1-10以内(用于聊天记录前几条数据，越多记住上下文的也越多,但是费用也会稍微贵一些) ', `上下文长度->当前长度:${this.gpt.MessageLength}`, {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(({ value }) => {
+        let sum=parseInt(value)
+        if(isNaN(sum)){
+          this.$message({
+            message: '长度设置失败:请输入1-10以内的数字',
+            type: 'error'
+          });
+        }else if(sum<1||sum>10){
+            this.$message({
+              message: '长度设置失败:请输入大于1并且小于10的数字',
+              type: 'error'
+            });
+        }else{
+          localStorage.setItem("MessageLength",value)
+          this.gpt.MessageLength=sum;
+          this.$message({
+            message: `长度设置成功-当前长度${this.gpt.MessageLength}`,
+            type: 'success'
+          });
+        }
+
+
+
+
+
+
+
+
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消设置-当前长度为:'+this.gpt.MessageLength
+        });
+      });
+
+
+    },
+
+    //当刷新缓存的时候
+    gptrefresh(){
+      this.textarea="emptyemptyempty";
+      this.button_send();
+    },
+
+
+    //创建聊天
+    createChat(){
+      this.$prompt('请输入创建聊天名称，可以随便取名', '创建聊天', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(({ value }) => {
+        this.saveChatSon(value)
+        this.createMessage(this.drawing[0].id);
+
+
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消创建'
+        });
+      });
+    },
+
+    //gpt模型选择
+    gptSwitch1(){
+      let optionHtml="";
+
+      for(let time of this.gptSwitch){
+        optionHtml+=` <option ref="option1" value="${time.model}">${time.name}</option>`;
+      }
+
+
+      let templateHtml=`
+     <select onchange="onGptModelSwitch(this)" id="fruits" style="padding: 5px; font-size: 16px; border-radius: 5px; background-color: #f2f2f2; color: #333;width: 100%" >
+          ${optionHtml}
+      </select>
+    `;
+
+
+      this.$alert(templateHtml, '模型选择', {
+        dangerouslyUseHTMLString: true
+      }).catch(()=>{}) // 添加错误捕获;
+    },
+    //当修改模型的时候
+    onGptModelSwitch(model){
+      this.gpt.model=model.value;
+      console.log("当前选择的模型:",model.value)
+
+    },
+
+
+  //高亮标记
   kk(item){
     let bol=false;
     let highlightBlocks = item.parentNode.querySelectorAll('pre code');
@@ -237,13 +409,13 @@ export default {
           {
             id: "msg_id:" + id1,
             bol: false,
-            userMessage: this.textarea,  //提问的问题
+            userMessage:this.textarea ,  //提问的问题
             AIMessage:'', //回答
             edition: "gpt-4.0"
           };
       //数组添加
       this.drawingClass.unshift(drawingClass)
-
+      drawingClass.AIMessage=`<span style="color: rgba(255,0,59,0.78)">正在生成中,如果10秒之后没反应请重发...</span>`
       //执行修改里面的内容
       let data1 = {
         "sum": this.gpt.MessageLength,
@@ -257,8 +429,8 @@ export default {
           // "content":"你是谁"
 
         },
-        social_uid: this.drawingID, //问题id
-        model:"gpt-3.5-turbo-0125",
+        social_uid: this.drawingID.id, //问题id
+        model:this.gpt.model,
         stream: true
       }
       const requestOptions = {
@@ -289,9 +461,10 @@ export default {
 
         let bol=false;
         let regex = /```/g; //正则表达式匹配
+
+        drawingClass.AIMessage="";
         while (!result.done) {
           let text = new TextDecoder("utf-8").decode(result.value).replace(/\s/g, '\u00A0').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/{{END}}/g, '\n');
-
 
           //改成每次进3-5个内容的时候在进行扫描有没有```符号有的话就进行操作
           if(regex.exec(drawingClass.AIMessage)){
@@ -340,7 +513,7 @@ export default {
 
       console.log("输出完成")
       //更新内存
-      localStorage.setItem(this.drawingID, JSON.stringify(this.drawingClass))
+      localStorage.setItem(this.drawingID.id, JSON.stringify(this.drawingClass))
     },
 
     async copy(item) {
@@ -375,7 +548,7 @@ export default {
       console.log("传递过来的id为: ",drawingID)
       this.drawingID=drawingID;
       //拿到对应的数据
-      this.drawingClass=JSON.parse(localStorage.getItem(drawingID))
+      this.drawingClass=JSON.parse(localStorage.getItem(drawingID.id))
     },
 
 
@@ -400,6 +573,12 @@ export default {
   created() {
     window.kk=this.kk;
     window.copy=this.copy;
+    window.onGptModelSwitch=this.onGptModelSwitch;
+
+   let gptMessageLength =localStorage.getItem("MessageLength")
+    this.MessageLength=gptMessageLength==null?3:gptMessageLength;
+
+    console.log("长度为:",this.MessageLength)
 
     // hljs.addPlugin( {
     //   'after:highlightElement': ({el, result}) => {
@@ -411,6 +590,7 @@ export default {
 
 
   watch:{
+
     // drawingID:{
     //   handler(xing){
     //     console.log("修改了")

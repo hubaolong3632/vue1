@@ -27,7 +27,7 @@
         </el-row>
         <el-row>
           <el-col :span="24" class="style_functionalZone"  style=" margin-top: 15px" v-for="(item,index) of drawing" :key="index">
-            <div @click="createMessage(item.id)">
+            <div @click="createMessage(item)">
               <span><img src="@/components/image/logo/message.png" style="width:18px; margin-bottom: 10px; "></span>
               <span>&nbsp;&nbsp;&nbsp;{{item.name}}</span>
             </div>
@@ -66,10 +66,11 @@ export default {
     return{
       functionalZone:[/*功能区*/
         {id:1,image:require("@/components/image/logo/play.png"),name:"角色扮演",clickName:"play"},
-        {id:2,image:require("@/components/image/logo/stop.png"),name:"停止回答",clickName:"stop"},
+        // {id:2,image:require("@/components/image/logo/stop.png"),name:"停止回答",clickName:"stop"},
         {id:3,image:require("@/components/image/logo/refresh.png"),name:"刷新缓存",clickName:"refresh"},
-        {id:4,image:require("@/components/image/logo/empty.png"),name:"清空缓存",clickName:"empty"},
-        {id:5,image:require("@/components/image/logo/settingUp.png"),name:"长度设置",clickName:"settingUp"},
+        {id:4,image:require("@/components/image/logo/empty.png"),name:"清空消息",clickName:"empty"},
+        {id:2,image:require("@/components/image/logo/settingUp.png"),name:"4.0/3.5模型切换",clickName:"gptSwitch"},
+        {id:5,image:require("@/components/image/logo/settingUp.png"),name:"上下文长度",clickName:"settingUp"},
       ],
       gptAIImage:require("@/components/image/logo/AI.png"),
       gptUserImage:require("@/components/image/logo/userImage.png"),
@@ -80,7 +81,12 @@ export default {
       //
       // ],
 
-      drawing:[{"id":"msg:693563","name":"聊天22一"}],
+      drawing:[
+          // {"id":"msg:693563","name":"聊天22一"}
+      ],
+      id:"", //当前选择的id
+
+
 
     }
   },
@@ -88,11 +94,47 @@ export default {
 
     //当点击id的时候切换选项
     createMessage(id){
+      this.id=id;
       this.$emit('drawingID',id)
+    },
+
+
+
+    //当设置角色扮演的时候
+    gptPlay(){
+
+      this.$emit('gptPlay',id)
+    },
+
+    //获取下拉选择的内容
+    gptSwitch(){
+
     },
 
     //选择的缓存
     functionalZoneClick(clickName){
+
+      // {id:1,image:require("@/components/image/logo/play.png"),name:"角色扮演",clickName:"play"},
+      // {id:2,image:require("@/components/image/logo/stop.png"),name:"停止回答",clickName:"stop"},
+      // {id:3,image:require("@/components/image/logo/refresh.png"),name:"刷新缓存",clickName:"refresh"},
+      // {id:4,image:require("@/components/image/logo/empty.png"),name:"清空缓存",clickName:"empty"},
+      // {id:5,image:require("@/components/image/logo/settingUp.png"),name:"长度设置",clickName:"settingUp"},
+      if(clickName=="refresh"){//当刷新缓存的时候
+        this.$emit('gptrefresh',"刷新")
+      }else if(clickName=="settingUp"){  //当点击长度设置的时候
+        this.$emit('settingUp',"设置长度")
+      }else if(clickName=="empty"){
+        console.log("清理缓存")
+        console.log(this.id.id)
+        localStorage.setItem(this.id.id,JSON.stringify([{id:this.id.id,bol:false,userMessage: "", AIMessage: `<span style="color: rgba(255,0,0,0.51)">消息已清空，请开始继续你的聊天</span> `, edition: "gpt-4.0"}]));
+        this.createMessage(this.id)
+      }else if(clickName=="gptSwitch"){ //模型切换
+
+        this.$emit('gptSwitch',"模型切换")
+
+      }
+
+
       console.log(clickName)
     },
 
@@ -104,7 +146,7 @@ export default {
         cancelButtonText: '取消',
       }).then(({ value }) => {
         this.saveChatSon(value)
-        this.createMessage(this.drawing[0].id);
+        this.createMessage(this.drawing[0]);
 
 
       }).catch(() => {
@@ -143,11 +185,11 @@ export default {
       // ];
 
       let drawingClass = [
-        {id:"msg_id:1",bol:false,userMessage: "--------------------------------------------", AIMessage: `当前所在分组:  <span style="color: red">${value}</span>  请开始提问吧`, edition: "gpt-4.0"},
+        {id:id1,bol:false,userMessage: "--------------------------------------------", AIMessage: `当前所在分组:  <span style="color: red">${value}</span>  请开始提问吧`, edition: "gpt-4.0"},
       ];
 
       localStorage.setItem(addDrawing.id, JSON.stringify(drawingClass));
-
+    return id1;
     },
 
 
@@ -160,7 +202,8 @@ export default {
     let drawing = localStorage.getItem("drawing")
     if (drawing == null) {
       console.log("为空")
-      this.saveChatSon("聊天一")
+
+      this.id=this.saveChatSon("聊天一");
 
 
     }else {
@@ -168,7 +211,7 @@ export default {
     }
 
     //显示最开始哪个内容
-    this.createMessage(this.drawing[0].id);
+    this.createMessage(this.drawing[0]);
 
 
 

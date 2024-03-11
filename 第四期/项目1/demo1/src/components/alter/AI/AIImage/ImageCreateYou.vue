@@ -13,7 +13,7 @@
                       :src="image.url"
                       :preview-src-list="image.url==null?null:image.url.split(' ')">
                   </el-image>
-                  <img :src="image.url">
+                  <img :src="image.url" :style="size1">
 
 
                 </div>
