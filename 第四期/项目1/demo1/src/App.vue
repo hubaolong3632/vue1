@@ -27,11 +27,10 @@
 
 </script>
 <script>
-import TouBu from './components/invariant/TouBu.vue'
-import WeiBu from './components/invariant/WeiBu.vue'
+const  TouBu =()=>import  ('@/components/invariant/TouBu.vue')
+const  WeiBu =()=> import  ('@/components/invariant/WeiBu.vue')
 
-import * as THREE from 'three'//导入样式
-import BIRDS from 'vanta/src/vanta.birds'
+
 import Clipboard from "clipboard";
 //导入动态样式逻辑
 

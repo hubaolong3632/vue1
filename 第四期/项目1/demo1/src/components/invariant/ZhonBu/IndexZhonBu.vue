@@ -67,16 +67,29 @@
 </template>
 
 <script>
-import LunBuoTuSon from '../../alter/LunBuoTuSon.vue'
-import Rest from "../../alter/ImageYi.vue"
-import ImageEr from "@/components/alter/ImageEr";
-import NumBer from "@/components/alter/zhonBu/Number";
-import UploaDing from "@/components/alter/uploading/UploaDing";
-import DrawOne from "@/components/alter/draw/drawYi";
-import CoustomZUJian from "@/components/alter/custom/CoustomZUJian";
-import TimeYi from "@/components/alter/draw/TimeYi";
-import ImageSan from "@/components/alter/ImageSan";
-import ImageShi from "@/components/alter/ImageShi";
+
+const LunBuoTuSon     =()=>import       ('../../alter/LunBuoTuSon.vue')
+const Rest            =()=>import       ("../../alter/ImageYi.vue")
+const ImageEr         =()=>import       ("@/components/alter/ImageEr")
+const NumBer          =()=>import       ("@/components/alter/zhonBu/Number")
+const UploaDing       =()=>import       ("@/components/alter/uploading/UploaDing")
+const DrawOne         =()=>import       ("@/components/alter/draw/drawYi")
+const CoustomZUJian   =()=>import       ("@/components/alter/custom/CoustomZUJian")
+const TimeYi          =()=>import       ("@/components/alter/draw/TimeYi")
+const ImageSan        =()=>import       ("@/components/alter/ImageSan")
+const ImageShi        =()=>import       ("@/components/alter/ImageShi")
+
+
+// import LunBuoTuSon from '../../alter/LunBuoTuSon.vue'
+// import Rest from "../../alter/ImageYi.vue"
+// import ImageEr from "@/components/alter/ImageEr";
+// import NumBer from "@/components/alter/zhonBu/Number";
+// import UploaDing from "@/components/alter/uploading/UploaDing";
+// import DrawOne from "@/components/alter/draw/drawYi";
+// import CoustomZUJian from "@/components/alter/custom/CoustomZUJian";
+// import TimeYi from "@/components/alter/draw/TimeYi";
+// import ImageSan from "@/components/alter/ImageSan";
+// import ImageShi from "@/components/alter/ImageShi";
 export default {
   name: "ZhonBu",
   components: {

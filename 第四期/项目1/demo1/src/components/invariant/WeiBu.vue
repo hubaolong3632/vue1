@@ -18,9 +18,17 @@
               <hr>
               <div style="font-size: 13px;color: rgba(0,0,0,0.34)">
                 <div class="row">
-                  <div class="col-sm-6"><span style="margin-left: 100px">联系邮箱:911412667@qq.com</span></div>
-                  <div class="col-sm-6"><span style="margin-left: 100px">联系QQ:911412667</span></div>
+                  <div class="col-sm-4"  ><span style="margin-left: 100px;cursor: pointer" class="copy" data-clipboard-text="yq911412667">客服微信:<span  style="color: red">yj911412667</span></span></div>
+<!--                  <div class="col-sm-6"><span style="margin-left: 100px">联系QQ:911412667</span></div>-->
+                  <div class="col-sm-4">
+                    <span class="copy" data-clipboard-text="911412667">
+                      客服QQ:<a href="http://wpa.qq.com/msgrd?v=3&amp;uin=911412667&amp;site=qq&amp;menu=yes" style="color: red;text-decoration:blink ;cursor: pointer">911412667</a>
+                  </span>
+                  </div>
+                  <div class="col-sm-4"><span style="margin-left: 100px;cursor: pointer">售后群:<a  class="copy" href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=0jvxdlhY7qasI5knWYK_98UaQlw8fZlT&authKey=y%2BUMtadHLjw1bi8K6IirRFC4Th0gSVDn01Kk7fFWCrTlVV3hGYn6RmdPZjQPqR06&noverify=0&group_code=658763207" style="color: red">658763207</a></span></div>
+
                 </div>
+
 
 
 
@@ -34,6 +42,10 @@
               <span style="font-size: 13px;color: rgba(204,0,0,0.5) ">
                 服务处于前沿探索阶段，用户应当合法合规使用本服务，并承担由此产生的所有责任。本服务生成的作品仅供个人学习交流使用，对用户的使用不做保证且不承担任何责任。
               </span>
+              <p style="font-size: 13px;color: rgba(105,0,204,0.73) ">
+                [如需要商业合作,AI定制,服务器购买,网站编写,遇到错误请联系上面QQ]
+              </p>
+
             </el-col>
           </el-row>
         </el-main>

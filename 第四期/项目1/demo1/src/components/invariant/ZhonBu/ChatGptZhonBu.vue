@@ -17,7 +17,7 @@
 
       <!--  左边-->
       <el-aside  style="width:250px;">
-         <functional-zone @drawingID="drawingIDClick" @gptrefresh="gptrefresh" @settingUp="settingUp" @gptSwitch="gptSwitch1"></functional-zone>
+         <functional-zone @messageBol="messageBol" @drawingID="drawingIDClick" @gptrefresh="gptrefresh" @settingUp="settingUp" @gptSwitch="gptSwitch1"></functional-zone>
       </el-aside>
 
 <!--      右边-->
@@ -50,11 +50,14 @@
                          </span>
                       </span>
 
+
                     <el-popover placement="top-start" trigger="hover" content="显示全部">
                       <div  @click="time.bol=!time.bol"   class="el-icon-caret-bottom tuBiao" style="margin-left: 40px" slot="reference" v-if="time.userMessage.length>text.textSize"></div>
                     </el-popover>
                     <!-- 显示更多-->
-
+                    &nbsp;&nbsp;
+                    <el-tag type="danger" v-if="time.edition=='系统信息'">{{time.edition}}</el-tag>
+                    <el-tag type="success" v-else>{{time.edition}} - {{gpt.content.name}}</el-tag>
 
                   </div>
                 </el-col>
@@ -84,8 +87,6 @@
                 <el-col :span="22">
                   <blockquote style="font-size: 15px;color:rgba(0,0,0,0.68); text-align: left;" v-html="time.AIMessage">
                   </blockquote>
-
-
                   <div>
 
                   </div>
@@ -111,7 +112,7 @@
                   <el-input
                       type="textarea"
                       :rows="4"
-                      :placeholder="`请输入需要提问的内容 Ctrl+Enter 或者Shift+Enter发送...  \n当前信息:[ 上下文长度: ${this.gpt.MessageLength} , 窗口名称: ${this.drawingID.name} , 当前模型: ${this.gpt.model} ]    `"
+                      :placeholder="`请输入需要提问的内容 Ctrl+Enter 或者Shift+Enter发送...  \n当前信息:[ 窗口名称: ${this.drawingID.name},  聊天角色:${this.gpt.content.name}   ,上下文长度: ${this.gpt.MessageLength} , 当前模型: ${this.gpt.model} ]    `"
                       v-model="textarea">
                 </el-input>
                 </span>
@@ -120,6 +121,7 @@
               <el-col :span="4" class="style_drawing">
                 <el-row>
                     <el-button @click="button_send()" type="info" plain>发送</el-button>
+                    <el-button @click="button_send_xiaoShuo()" type="info" plain>生成小说</el-button>
                 </el-row>
               </el-col>
 
@@ -144,7 +146,7 @@
 
     </el-container>
 
-
+      <character-zhon v-show="characterMessageBol" @messageBol="messageBol" @characterID="characterID"  @characterID_created="characterID_created"></character-zhon>
 
 
 </div>
@@ -158,17 +160,18 @@ import HigHlightV1 from "@/components/alter/AI/ChatGptZhon/HigHlightV1";
 import hljs from "highlight.js";
 import HigHlightV2 from "@/components/alter/AI/ChatGptZhon/HigHlightV2";
 import axios from "axios";
+import CharacterZhon from "@/components/alter/AI/ChatGptZhon/characterZhon";
 
 
 export default {
   name: "ChatGptZhonBu",
-  components: {HigHlightV2, HigHlightV1, CheShi, FunctionalZone},
+  components: {CharacterZhon, HigHlightV2, HigHlightV1, CheShi, FunctionalZone},
   mounted() {
-    console.log("你好")
     // let highlight = document.getElementById("messageShow").querySelectorAll('pre code');
   },
   data() {
     return {
+      characterMessageBol:false,
       fileSum:"",
       placeholder:`请输入需要提问的内容 Ctrl+Enter 或者Shift+Enter发送  当前上下文长度... `,
       textarea: '',
@@ -179,8 +182,8 @@ export default {
       },
       gpt:{
         MessageLength:3, //聊天消息长度
-        content:"你会认真回答我的问题",
-        model:"gpt-3.5-turbo-0125"
+        content:{id:"gpt:hint-1",name:"普通聊天",content:"你会认真回答我的问题"}, // 聊天的内容
+        model:localStorage.getItem("model")||"gpt-3.5-turbo-0125",
 
       },
       drawingID: "msg:1111",
@@ -189,6 +192,7 @@ export default {
 
       ],
       gptSwitch:[
+        {id:1,name:"请选择下列模型",model:"gpt-3.5-turbo-0125"},
         {id:1,name:"gpt4.0ALL可联网 分析文件 (0.1$/次)",model:"gpt-4-all"},
         {id:2,name:"gpt4 2024年1月25号模型 (0.1$/次)",model:"gpt-4-0125-preview"},
         {id:3,name:"gpt3.5 支持4千字上下文(0.001$/次)",model:"gpt-3.5-turbo-0125"},
@@ -199,6 +203,25 @@ export default {
   },
 
   methods:{
+    characterID_created(){
+      this.gpt.content=characterID; //设置选择的值
+    },
+
+    //获取那边传输过来的值
+    characterID(characterID){
+      this.gpt.content=characterID; //设置选择的值
+      this.textarea="emptyemptyempty"; //刷新缓存
+      this.button_send();
+
+
+     // console.log(this.gpt.content)
+    },
+
+    //关闭聊天
+    messageBol(timeBol){
+      console.log("状态",timeBol)
+      this.characterMessageBol=timeBol;
+    },
 
 
     //如果点击上传文件
@@ -215,7 +238,7 @@ export default {
       //   alert("请上传图片文件");
       //   return;
       // }
-      console.log("上传文件1")
+      console.log("上传文件")
 
       let formData = new FormData();
       formData.append('file', this.file);
@@ -227,16 +250,11 @@ export default {
           'Content-Type': 'multipart/form-data'
         },
         onUploadProgress: progressEvent => {
-          console.log("上传文件进度"+1)
-
           this.fileSum = `:${Math.round((100 * progressEvent.loaded) / progressEvent.total)}%`;
         }
       })
-      console.log("上传文件2")
-
 
       console.log(data)
-      console.log("上传文件4")
 
       // this.messageData.picture = data.data.url;
       console.log(data.data.url)
@@ -287,10 +305,6 @@ export default {
 
 
 
-
-
-
-
       }).catch(() => {
         this.$message({
           type: 'info',
@@ -301,9 +315,21 @@ export default {
 
     },
 
+    async button_send_xiaoShuo() {
+      let k=10; //章节控制
+        while (k){
+          this.textarea = "继续给我下一章，并且要有故事情节和他们之间的对话，字数在1000字左右";
+          await this.button_send();
+          console.log("生成文章！")
+          k--;
+        }
+
+    },
+
     //当刷新缓存的时候
     gptrefresh(){
       this.textarea="emptyemptyempty";
+
       this.button_send();
     },
 
@@ -349,7 +375,14 @@ export default {
     //当修改模型的时候
     onGptModelSwitch(model){
       this.gpt.model=model.value;
+      localStorage.setItem("model",model.value) //设置模型
+
       console.log("当前选择的模型:",model.value)
+      this.$notify({
+        title: '成功',
+        message: `当前模型:[${this.gpt.model}]`,
+        type: 'success'
+      });
 
     },
 
@@ -365,29 +398,6 @@ export default {
         bol=true;
       }
     });
-
-
-    // let highlight = item.parentNode.parentNode.parentNode.parentNode.querySelectorAll('pre code');
-    // highlight.forEach((block) => {
-    //   if (!block.classList.contains('hljs')) {
-    //     hljs.highlightElement(block);
-    //     block.classList.add('hljs'); // 添加类名标记为已经高亮
-    //     bol=true;
-    //   }
-    // });
-
-
-    //先找到最开始哪个 给他修改代码
-    // hljs.highlightElement(item.parentNode.querySelector('[name="cc1"]'));
-
-
-    // let highlight = item.parentNode.parentNode.parentNode.parentNode.querySelectorAll('pre code');
-    // // let highlight = item.parentNode.querySelectorAll('pre code');
-    // highlight.forEach((block) => {
-    //   // Deprecated as of 10.7.0. highlightBlock will be removed entirely in v12.0
-    //   // Deprecated as of 10.7.0. Please use highlightElement now.
-    //   hljs.highlightElement(block);
-    // })
 
 
   },
@@ -411,7 +421,7 @@ export default {
             bol: false,
             userMessage:this.textarea ,  //提问的问题
             AIMessage:'', //回答
-            edition: "gpt-4.0"
+            edition: this.textarea=="emptyemptyempty"?"系统信息":this.gpt.model
           };
       //数组添加
       this.drawingClass.unshift(drawingClass)
@@ -421,7 +431,7 @@ export default {
         "sum": this.gpt.MessageLength,
         "g2": {
           "role": "system",
-          "content": this.gpt.content
+          "content": this.gpt.content.content
         },
         "g3": {
           "role": "user",
@@ -443,14 +453,17 @@ export default {
       };
 
       this.textarea = "";
-      console.log(data1)
+      // console.log(data1)
 
       //错误的
       const fetchPromise = fetch(requestData.ip()+"gptChat/gpt4.0.all", requestOptions); // 创建fetch请求的Promise实例
       const timeoutPromise = new Promise((resolve, reject) => { // 创建超时的Promise实例
         setTimeout(() => {
-          reject(new Error('请求超时'));
-        }, 10000); // 设置超时时间为10秒
+            // this.$message.error('接口请求超时,请重新生成:错误原因：'+JSON.stringify(resolve));
+
+
+          reject(new Error('请求超时，错误原因:')+JSON.stringify(reject));
+        }, 30000); // 设置超时时间为30秒
       });
       const response = await Promise.race([fetchPromise, timeoutPromise]); // 使用Promise.race()并行执行fetch请求和超时的Promise实例
 
@@ -512,6 +525,13 @@ export default {
 
 
       console.log("输出完成")
+
+      this.$message({
+        message: '回答完成',
+        type: 'success'
+      });
+
+
       //更新内存
       localStorage.setItem(this.drawingID.id, JSON.stringify(this.drawingClass))
     },
@@ -571,12 +591,18 @@ export default {
 
   },
   created() {
+
     window.kk=this.kk;
     window.copy=this.copy;
     window.onGptModelSwitch=this.onGptModelSwitch;
 
    let gptMessageLength =localStorage.getItem("MessageLength")
     this.MessageLength=gptMessageLength==null?3:gptMessageLength;
+
+    console.log(localStorage.getItem("model"))
+
+
+
 
     console.log("长度为:",this.MessageLength)
 

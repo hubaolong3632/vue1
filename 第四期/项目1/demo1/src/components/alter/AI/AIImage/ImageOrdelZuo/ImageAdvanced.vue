@@ -374,7 +374,7 @@ export default {
       const timeoutPromise = new Promise((resolve, reject) => { // 创建超时的Promise实例
         setTimeout(() => {
           reject(new Error('请求超时'));
-        }, 10000); // 设置超时时间为10秒
+        }, 30000); // 设置超时时间为30秒
       });
       const response = await Promise.race([fetchPromise, timeoutPromise]); // 使用Promise.race()并行执行fetch请求和超时的Promise实例
 

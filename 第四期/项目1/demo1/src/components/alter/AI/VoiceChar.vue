@@ -1,7 +1,8 @@
 <template>
 <div>
-    <button @click="g1">Ai语音聊天</button>
   <RoundTimeEr></RoundTimeEr>
+  <button @click="g1">Ai语音聊天</button>
+
 </div>
 </template>
 

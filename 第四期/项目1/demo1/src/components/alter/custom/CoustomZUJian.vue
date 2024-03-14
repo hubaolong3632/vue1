@@ -41,7 +41,7 @@ export default {
           InterVal:null,
           symbol:true,
           text:"",
-          text_1:"欢迎使用邮寄，你的创作灵感激发器 !",
+          text_1:"欢迎使用邮迹，你的创作灵感激发器 !",
         },
         color:"#ff6b6b",
         screenWidth: window.innerWidth ,// 获取屏幕宽度

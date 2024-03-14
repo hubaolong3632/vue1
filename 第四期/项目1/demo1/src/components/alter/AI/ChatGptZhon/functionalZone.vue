@@ -92,6 +92,8 @@ export default {
   },
   methods:{
 
+
+
     //当点击id的时候切换选项
     createMessage(id){
       this.id=id;
@@ -126,12 +128,15 @@ export default {
       }else if(clickName=="empty"){
         console.log("清理缓存")
         console.log(this.id.id)
-        localStorage.setItem(this.id.id,JSON.stringify([{id:this.id.id,bol:false,userMessage: "", AIMessage: `<span style="color: rgba(255,0,0,0.51)">消息已清空，请开始继续你的聊天</span> `, edition: "gpt-4.0"}]));
+        localStorage.setItem(this.id.id,JSON.stringify([{id:this.id.id,bol:false,userMessage: "", AIMessage: `<span style="color: rgba(255,0,0,0.51)">消息已清空，请开始继续你的聊天</span> `, edition: "系统信息"}]));
         this.createMessage(this.id)
       }else if(clickName=="gptSwitch"){ //模型切换
 
         this.$emit('gptSwitch',"模型切换")
 
+      }else if(clickName=="play"){
+        console.log("xxxx")
+        this.$emit("messageBol",true) //打开角色选择
       }
 
 
@@ -185,7 +190,7 @@ export default {
       // ];
 
       let drawingClass = [
-        {id:id1,bol:false,userMessage: "--------------------------------------------", AIMessage: `当前所在分组:  <span style="color: red">${value}</span>  请开始提问吧`, edition: "gpt-4.0"},
+        {id:id1,bol:false,userMessage: "--------------------------------------------", AIMessage: `当前所在分组:  <span style="color: red">${value}</span>  请开始提问吧`, edition: "系统信息"},
       ];
 
       localStorage.setItem(addDrawing.id, JSON.stringify(drawingClass));

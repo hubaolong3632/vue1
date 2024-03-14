@@ -4,7 +4,8 @@ import axios from 'axios'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 //这里是设置所有地址的ip
-let ip="http://127.0.0.1/"
+// let ip="http://127.0.0.1/"
+let ip="http://springbootgpt.00000.work/"
 let timeoutData=60000; //服务器超时时间一分钟
 let noData={
     code:100,

@@ -4,54 +4,46 @@
 <!--  头部   fixed-top最上面-->
   <header style="height: 56px;background-color: rgba(255,255,255,0.54)" class="p-1  fixed-top with-underline" >
     <!--      这里的 作用是 让 页面的 宽度 适配 手机屏幕的 宽度，这样写 就能使 html 的 width 等于 对应手机 屏幕的 宽度。另外 还阻止用户 缩放 界面-->
-    <!--      目的是 让界面显示 更加适应 手机屏幕-->
-<!--    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
 
 <!--    设置logo-->
     <el-row :gutter="20">
-      <el-col :span="4" class="left-content p-2 ">
-        <img   src="../image/logo/logo2.png" style="height:30% ;width:30%; cursor:pointer" @click="skip_index(headerDate[0])">
-        <span class="index_tag__vNHRb"><span>内测版</span></span>
+      <el-col :span="4" class="left-content p-1 ">
+        <img   src="../image/logo/logo2.png" style="height:40% ;width:40%; cursor:pointer" @click="skip_index(headerDate[0])">
+<!--        <span class="index_tag__vNHRb"><span>内测版</span></span>-->
     </el-col>
 
-<!--      设置字体-->
-      <el-col class="font_1 index_gradient-label__6zsG5 " :span="15"  >
+<!--      设置文章显示-->
+      <el-col class="font_1 index_gradient-label__6zsG5 " :span="17"  >
 
-<!--        设置文字显示-->
-    <div @click="skip_index(header)" v-for="header of headerDate" :key="header.id" style="cursor: pointer;"  >
-        <el-col :span="3" :class="['float-event', 'p-2', 'el-dropdown-link',xuanzhon==header.id?'float-event_click':'']">
-            <p  v-if="header.list.length==0" style="font-size: 1vw; ">{{header.name}}</p>
-            <el-dropdown v-else>
-              <div class="el-dropdown-link">
-                <span class="el-dropdown-link" style="font-size: 1vw">{{header.name}}</span>
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </div>
+        <!--        设置文字显示-->
+            <div @click="skip_index(header)" v-for="header of headerDate" :key="header.id" style="cursor: pointer;"  >
+                <el-col :span="3" :class="['float-event', 'p-2', 'el-dropdown-link',xuanzhon==header.id?'float-event_click':'']">
+                    <p  v-if="header.list.length==0" style="font-size: 1vw; ">{{header.name}}</p>
+                    <el-dropdown v-else>
+                      <div class="el-dropdown-link">
+                        <span class="el-dropdown-link" style="font-size: 1vw">{{header.name}}</span>
+                        <i class="el-icon-arrow-down el-icon--right"></i>
+                      </div>
 
-              <el-dropdown-menu slot="dropdown" style="width: 8%" >
-                <!--                          @mouseenter=""-->
+                      <el-dropdown-menu slot="dropdown" style="width: 8%" >
+                        <!--                          @mouseenter=""-->
 
-                <div v-for="header_to of header.list" :key="header_to.id+1"  @click="skip_index(header_to)" >
+                        <div v-for="header_to of header.list" :key="header_to.id+1"  @click="skip_index(header_to)" >
 
-                  <el-dropdown-item style="text-align: center;font-size: 1vw; "> {{header_to.name}} </el-dropdown-item>
-                </div>
-
-
-              </el-dropdown-menu>
-            </el-dropdown>
-
-        </el-col>
-    </div>
+                          <el-dropdown-item style="text-align: center;font-size: 1vw; "> {{header_to.name}} </el-dropdown-item>
+                        </div>
 
 
+                      </el-dropdown-menu>
+                    </el-dropdown>
 
-
+                </el-col>
+            </div>
 
       </el-col>
 
-<!--      <el-col :span="3"><el-avatar :size="sizeList[2]" :src="circleUrl"></el-avatar></el-col>-->
-      <el-col :span="3" class="p-2">
 
-
+      <el-col :span="1" class="p-2">
         <el-avatar class="el-icon-user-solid" :size="sizeList[1]" :src="circleUrl"></el-avatar>
       </el-col>
 <!--      <el-col :span="3"><i class="el-icon-s-custom"></i></el-col>-->
@@ -72,9 +64,9 @@ name: "TouBu",
         headerDate:[
             {id:1,name:"首页",  route:"/IndexZhonBu",list:[]},
             {id:2,name:"联网AI",route:"/ChatGptZhonBu",list:[]},
-            {id:3,name:"AI聊天",route:"/VoiceChar",list:[]},
-            {id:4,name:"AI绘图",route:"/AIImage",list:[]},
-            {id:5,name:"ChatGpt3.5",route:"/ShoppingZhonBu",list:[]},
+            {id:3,name:"AI绘图",route:"/AIImage",list:[]},
+            {id:4,name:"AI聊天",route:"/VoiceChar",list:[]},
+            // {id:5,name:"ChatGpt3.5",route:"/ShoppingZhonBu",list:[]},
             {id:6,name:"其他",route:"null",list:[{id:31,name:"联系我们",route:"/FIleZhonBu",list:[]},{id:32,name:"次数购买",route:"/FIleZhonBu",list:[]},{id:33,name:"GPT4",route:"/FIleZhonBu",list:[]},{id:34,name:"看图识物",route:"/FIleZhonBu",list:[]}]},
 
         ],
