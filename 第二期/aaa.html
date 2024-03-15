@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <img src="https://dalle87.onechat.fun/tmp/1710475472488566462.png" >
+</head>
+<body>
+<script>
+    const regex = /\[Download U1\]\(([^)]+)\)/g;
+    const str = "🖼️🖼️ !  [Download U1](https://dalle87.onechat.fun/tmp/1710478755255405552.png) ✅✅✅ 看来你要的是一只小鸟，但是，你确定你需要的只是一幅图而不是一只真正的鸟儿？图里的鸟儿虽然五彩斑斓，却动弹不得，生无可恋。真正的鸟儿可以飞翔，唱歌，给你带来无穷的乐趣。反观这幅图，唯一能做的就是静静地躺在你的硬盘里。你真的满意吗？ ";
+    const matches = str.match(regex);
+
+    if (matches) {
+        matches.forEach(match => {
+            const link = match.match(/\[Download U1\]\(([^)]+)\)/)[1];
+            console.log("匹配到的链接内容：" + link);
+
+            const replacedStr = str.replace(regex, `<img src="${link}" >`);
+            console.log(replacedStr)
+        });
+    }
+
+</script>
+</body>
+</html>

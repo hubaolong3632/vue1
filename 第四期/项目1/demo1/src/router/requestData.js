@@ -5,7 +5,8 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 //这里是设置所有地址的ip
 // let ip="http://127.0.0.1/"
-let ip="http://springbootgpt.00000.work/"
+let ip="https://springbootgpt.00000.work/"
+let fileIP="https://file.00000.work:11001/test/upload" //上传文件的ip
 let timeoutData=60000; //服务器超时时间一分钟
 let noData={
     code:100,
@@ -17,6 +18,10 @@ const requestData={
     ip(){
         console.log("获取ip：")
         return ip;
+    },
+    fileIp(){
+        console.log("获取上传ip：")
+        return fileIP;
     },
     async  get(url, data) { // 声明为一个异步函数
         try {

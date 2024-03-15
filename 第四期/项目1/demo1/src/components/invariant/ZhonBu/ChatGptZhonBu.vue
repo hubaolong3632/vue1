@@ -57,7 +57,7 @@
                     <!-- 显示更多-->
                     &nbsp;&nbsp;
                     <el-tag type="danger" v-if="time.edition=='系统信息'">{{time.edition}}</el-tag>
-                    <el-tag type="success" v-else>{{time.edition}} - {{gpt.content.name}}</el-tag>
+                    <el-tag type="success" v-else>{{time.edition}} - {{time.contentName}}</el-tag>
 
                   </div>
                 </el-col>
@@ -71,7 +71,7 @@
 
 
                   <el-popover placement="right-start" trigger="hover" content="复制回答文字" >
-                    <div class="el-icon-document-copy tuBiao copy" slot="reference" :data-clipboard-text="time.AIMessage.replace(/\u00A0/g, ' ')">
+                    <div class="el-icon-document-copy tuBiao copy" slot="reference" :data-clipboard-text="time.AIMessage.replace(/\u00A0/g, ' ').replace(/<br>/g,'\n')">
 
 
                     </div>
@@ -118,23 +118,30 @@
                 </span>
               </el-col>
 
+
               <el-col :span="4" class="style_drawing">
                 <el-row>
-                    <el-button @click="button_send()" type="info" plain>发送</el-button>
-                    <el-button @click="button_send_xiaoShuo()" type="info" plain>生成小说</el-button>
+                  <!--                  <el-button @click="file_send()" type="info" plain>上传文件</el-button>-->
+                  <div>
+                    <input type="file" ref="fileInput" style="display: none" @change="onFileChange">
+                    <el-button @click="file_send()" type="primary" plain>上传文件{{fileSum}}</el-button>
+                    <el-button @click="button_send_xiaoShuo()" type="primary" plain>生成小说</el-button>
+
+                    <!--                      <img :src="require('@/components/image/c1.png')" @click="triggerFileInput">-->
+                  </div>
                 </el-row>
               </el-col>
 
               <el-col :span="4" class="style_drawing">
                 <el-row>
-<!--                  <el-button @click="file_send()" type="info" plain>上传文件</el-button>-->
-                    <div>
-                      <input type="file" ref="fileInput" style="display: none" @change="onFileChange">
-                      <el-button @click="file_send()" type="info" plain>上传文件{{fileSum}}</el-button>
-<!--                      <img :src="require('@/components/image/c1.png')" @click="triggerFileInput">-->
-                    </div>
+                    <el-button @click="button_send()" type="success" style="width: 100%" plain>发送</el-button>
                 </el-row>
               </el-col>
+
+
+
+
+
 
             </el-row>
 <!--          <button @click="drawingID=5564">修改</button>-->
@@ -181,8 +188,8 @@ export default {
         textSize: 100,   //字体长度
       },
       gpt:{
-        MessageLength:3, //聊天消息长度
-        content:{id:"gpt:hint-1",name:"普通聊天",content:"你会认真回答我的问题"}, // 聊天的内容
+        MessageLength:5, //聊天消息长度
+        content:{id:"gpt:hint-1",name:"抬杠聊天(受不了请切换角色扮演)",content:"我想让你装做一个很会拾杠的人(拾杠指的是唱反调，调侃和讽刺对方)，不管我说什么你都先挑刺反驳.但是你也会回答用户的问题"}, // 聊天的内容
         model:localStorage.getItem("model")||"gpt-3.5-turbo-0125",
 
       },
@@ -193,8 +200,8 @@ export default {
       ],
       gptSwitch:[
         {id:1,name:"请选择下列模型",model:"gpt-3.5-turbo-0125"},
-        {id:1,name:"gpt4.0ALL可联网 分析文件 (0.1$/次)",model:"gpt-4-all"},
-        {id:2,name:"gpt4 2024年1月25号模型 (0.1$/次)",model:"gpt-4-0125-preview"},
+        {id:1,name:"gpt4.0ALL可联网 分析文件 生成图片 (0.1$/次)",model:"gpt-4-all"},
+        {id:2,name:"gpt4-1025 可分析2024年1月25号模型 (0.1$/次)",model:"gpt-4-0125-preview"},
         {id:3,name:"gpt3.5 支持4千字上下文(0.001$/次)",model:"gpt-3.5-turbo-0125"},
         {id:3,name:"gpt3.5 16K 支持1w6千字上下文(0.005$/次)",model:"gpt-3.5-turbo-16k-0613"},
       ]
@@ -203,7 +210,7 @@ export default {
   },
 
   methods:{
-    characterID_created(){
+    characterID_created(characterID){
       this.gpt.content=characterID; //设置选择的值
     },
 
@@ -245,7 +252,7 @@ export default {
       formData.append('bucketName', 'my-bucketname');
       formData.append('userName', 'zhangsan');
 
-      let {data} = await axios.post('http://file.00000.work:11001/test/upload', formData, {
+      let {data} = await axios.post(requestData.fileIp(), formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
@@ -270,7 +277,7 @@ export default {
 
       this.$notify({
         title: '上传提示',
-        message: '请确保选择的模型为【gpt-4-all】 并且在上传之前请【刷新一下缓存】，问题问完之后在【刷新缓存】确保消息不会出现问题，文件会以链接的方式放入进去在链接后面编写文件提示功能就可以',
+        message: '请确保选择的模型为【gpt-4-all】 并且在上传之前请【刷新一下缓存】，问题问完之后在【刷新缓存】确保消息不会出现问题，文件会以链接的方式放入进去在链接后面编写文件提示功能就可以 不用管链接',
         type: 'warning'
       });
       this.$refs.fileInput.click();
@@ -316,7 +323,13 @@ export default {
     },
 
     async button_send_xiaoShuo() {
-      let k=10; //章节控制
+      let k=3; //章节控制
+
+      this.$notify({
+        title: '上传提示',
+        message: `请确保角色扮演选择的是【小说大佬】并且已经让他指定生成了什么小说，点击这个就能连续${k}次生成小说！`,
+        type: 'warning'
+      });
         while (k){
           this.textarea = "继续给我下一章，并且要有故事情节和他们之间的对话，字数在1000字左右";
           await this.button_send();
@@ -421,7 +434,8 @@ export default {
             bol: false,
             userMessage:this.textarea ,  //提问的问题
             AIMessage:'', //回答
-            edition: this.textarea=="emptyemptyempty"?"系统信息":this.gpt.model
+            edition: this.textarea=="emptyemptyempty"?"系统信息":this.gpt.model,
+            contentName:this.gpt.content.name
           };
       //数组添加
       this.drawingClass.unshift(drawingClass)
@@ -515,8 +529,6 @@ export default {
 
           drawingClass.AIMessage +=text;
 
-          this.code=drawingClass.AIMessage;
-
           result = await reader.read();
         }
       } else { // 如果response是超时的错误信息
@@ -525,6 +537,36 @@ export default {
 
 
       console.log("输出完成")
+
+      //如果有图片那就要链接
+      const regex = /\[Image\]\(([^)]+)\)/g;
+      const str =  drawingClass.AIMessage;
+      const matches = str.match(regex);
+
+      if (matches) {
+        matches.forEach(match => {
+          const link = match.match(/\[Image\]\(([^)]+)\)/)[1];
+          console.log("匹配到的链接内容：" + link);
+
+          drawingClass.AIMessage = str.replace(regex, ` <img src="${link}" >`);
+        });
+      }else{
+      //  如果没有去查一下另一个
+        const regex = /\[Download U1\]\(([^)]+)\)/g;
+        const str =  drawingClass.AIMessage;
+        const matches = str.match(regex);
+
+        if (matches) {
+          matches.forEach(match => {
+            const link = match.match(/\[Download U1\]\(([^)]+)\)/)[1];
+            console.log("匹配到的链接内容：" + link);
+
+            drawingClass.AIMessage  = str.replace(regex, `<img src="${link}" >`);
+          });
+        }
+      }
+
+
 
       this.$message({
         message: '回答完成',
@@ -537,6 +579,7 @@ export default {
     },
 
     async copy(item) {
+
       let clipboardObj = navigator.clipboard;
       try {
         let dom = item.parentNode.querySelector('[name="cc1"]');
@@ -545,7 +588,7 @@ export default {
         // 删除首行内容
         text=text.trim();
         text = text.replace(/.*\n/, '');
-        text = text.replace(/\u00A0/g, ' ');
+        text = text.replace(/\u00A0/g, ' ').replace(/<br>/g, '\n');
 
         let res = await clipboardObj.writeText(text); //执行复制功能
         this.$notify({
