@@ -4,10 +4,10 @@ import axios from 'axios'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 //这里是设置所有地址的ip
-// let ip="http://127.0.0.1/"
-let ip="https://springbootgpt.00000.work/"
+let ip="http://127.0.0.1/"
+// let ip="https://springbootgpt.00000.work/"
 let fileIP="https://file.00000.work:11001/test/upload" //上传文件的ip
-let timeoutData=60000; //服务器超时时间一分钟
+let timeoutData=120000; //服务器超时时间一分钟
 let noData={
     code:100,
     data:null,

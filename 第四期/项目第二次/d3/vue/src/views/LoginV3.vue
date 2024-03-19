@@ -23,9 +23,10 @@ let login=async () => {
     return;
   }
 
-    let {data}=  await axios.get(ip.url() + "from_login", {
+    let {data}=  await axios.get(ip.url() + "fromUser", {
         params: user.value
       })
+    console.log(data)
 
 
     if(data.username==null){
@@ -41,16 +42,10 @@ let login=async () => {
       }
 
     console.log("登入成功")
-      await router.push("/home")
+       await router.push("/service")
 
 
     }
-
-
-
-
-
-
 }
 
 
@@ -58,57 +53,41 @@ let login=async () => {
 
 <template>
 <div>
-  <div class="common-layout">
-    <el-container style="height: 100vh">
-      <el-header></el-header>
-      <el-main style="margin-left: 30vw">
-        <el-container>
-          <el-header style="font-size: 30px"><h1>健康颐养平台  后台管理系统</h1></el-header>
-          <el-main>
 
-         <div style="margin-left: 100px;margin-top: 40px">
-          账号: <el-input v-model="user.username" style="width: 240px" placeholder="请输入账号" />
-           <br>
-           <br>
+ <div style="margin-top: 20vh;margin-left: 30vw">
 
-           密码:<el-input
-               v-model="user.password"
-               style="width: 240px"
-               type="password"
-               placeholder="请输入密码"
-               show-password
-           />
+     <el-header style="font-size: 30px"><h2>健康颐养平台  后台管理系统</h2></el-header>
 
-           <br>
-           <br>
+       <div style="margin-left: 100px;margin-top: 40px">
+         账号: <el-input v-model="user.username" style="width: 240px" placeholder="请输入账号" />
+         <br>
+         <br>
+         密码:<el-input
+           v-model="user.password"
+           style="width: 240px"
+           type="password"
+           placeholder="请输入密码"
+           show-password
+       />
 
-           是否保存密码:<el-switch
-               v-model="user.swit"
-               inline-prompt
-               active-text="是"
-               inactive-text="否"
-           />
-           <br>
+         <br>
+         <br>
+         是否保存密码:<el-switch
+           v-model="user.swit"
+           inline-prompt
+           active-text="是"
+           inactive-text="否"
+       />
+         <br>
+         <p style="color: red">{{show}}</p>
+         <br>
+         <br>
+         <el-button type="success" @click="login()" plain>登入</el-button>
+       </div>
+ </div>
 
-           <p style="color: red">{{show}}</p>
-
-          <br>
-          <br>
-           <el-button type="success" @click="login()" plain>登入</el-button>
-         </div>
-
-
-          </el-main>
-        </el-container>
-
-
-      </el-main>
-      <el-footer></el-footer>
-    </el-container>
-  </div>
 </div>
 </template>
-
 <style scoped>
 
 </style>

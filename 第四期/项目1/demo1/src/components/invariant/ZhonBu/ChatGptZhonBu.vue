@@ -188,7 +188,7 @@ export default {
         textSize: 100,   //字体长度
       },
       gpt:{
-        MessageLength:5, //聊天消息长度
+        MessageLength:4, //聊天消息长度
         content:{id:"gpt:hint-1",name:"抬杠聊天(受不了请切换角色扮演)",content:"我想让你装做一个很会拾杠的人(拾杠指的是唱反调，调侃和讽刺对方)，不管我说什么你都先挑刺反驳.但是你也会回答用户的问题"}, // 聊天的内容
         model:localStorage.getItem("model")||"gpt-3.5-turbo-0125",
 
@@ -200,10 +200,11 @@ export default {
       ],
       gptSwitch:[
         {id:1,name:"请选择下列模型",model:"gpt-3.5-turbo-0125"},
-        {id:1,name:"gpt4.0ALL可联网 分析文件 生成图片 (0.1$/次)",model:"gpt-4-all"},
+        {id:1,name:"gpt4.0ALL(可联网)(分析文件)(生成图片)(缺点容易崩溃)(0.1$/次)",model:"gpt-4-all"},
         {id:2,name:"gpt4-1025 可分析2024年1月25号模型 (0.1$/次)",model:"gpt-4-0125-preview"},
-        {id:3,name:"gpt3.5 支持4千字上下文(0.001$/次)",model:"gpt-3.5-turbo-0125"},
-        {id:3,name:"gpt3.5 16K 支持1w6千字上下文(0.005$/次)",model:"gpt-3.5-turbo-16k-0613"},
+        {id:2,name:"claude-3-haiku-20240307 谷歌最强大模型(据说比4.0强)(可分析文件) (0.1$/次)",model:"claude-3-haiku-20240307"},
+        {id:3,name:"gpt3.5 (支持4千字上下文)(0.001$/次)",model:"gpt-3.5-turbo-0125"},
+        {id:3,name:"gpt3.5-16K (支持1w6千字上下文)(0.005$/次)",model:"gpt-3.5-turbo-16k-0613"},
       ]
 
     }
