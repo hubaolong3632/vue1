@@ -1,19 +1,15 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeV3 from "../components/HomeV3.vue";
-import Login from "../components/Login.vue";
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
+import {createRouter,createWebHistory } from "vue-router"
+import Login from "../components/Login.vue"
+import HomeV3 from "../components/HomeV3.vue"
+import ServiceV3 from "../components/ServiceV3.vue"
+import ShoppyV3 from "../components/ShoppyV3.vue"
+export default createRouter(
     {
-      path: '/',
-      component: Login
-    },
-    {
-      path: '/home',
-      component: HomeV3
-    },
+        history:createWebHistory(import.meta.env.BASE_URL),
+        routes:[
+            {path:"/",component:Login},
+            {path:"/home",component:HomeV3,children:[{path:"/service",component:ServiceV3},{path:"/shoppy",component:ShoppyV3}]}
+        ]
 
-  ]
-})
+    })
 
-export default router

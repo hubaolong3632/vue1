@@ -3,8 +3,9 @@
 
 <template>
 
-  <router-view></router-view>
-
+<div>
+  asdas
+</div>
 </template>
 
 <style scoped>

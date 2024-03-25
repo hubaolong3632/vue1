@@ -1,7 +1,10 @@
 <script setup>
 import {ref} from "vue";
 import axios from "axios";
-import rou from "../router";
+import rou from "../router/index.js";
+import ip from "../router/ip.js";
+
+
 
 let user=ref({
   username:localStorage.getItem("username")||"",
@@ -32,12 +35,12 @@ let login=async () => {
   }
 
 
- let {data}=await axios.get("http://127.0.0.1:8080/login", {
+ let {data}=await axios.get(ip+"login", {
    params:user.value
   })
   console.log(data)
   if(data==true){
-    await rou.push("/home")
+    await rou.push("/service")
     // alert("登入成功")
   }else{
     user.value.show = "账号密码错误"

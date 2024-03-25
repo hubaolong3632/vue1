@@ -1,11 +1,12 @@
 <script setup>
+
 </script>
 
 <template>
-
-  <router-view></router-view>
-
+c2
 </template>
+
+
 
 <style scoped>
 
