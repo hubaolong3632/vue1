@@ -130,7 +130,6 @@ const beforeAvatarUpload= (rawFile) => {
 </script>
 
 <template>
-
   <el-row :gutter="20">
     <el-col :span="6">
       <el-select v-model="value" placeholder="服务类型" size="large" style="width: 240px">

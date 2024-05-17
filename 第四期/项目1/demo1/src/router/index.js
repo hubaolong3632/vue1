@@ -30,7 +30,7 @@ const router=new VueRouter({
            //高级画图
            {name:"ImageAdvanced",path:"/AIImage/ImageAdvanced",component:ImageAdvanced},
            // 默认显示高级画图
-           {path:"/",redirect:"/AIImage/ImageFast"},
+           {path:"/",redirect:"/AIImage/ImageAdvanced"},
        ]},
 
         //语音聊天

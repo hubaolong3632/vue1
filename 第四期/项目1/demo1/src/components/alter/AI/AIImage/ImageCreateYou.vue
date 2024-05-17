@@ -4,16 +4,21 @@
     <div class="demo-image__placeholder" >
 
         <div v-if="imageData.length!=0">
-            <div  v-for="image of imageData" :key="image.url">
+            <div  v-for="(image,index) of imageData" :key="image.url">
               <div class="card">
               <div class="row ">
                 <div class="col-md-12">
                   <el-image
-                      :style="size1"
+                      :style="image.imgLoad==true?size1:size2"
                       :src="image.url"
+                      @load="imgBool(index)"
                       :preview-src-list="image.url==null?null:image.url.split(' ')">
+
                   </el-image>
-                  <img :src="image.url" :style="size1">
+
+
+
+                  <img :src="image.url" :style="size1"  v-if="image.imgLoad==false">
 
 
                 </div>
@@ -48,12 +53,12 @@
 
         <div v-else class="mc1">
           <h2 >正在努力生成中请稍后！！</h2>
-          <el-progress type="dashboard" :percentage="progressBar.percentage" :color="progressBar.colors"></el-progress>
-          <el-progress type="dashboard" :percentage="progressBar.percentage" :color="progressBar.colors"></el-progress>
-          <el-progress type="dashboard" :percentage="progressBar.percentage" :color="progressBar.colors"></el-progress>
-          <el-progress type="dashboard" :percentage="progressBar.percentage" :color="progressBar.colors"></el-progress>
-          <el-progress type="dashboard" :percentage="progressBar.percentage" :color="progressBar.colors"></el-progress>
-          <el-progress type="dashboard" :percentage="progressBar.percentage" :color="progressBar.colors"></el-progress>
+          <el-progress style="margin-left: 10vw" type="dashboard" :percentage="progressBar.percentage" :color="progressBar.colors"></el-progress>
+          <el-progress style="margin-left: 10vw" type="dashboard" :percentage="progressBar.percentage" :color="progressBar.colors"></el-progress>
+          <el-progress style="margin-left: 10vw" type="dashboard" :percentage="progressBar.percentage" :color="progressBar.colors"></el-progress>
+<!--          <el-progress type="dashboard" :percentage="progressBar.percentage" :color="progressBar.colors"></el-progress>-->
+<!--          <el-progress type="dashboard" :percentage="progressBar.percentage" :color="progressBar.colors"></el-progress>-->
+<!--          <el-progress type="dashboard" :percentage="progressBar.percentage" :color="progressBar.colors"></el-progress>-->
 <!--          <el-button type="success" @click="ImageSetInterval()">下载图片</el-button>-->
         </div>
 
@@ -89,13 +94,16 @@ export default {
         ],
       },
       imageSize:{
-        "1024x1792":{width: `70vh`,height: `100vh`},
-        "1024x1024":{width: `100vh`,height: `100vh`},
-        "1792x1024":{width: `100vh`,height: `70vh`},
+        "1024x1792":{width: `50vh`,height: `70vh`},
+        "1024x1024":{width: `60vh`,height: `60vh`},
+        "1792x1024":{width: `70vh`,height: `50vh`},
       },
       // size1:{width: `100vh`,height: `100vh`}, //设置默认大小
       // size1:{width: `70vh`,height: `100vh`}, //设置默认大小
-      size1:{width: `100vh`,height: `70vh`}, //设置默认大小
+      size1:{width: `65vh`,height: `50vh`}, //设置默认大小
+      size2:{width: `1px`,height: `1px`}, //设置默认大小
+      lastClickTime:0, //获取上一张和下一张生成间隔
+      // size1:{width: `1vh`,height: `7vh`}, //设置默认大小
       imageData: [
 
         // {
@@ -108,6 +116,12 @@ export default {
     }
   },
   methods:{
+    imgBool(index){
+      // console.log(index)
+      this.imageData[index].imgLoad=true;
+      // alert("显示完成")
+    },
+
     //图片定时器
     ImageSetInterval(){
         this.progressBar.bool=true;
@@ -115,7 +129,7 @@ export default {
         this.initerVar=setInterval(()=>{
           this.progressBar.percentage++;
 
-          if(this.imageData.length!=0||this.progressBar.bool==false){
+          if(this.imageData.length!==0||this.progressBar.bool===false){
             clearInterval(this.initerVar)
             this.progressBar.bool=false;
           }
@@ -137,7 +151,7 @@ export default {
 
       let imageJson = await requestData.postData("gptImage/image.dalle3", imagePicture);
       console.log("获取到的参数:",imageJson)
-      if(imageJson.code!=1){
+      if(imageJson.code!==1){
         data.$notify({
           title: '失败',
           message: "加载图片资源失败",
@@ -155,7 +169,10 @@ export default {
         type: 'success'
       });
 
+      // 判断图片生成数量是否为空如果为空就返回他自己本身如果不是就拿到后台传输过来的数据
       data.imageData = imageJson.data.data==null? data.imageData: imageJson.data.data;
+
+
 
       // console.log(data.imageData);
       //
@@ -198,7 +215,35 @@ export default {
 
     Bus.$on("imagePicture", (imagePicture)=> {
       console.log("接收到生成图片命令")
-      this.handleImagePicture(imagePicture);
+
+
+      // 获取当前时间
+      let currentTime = new Date().getTime();
+
+// 计算时间差
+      let timeDiff = currentTime - this.lastClickTime;
+
+// 更新上一次点击时间
+      this.lastClickTime = currentTime;
+// 判断时间差是否小于等于1秒
+      if (timeDiff <= 1000) {
+
+
+        this.$notify.error({
+          title: '错误',
+          message: '请每次点击时间间隔1：'+timeDiff
+        });
+
+      } else {
+        this.handleImagePicture(imagePicture);
+      }
+
+
+
+
+
+
+
     });
   }
 
@@ -227,3 +272,30 @@ export default {
 
 </style>
 
+
+<!--// 获取按钮元素-->
+<!--var button = document.getElementById('yourButtonId');-->
+
+<!--// 初始化上一次点击时间-->
+<!--var lastClickTime = 0;-->
+
+<!--// 添加点击事件监听器-->
+<!--button.addEventListener('click', function() {-->
+<!--// 获取当前时间-->
+<!--var currentTime = new Date().getTime();-->
+
+<!--// 计算时间差-->
+<!--var timeDiff = currentTime - lastClickTime;-->
+
+<!--// 更新上一次点击时间-->
+<!--lastClickTime = currentTime;-->
+
+<!--// 判断时间差是否小于等于1秒-->
+<!--if (timeDiff <= 1000) {-->
+<!--// 成功-->
+<!--console.log('成功');-->
+<!--} else {-->
+<!--// 失败-->
+<!--console.log('失败');-->
+<!--}-->
+<!--});-->

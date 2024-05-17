@@ -333,10 +333,10 @@ export default {
     //生成润色
     async imageCreate(){
       let data=this;
-      console.log("文字理解:",data.comprehend.value,"  画图类型:",data.type2.value,"   画图风格:",data.style1.value)
-      // console.log("图片大体:",data.generall.value,"  重点描述:",data.describe1.value1[0])
-      console.log("图片大体:",data.generall.value,"  重点描述:",this.describe1.value1)
-      console.log("用户输入:",data.textarea)
+      // console.log("文字理解:",data.comprehend.value,"  画图类型:",data.type2.value,"   画图风格:",data.style1.value)
+      // // console.log("图片大体:",data.generall.value,"  重点描述:",data.describe1.value1[0])
+      // console.log("图片大体:",data.generall.value,"  重点描述:",this.describe1.value1)
+      // console.log("用户输入:",data.textarea)
       // "content":"你给出的回答一定是中文，并且你是一个绘画描述大师，接下来的你不需要回答我好的，或者非常感谢什么的你只可以给我描述词"
       data.textarea40="";//清理数据
 

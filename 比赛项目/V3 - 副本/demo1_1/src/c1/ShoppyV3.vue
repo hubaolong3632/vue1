@@ -64,7 +64,7 @@ let v1=ref({
 });
 
 //----
-let messageShow=ref(false);
+let messageShow=ref(true);
 let xBol=ref(0);
 
 

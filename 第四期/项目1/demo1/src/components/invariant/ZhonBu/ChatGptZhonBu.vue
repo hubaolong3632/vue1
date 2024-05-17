@@ -56,7 +56,7 @@
                     </el-popover>
                     <!-- 显示更多-->
                     &nbsp;&nbsp;
-                    <el-tag type="danger" v-if="time.edition=='系统信息'">{{time.edition}}</el-tag>
+                    <el-tag type="danger" v-if="time.edition==='系统信息'">{{time.edition}}</el-tag>
                     <el-tag type="success" v-else>{{time.edition}} - {{time.contentName}}</el-tag>
 
                   </div>
@@ -72,8 +72,6 @@
 
                   <el-popover placement="right-start" trigger="hover" content="复制回答文字" >
                     <div class="el-icon-document-copy tuBiao copy" slot="reference" :data-clipboard-text="time.AIMessage.replace(/\u00A0/g, ' ').replace(/<br>/g,'\n')">
-
-
                     </div>
 
                   </el-popover>
@@ -85,8 +83,18 @@
 
                 </el-col>
                 <el-col :span="22">
-                  <blockquote style="font-size: 15px;color:rgba(0,0,0,0.68); text-align: left;" v-html="time.AIMessage">
-                  </blockquote>
+                  <div v-hljs>
+                    <blockquote id="c1" ref="c1" style="font-size: 15px; text-align: left;" v-html="time.AIMessage">
+
+                    </blockquote>
+<!--                    <pre><code>-->
+
+<!--                     <blockquote style="font-size: 15px;color:rgba(0,0,0,0.68); text-align: left;" v-html="time.AIMessage">-->
+<!--                    </blockquote>-->
+
+<!--                    </code></pre>-->
+                  </div>
+
                   <div>
 
                   </div>
@@ -118,25 +126,25 @@
                 </span>
               </el-col>
 
-
+              <el-col :span="4" class="style_drawing">
+                <el-row>
+                  <el-button @click="button_send()" type="success" style="width: 100%" plain>发送</el-button>
+                </el-row>
+              </el-col>
               <el-col :span="4" class="style_drawing">
                 <el-row>
                   <!--                  <el-button @click="file_send()" type="info" plain>上传文件</el-button>-->
                   <div>
                     <input type="file" ref="fileInput" style="display: none" @change="onFileChange">
                     <el-button @click="file_send()" type="primary" plain>上传文件{{fileSum}}</el-button>
-                    <el-button @click="button_send_xiaoShuo()" type="primary" plain>生成小说</el-button>
+<!--                    <el-button @click="button_send_xiaoShuo()" type="primary" plain>生成小说</el-button>-->
 
                     <!--                      <img :src="require('@/components/image/c1.png')" @click="triggerFileInput">-->
                   </div>
                 </el-row>
               </el-col>
 
-              <el-col :span="4" class="style_drawing">
-                <el-row>
-                    <el-button @click="button_send()" type="success" style="width: 100%" plain>发送</el-button>
-                </el-row>
-              </el-col>
+
 
 
 
@@ -168,8 +176,9 @@ import hljs from "highlight.js";
 import HigHlightV2 from "@/components/alter/AI/ChatGptZhon/HigHlightV2";
 import axios from "axios";
 import CharacterZhon from "@/components/alter/AI/ChatGptZhon/characterZhon";
-
-
+import showdown from "showdown";
+import {marked} from 'marked';
+import {ref} from "vue";
 export default {
   name: "ChatGptZhonBu",
   components: {CharacterZhon, HigHlightV2, HigHlightV1, CheShi, FunctionalZone},
@@ -200,11 +209,20 @@ export default {
       ],
       gptSwitch:[
         {id:1,name:"请选择下列模型",model:"gpt-3.5-turbo-0125"},
-        {id:1,name:"gpt4.0ALL(可联网)(分析文件)(生成图片)(缺点容易崩溃)(0.1$/次)",model:"gpt-4-all"},
-        {id:2,name:"gpt4-1025 可分析2024年1月25号模型 (0.1$/次)",model:"gpt-4-0125-preview"},
-        {id:2,name:"claude-3-haiku-20240307 谷歌最强大模型(据说比4.0强)(可分析文件) (0.1$/次)",model:"claude-3-haiku-20240307"},
-        {id:3,name:"gpt3.5 (支持4千字上下文)(0.001$/次)",model:"gpt-3.5-turbo-0125"},
-        {id:3,name:"gpt3.5-16K (支持1w6千字上下文)(0.005$/次)",model:"gpt-3.5-turbo-16k-0613"},
+        {id:2,name:"gpt4.0ALL(可联网)(分析文件)(生成图片)(缺点容易崩溃)(0.1$/次)",model:"gpt-4-all"},
+        {id:3,name:"gpt4.0 (更具时代变化的4.0)",model:"gpt-4-turbo"},
+        {id:3,name:"gpt4.022 (最新版4.0)",model:"gpt-4-turbo-2024-04-09"},
+
+        {id:11,name:"最新gpt4o模型plus版",model:"gpt-4o-plus"},
+        {id:12,name:"最新gpt4o模型普通版",model:"gpt-4o"},
+
+
+
+        {id:5,name:"claude-3-haiku-20240307 谷歌最强大模型(据说比4.0强)(可分析文件) (0.1$/次)",model:"claude-3-haiku-20240307"},
+        {id:6,name:"gpt3.5 (支持4千字上下文)(0.001$/次)",model:"gpt-3.5-plus"},
+        {id:7,name:"gpt3.5-16K (支持1w6千字上下文)(0.005$/次)",model:"gpt-3.5-turbo-16k-0613"},
+        {id:8,name:"llama3-70b-8192",model:"llama3-70b-8192"},
+        {id:9,name:"deepseek-coder",model:"deepseek-coder"},
       ]
 
     }
@@ -340,11 +358,13 @@ export default {
 
     },
 
-    //当刷新缓存的时候
+    //当刷新缓存的时候 先保存之前保存的后面在吧保存的放回去
     gptrefresh(){
-      this.textarea="emptyemptyempty";
+     let text= this.textarea
 
+      this.textarea="emptyemptyempty";
       this.button_send();
+      this.textarea=text
     },
 
 
@@ -356,8 +376,6 @@ export default {
       }).then(({ value }) => {
         this.saveChatSon(value)
         this.createMessage(this.drawing[0].id);
-
-
       }).catch(() => {
         this.$message({
           type: 'info',
@@ -371,7 +389,7 @@ export default {
       let optionHtml="";
 
       for(let time of this.gptSwitch){
-        optionHtml+=` <option ref="option1" value="${time.model}">${time.name}</option>`;
+        optionHtml+=`<option ref="option1" value="${time.model}">${time.name}</option>`;
       }
 
 
@@ -390,7 +408,7 @@ export default {
     onGptModelSwitch(model){
       this.gpt.model=model.value;
       localStorage.setItem("model",model.value) //设置模型
-
+      this.gptrefresh();
       console.log("当前选择的模型:",model.value)
       this.$notify({
         title: '成功',
@@ -415,12 +433,47 @@ export default {
 
 
   },
+   copyPre(perTag) {
+      let perTags = perTag.getElementsByTagName('code')[0];
+
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(perTags.innerText);
+      } else {
+        let textarea = document.createElement('textarea');
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = 0;
+        textarea.value = perTags.innerText;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+
+
+
+
+      let tooltip = document.getElementById('tooltip');
+      tooltip.style.display = 'block'; // 显示提示框
+      setTimeout(function() {
+        tooltip.style.display = 'none'; // 2秒后隐藏提示框
+      }, 300);
+
+      console.log("复制成功")
+
+    },
 
     //发送数据
     async button_send() {
       if (this.textarea.trim() === "") { //如果输入的内容为空
         this.$message({
           message: '警告,请先输入内容',
+          type: 'warning'
+        });
+        return;
+      }
+      if ((this.gpt.model==="gpt-4-all"||this.gpt.model==="gpt-4-turbo"||this.gpt.model==="gpt-4-turbo-2024-04-09")&&this.textarea.length>=5000) { //如果输入的内容为空
+        this.$message({
+          message: '警告,使用4.0请输入5000字以下否则请联系管理员打开权限',
           type: 'warning'
         });
         return;
@@ -440,7 +493,38 @@ export default {
           };
       //数组添加
       this.drawingClass.unshift(drawingClass)
-      drawingClass.AIMessage=`<span style="color: rgba(255,0,59,0.78)">正在生成中,如果10秒之后没反应请重发...</span>`
+      drawingClass.AIMessage=`
+      <style>
+        @keyframes bubble {
+          0% {
+            transform: scale(0.95);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 0, 59, 0.78);
+          }
+          50% {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            border-color: rgba(0, 20, 241, 0.98);
+          }
+          100% {
+            transform: scale(0.95);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            border-color: rgba(0, 255, 59, 0.78);
+          }
+        }
+
+        .bubbleText {
+          animation: bubble 2s infinite;
+          padding: 10px;
+          border: 2px solid;
+          border-radius: 10px;
+          background-color: white;
+          display: inline-block;
+          color: black;
+        }
+      </style>
+        <span  style="color: #5fd70d" class="bubbleText">正在生成中,如果10秒之后没反应请重发...</span>
+`
       //执行修改里面的内容
       let data1 = {
         "sum": this.gpt.MessageLength,
@@ -476,8 +560,10 @@ export default {
         setTimeout(() => {
             // this.$message.error('接口请求超时,请重新生成:错误原因：'+JSON.stringify(resolve));
 
-
           reject(new Error('请求超时，错误原因:')+JSON.stringify(reject));
+          // drawingClass.AIMessage=new Error('请求超时，错误原因:')+JSON.stringify(reject);
+
+        // }, 30000); // 设置超时时间为30秒
         }, 30000); // 设置超时时间为30秒
       });
       const response = await Promise.race([fetchPromise, timeoutPromise]); // 使用Promise.race()并行执行fetch请求和超时的Promise实例
@@ -487,87 +573,56 @@ export default {
         let result = await reader.read();
 
 
-        let bol=false;
-        let regex = /```/g; //正则表达式匹配
-
-        drawingClass.AIMessage="";
-        while (!result.done) {
-          let text = new TextDecoder("utf-8").decode(result.value).replace(/\s/g, '\u00A0').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/{{END}}/g, '\n');
-
-          //改成每次进3-5个内容的时候在进行扫描有没有```符号有的话就进行操作
-          if(regex.exec(drawingClass.AIMessage)){
-
-            if(bol==false){
-              result = await reader.read();
 
 
-              drawingClass.AIMessage=drawingClass.AIMessage.replace(/```/g, `
-                   <div style="background-color: #000000">
-                       <span onclick="copy(this)" style="color: #cccccc;border: red 1px ridge;cursor: pointer; font-size: 1vw">复制<span/>
-                       <pre  onmouseover="kk(this)"  style="color: #ffffff;" name="cc1" >
-                          <code>
-                  `)
-              bol=true;
+      drawingClass.AIMessage="";
+       let k="";
+        let converter = new showdown.Converter();
+          while (!result.done) {
+            // let text = new TextDecoder("utf-8").decode(result.value).replace(/\s/g, '\u00A0').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/{{END}}/g, '\n');
+            let text = new TextDecoder("utf-8").decode(result.value);
 
-            }else{
 
-              drawingClass.AIMessage=drawingClass.AIMessage.replace(/```/g, `
-                        </code>
-                     </pre>
-                   </div>
-                  `)
-              bol=false;
-            }
+            k+=text;
 
+            // 将文本转换为Markdown格式的HTML
+            // drawingClass.AIMessage = converter.makeHtml(k);
+            // drawingClass.AIMessage = madn(k);
+            drawingClass.AIMessage =marked.parse(k);
+            // drawingClass.AIMessage = converter.makeHtml(drawingClass.AIMessage+text);
+
+
+            // console.log(drawingClass.AIMessage);
+
+
+            result = await reader.read();
           }
 
-
-        if(bol==false){
-          text =text.replace(/\n/g, '<br>');
-        }
-
+        // 进行更新标签
+        // let blocks = document.getElementById("c1").querySelectorAll('pre code');
+        let blocks = document.getElementById("c1").querySelectorAll('pre');
 
 
-          drawingClass.AIMessage +=text;
+          for(let b1 of blocks) {
+            b1.onclick = () => {
+              console.log("复制功能")
+            }
+          }
 
-          result = await reader.read();
-        }
+        Array.prototype.forEach.call(blocks, hljs.highlightBlock);
+
+
+
+
+
+
+
       } else { // 如果response是超时的错误信息
         console.error(response.message);
       }
 
 
       console.log("输出完成")
-
-      //如果有图片那就要链接
-      const regex = /\[Image\]\(([^)]+)\)/g;
-      const str =  drawingClass.AIMessage;
-      const matches = str.match(regex);
-
-      if (matches) {
-        matches.forEach(match => {
-          const link = match.match(/\[Image\]\(([^)]+)\)/)[1];
-          console.log("匹配到的链接内容：" + link);
-
-          drawingClass.AIMessage = str.replace(regex, ` <img src="${link}" >`);
-        });
-      }else{
-      //  如果没有去查一下另一个
-        const regex = /\[Download U1\]\(([^)]+)\)/g;
-        const str =  drawingClass.AIMessage;
-        const matches = str.match(regex);
-
-        if (matches) {
-          matches.forEach(match => {
-            const link = match.match(/\[Download U1\]\(([^)]+)\)/)[1];
-            console.log("匹配到的链接内容：" + link);
-
-            drawingClass.AIMessage  = str.replace(regex, `<img src="${link}" >`);
-          });
-        }
-      }
-
-
 
       this.$message({
         message: '回答完成',
@@ -578,6 +633,7 @@ export default {
       //更新内存
       localStorage.setItem(this.drawingID.id, JSON.stringify(this.drawingClass))
     },
+
 
     async copy(item) {
 
@@ -726,7 +782,6 @@ blockquote {
   border-color: #00ff00; /* 在Hover状态下改变边框颜色 */
   background-color: rgba(0, 0, 0, 0.07);
 }
-
 
 
 

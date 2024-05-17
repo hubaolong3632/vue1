@@ -19,7 +19,6 @@
           </el-col>
         </el-row>
 
-
       </el-header>
       <el-container>
         <el-aside width="200px" style="background-color: rgba(2,2,2,0.51)">

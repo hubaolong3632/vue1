@@ -18,7 +18,8 @@
         <!--        设置文字显示-->
             <div @click="skip_index(header)" v-for="header of headerDate" :key="header.id" style="cursor: pointer;"  >
                 <el-col :span="3" :class="['float-event', 'p-2', 'el-dropdown-link',xuanzhon==header.id?'float-event_click':'']">
-                    <p  v-if="header.list.length==0" style="font-size: 1vw; ">{{header.name}}</p>
+<!--                    <p  v-if="header.list.length==0" style="font-size: 1vw; ">{{header.name}}</p>-->
+                    <p  v-if="header.list.length==0" style="">{{header.name}}</p>
                     <el-dropdown v-else>
                       <div class="el-dropdown-link">
                         <span class="el-dropdown-link" style="font-size: 1vw">{{header.name}}</span>

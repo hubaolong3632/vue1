@@ -16,17 +16,17 @@ let user=ref({
 let login=async () => {
   console.log("登入")
 
-  if (user.value.username.trim() == "") {
+  if (user.value.username.trim() === "") {
     user.value.show = "请输入用户名"
     return;
   }
-  if (user.value.password.trim() == "") {
+  if (user.value.password.trim() === "") {
     user.value.show = "请输入密码"
     return;
 
   }
 
-  if(user.value.chick==true){
+  if(user.value.chick===true){
     localStorage.setItem("username",user.value.username)
     localStorage.setItem("password",user.value.password)
   }else{
@@ -39,7 +39,7 @@ let login=async () => {
    params:user.value
   })
   console.log(data)
-  if(data==true){
+  if(data===true){
     await rou.push("/service")
     // alert("登入成功")
   }else{

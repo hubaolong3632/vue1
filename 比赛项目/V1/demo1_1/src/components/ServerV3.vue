@@ -247,6 +247,7 @@ let filrIP=ip.url()+"file";
 
 <!--    上传  -->
       <div>
+
         <p>宣传图片</p>
           <el-upload
               class="avatar-uploader"
