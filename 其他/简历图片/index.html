@@ -5,295 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人项目图片展示</title>
-    <style>
-        /* 全局样式 */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            background-image: url('data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23cccccc" fill-opacity="0.4" fill-rule="evenodd"%3E%3Ccircle cx="3" cy="3" r="3" /%3E%3Ccircle cx="13" cy="13" r="3" /%3E%3Ccircle cx="23" cy="23" r="3" /%3E%3Ccircle cx="33" cy="33" r="3" /%3E%3C/g%3E%3C/svg%3E');
-        }
 
-        /* 图片容器样式 */
-        .project-img-container {
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            width: 100%;
-        }
-
-        /* 鼠标悬停时图片放大及标题显示效果 */
-        .project-img-container:hover .img-fluid {
-            transform: scale(1.1);
-        }
-
-        .project-img-container:hover .img-title {
-            opacity: 1;
-        }
-
-        /* 章节标题样式 */
-        .section-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 30px;
-            color: #333;
-        }
-
-        /* 容器布局样式 */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* 图片滚动容器样式 */
-        .image-scroll-container {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            padding: 10px 0;
-        }
-
-        /* 单个图片项目样式（用于滚动容器内） */
-        .image-scroll-item {
-            flex: 0 0 auto;
-            scroll-snap-align: start;
-            margin-right: 10px;
-        }
-
-        /* 放大后的图片容器样式 */
-        .enlarged-img-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        /* 放大后的图片样式 */
-        .enlarged-img {
-            max-width: 90%;
-            max-height: 90%;
-        }
-
-        /* 关闭按钮样式 */
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        /* 滑动按钮样式 */
-        .slide-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            font-size: 36px;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .prev-btn {
-            left: 20px;
-        }
-
-        .next-btn {
-            right: 20px;
-        }
-    </style>
-    <style>
-
-        .img-fluid {
-            height: 250px;
-            width: auto;
-            object-fit: cover;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
-
-
-        @media only screen and (max-width: 600px) {
-            .img-fluid {
-                height: 100px;
-            }
-        }
-
-
-
-
-        /* 图片标题样式 */
-        .img-title {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 5px;
-            text-align: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-    </style>
 </head>
-
 <body>
 
 <div class="container">
     <h1 style="text-align: center">个人项目图片展示</h1>
-
     <div id="home"></div>
 </div>
-
+</body>
 <script>
-    // 将 htmlList 提升到全局作用域
-    const htmlList = [
-        { text: "荣誉证书/奖牌(<=左滑更多)", data: [
-                { text: "江苏省技能状元大赛", img: "荣誉/c4.jpg" },
-                { text: "基于物联网的自动升降井盖", img: "荣誉/c0.jpg" },
-                { text: "第十五届蓝桥杯", img: "荣誉/c1.jpg" },
-                { text: "第十四届蓝桥杯", img: "荣誉/c2.jpg" },
-                { text: "第十三届蓝桥杯", img: "荣誉/c3.jpg" }] },
-
-        { text: "鸡尾酒调酒机", data: [
-                { text: "智能调酒机", img: "智能调酒机/t6.jpg" },
-                { text: "智能调酒机", img: "智能调酒机/t2.jpg" },
-                { text: "智能调酒机", img: "智能调酒机/t1.jpg" },
-                { text: "智能调酒机", img: "智能调酒机/t3.jpg" },
-                { text: "智能调酒机", img: "智能调酒机/t5.jpg" }
-                ]},
-
-
-        { text: "鸡尾酒调酒机控制界面", data: [
-                { text: "智能调酒机控制界面", img: "调酒机界面图片/1.png" },
-                { text: "智能调酒机控制界面", img: "调酒机界面图片/2.png" },
-                { text: "智能调酒机控制界面", img: "调酒机界面图片/3.png" },
-                { text: "智能调酒机控制界面", img: "调酒机界面图片/4.png" },
-                { text: "智能调酒机控制界面", img: "调酒机界面图片/5.png" },
-                { text: "智能调酒机控制界面", img: "调酒机界面图片/6.png" },
-                { text: "智能调酒机控制界面", img: "调酒机界面图片/7.png" },
-                { text: "智能调酒机控制界面", img: "调酒机界面图片/8.png" },
-                { text: "智能调酒机控制界面", img: "调酒机界面图片/9.png" },
-
-            ]},
-
-
-        { text: "歌唱比赛项目", data: [
-            { text: "歌单查看界面", img: "歌唱比赛项目节目单/c6.png" },
-                { text: "歌单查看界面", img: "歌唱比赛项目节目单/c7.png" },
-                { text: "获奖界面", img: "歌唱比赛项目节目单/c1.png" },
-                { text: "每个歌单显示界面", img: "歌唱比赛项目节目单/c2.png" },
-                { text: "歌单查看界面", img: "歌唱比赛项目节目单/c4.png" },
-                { text: "歌单查看界面", img: "歌唱比赛项目节目单/c5.png" }] },
-        { text: "邮寄AI项目", data: [{ text: "AI首页", img: "AI项目/c2.png" },
-                { text: "生成图片界面", img: "AI项目/c5.png" },
-                { text: "扮演角色界面", img: "AI项目/c3.png" },
-                { text: "聊天界面", img: "AI项目/c0.png" },
-                { text: "AI语音聊天", img: "AI项目/c7.png" },
-                { text: "简易手机版AI", img: "AI项目/c1.png" },
-                { text: "简易电脑版AI", img: "AI项目/c6.png" }]},
-        { text: "机器狗控制程序", data: [
-            { text: "控制界面", img: "机器狗控制程序/c4.png" },
-                { text: "指令模式", img: "机器狗控制程序/c5.png" },
-                { text: "控制移动", img: "机器狗控制程序/c0.jpg" },
-                { text: "机器狗", img: "机器狗控制程序/c1.jpg" },
-                { text: "识别色彩", img: "机器狗控制程序/c2.jpg" },
-                { text: "雷达扫描", img: "机器狗控制程序/c3.jpg" }] },
-
-        { text: "江苏省倍思特律师事务所", data: [
-                { text: "前台1", img: "倍思特律师事务所/c9.png" },
-                { text: "前台2", img: "倍思特律师事务所/c1.png" },
-                { text: "前台3", img: "倍思特律师事务所/c2.png" },
-                { text: "前台4", img: "倍思特律师事务所/c3.png" },
-                { text: "前台5", img: "倍思特律师事务所/c5.png" },
-                { text: "前台6", img: "倍思特律师事务所/c6.png" },
-                { text: "前台7", img: "倍思特律师事务所/c7.png" },
-                { text: "文章管理界面", img: "倍思特律师事务所/c0.png" },
-                { text: "编写文章界面", img: "倍思特律师事务所/c8.png" },
-                { text: "荣誉界面图片", img: "倍思特律师事务所/c10.png" }] },
-        { text: "图床", data: [
-                { text: "图一", img: "图床/c2.png" },
-                { text: "图二", img: "图床/c1.png" },
-                { text: "图二", img: "图床/c3.png" }] },
-        { text: "基于物联网的自动井盖", data: [
-            { text: "图一", img: "硬件/c21.jpg" },
-                { text: "图二", img: "硬件/c4.png" },
-                { text: "图三", img: "硬件/c6.png" }] },
-
-
-        { text: "饮料贩卖机", data: [
-            { text: "图一", img: "饮料贩卖机/c3.jpg" },
-                { text: "图二", img: "饮料贩卖机/c0.png" },
-                { text: "图三", img: "饮料贩卖机/c1.png" },
-                { text: "图四", img: "饮料贩卖机/c2.jpg" },
-                { text: "图五", img: "饮料贩卖机/c4.png" }] },
-
-        { text: "邮件发送器", data: [
-                { text: "邮局发送系统", img: "桌面软件/c2.png" },
-                { text: "服务器更换", img: "桌面软件/c1.png" },
-                { text: "密钥添加", img: "桌面软件/c3.png" }] },
-        { text: "QQ机器人", data: [
-                { text: "QQ机器人", img: "QQ机器人/c1.png" },
-                { text: "QQ机器人", img: "QQ机器人/c2.png" },
-                { text: "QQ机器人", img: "QQ机器人/c3.png" },
-
-            ] },
-        { text: "图书管理系统", data: [
-                { text: "图一", img: "图书管理系统/c1.png" },
-                { text: "图二", img: "图书管理系统/c2.png" },
-                { text: "图三", img: "图书管理系统/c3.png" },
-                { text: "图四", img: "图书管理系统/c4.png" },
-                { text: "图五", img: "图书管理系统/c5.png" },
-            ] },
-
-
-
-        { text: "PCB电路板设计", data: [
-                { text: "rs485通信驱动板", img: "PCB/rs485通信驱动板.png" },
-                { text: "485电机驱动板", img: "PCB/485电机驱动板.png" },
-                { text: "esp32控制led", img: "PCB/esp32控制led.png" },
-                { text: "五路语言控制usb模块", img: "PCB/五路usb模块.png" },
-                { text: "米家转esp32驱动板", img: "PCB/米家转esp32驱动板.png" },
-
-                { text: "分开插入驱动板", img: "PCB/分开插入驱动板.png" },
-                { text: "驱动板", img: "PCB/驱动板.png" }
-            ]},
-
-        { text: "其他", data: [
-                { text: "图一", img: "其他/c1.png" },
-                { text: "图二", img: "其他/c2.png" },
-                { text: "图三", img: "其他/c3.png" },
-                { text: "图四", img: "其他/c4.png" },
-            ] },
-    ];
-
+    // folder: 图片所在文件夹名，与 img 拼接为完整路径 url + folder + "/" + img
+    // 列表从 fileList.json 加载，v1.js 可扫描 img/ 只追加不存在的文件夹
+    let htmlList = [];
     const url = "./img/";
     let htmlTable = "";
 
     function init() {
+        htmlTable = "";
         for (const html of htmlList) {
             let htmlDataTable = "";
             for (const text of html.data) {
+                const imgSrc = url + html.folder + "/" + text.img;
                 htmlDataTable += `
                     <div class="image-scroll-item">
                         <div class="project-img-container">
-                            <img src="${url + text.img}" class="img-fluid" onclick="enlargeImage(this.src, '${html.text}')" alt="">
+                            <img src="${imgSrc}" class="img-fluid" onclick="enlargeImage(this.src, '${html.text.replace(/'/g, "\\'")}')" alt="">
                             <div class="img-title">${text.text}</div>
                         </div>
                     </div>
@@ -314,16 +51,29 @@
         document.getElementById("home").innerHTML = htmlTable;
     }
 
-    init();
+    fetch('./fileList.json')
+        .then(res => res.json())
+        .then(data => {
+            htmlList = data;
+            init();
+        })
+        .catch(err => {
+            document.getElementById("home").innerHTML = '<p style="color:red">加载 fileList.json 失败，请确保存在该文件。</p>';
+            console.error(err);
+        });
 
     let currentImageIndex = 0;
     let currentImagesData = [];
+    let currentSectionFolder = "";
 
     function enlargeImage(src, sectionText) {
         // 找到当前图片所在的数据组
-        const sectionData = htmlList.find(section => section.text === sectionText).data;
+        const section = htmlList.find(s => s.text === sectionText);
+        const sectionData = section.data;
+        currentSectionFolder = section.folder;
         currentImagesData = sectionData;
-        currentImageIndex = currentImagesData.findIndex(img => img.img === src.replace(url, ''));
+        const pathAfterUrl = src.replace(url, '');
+        currentImageIndex = currentImagesData.findIndex(item => (currentSectionFolder + "/" + item.img) === pathAfterUrl);
 
         const enlargedImgContainer = document.createElement('div');
         enlargedImgContainer.classList.add('enlarged-img-container');
@@ -436,11 +186,158 @@
             currentImageIndex = 0;
         }
 
-        const newSrc = url + currentImagesData[currentImageIndex].img;
+        const newSrc = url + currentSectionFolder + "/" + currentImagesData[currentImageIndex].img;
         enlargedImg.src = newSrc;
     }
 </script>
 
-</body>
 
+
+
+<style>
+    /* 全局样式 */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        background-image: url('data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23cccccc" fill-opacity="0.4" fill-rule="evenodd"%3E%3Ccircle cx="3" cy="3" r="3" /%3E%3Ccircle cx="13" cy="13" r="3" /%3E%3Ccircle cx="23" cy="23" r="3" /%3E%3Ccircle cx="33" cy="33" r="3" /%3E%3C/g%3E%3C/svg%3E');
+    }
+
+    /* 图片容器样式 */
+    .project-img-container {
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        width: 100%;
+    }
+
+    /* 鼠标悬停时图片放大及标题显示效果 */
+    .project-img-container:hover .img-fluid {
+        transform: scale(1.1);
+    }
+
+    .project-img-container:hover .img-title {
+        opacity: 1;
+    }
+
+    /* 章节标题样式 */
+    .section-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 30px;
+        color: #333;
+    }
+
+    /* 容器布局样式 */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* 图片滚动容器样式 */
+    .image-scroll-container {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding: 10px 0;
+    }
+
+    /* 单个图片项目样式（用于滚动容器内） */
+    .image-scroll-item {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+        margin-right: 10px;
+    }
+
+    /* 放大后的图片容器样式 */
+    .enlarged-img-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    /* 放大后的图片样式 */
+    .enlarged-img {
+        max-width: 90%;
+        max-height: 90%;
+    }
+
+    /* 关闭按钮样式 */
+    .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    /* 滑动按钮样式 */
+    .slide-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+        font-size: 36px;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .prev-btn {
+        left: 20px;
+    }
+
+    .next-btn {
+        right: 20px;
+    }
+</style>
+<style>
+
+    .img-fluid {
+        height: 250px;
+        width: auto;
+        object-fit: cover;
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+    }
+
+
+    @media only screen and (max-width: 600px) {
+        .img-fluid {
+            height: 100px;
+        }
+    }
+
+
+
+
+    /* 图片标题样式 */
+    .img-title {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 5px;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+</style>
 </html>
