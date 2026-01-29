@@ -4,27 +4,15 @@
     <div >
 <!--      <span v-show="yuanInterVal.symbol" ref="symbol" style="font-size: 100px;color: #ff6b6b">|</span>-->
       <span v-show="yuanInterVal.symbol" ref="symbol" :style="{ fontSize: dynamicFontSize1,color:color}">|</span>
-      <span class="textStyle" ref="title" :style="{ fontSize: dynamicFontSize }" >{{yuanInterVal.text}}</span>
-      <span v-show="yuanInterVal.symbol" ref="symbol" :style="{ fontSize: dynamicFontSize1,color:color}">|</span>
 
+
+<!--      <span class="textStyle" ref="title" :style="{ fontSize: dynamicFontSize }" >{{yuanInterVal.text}}</span>-->
+      <span class="textStyle" ref="title" style="font-size: 4vw" >{{yuanInterVal.text}}</span>
+
+
+      <span class="loading" v-show="yuanInterVal.symbol" ref="symbol" :style="{ fontSize: dynamicFontSize1,color:color}">|</span>
 
     </div>
-
-<!--    <slot name="h1" :id="name" msg="aaa">那边不写我就是默认值</slot>-->
-<!--    <slot name="h2">那边不写我就是默认值</slot>-->
-<!--    <slot name="h3">那边不写我就是默认值</slot>-->
-<!--    <input v-f1_s="name" ref="inp" type="text" v-model="name">-->
-<!--    <div class="input-group mt-3 mb-3">-->
-<!--      <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">-->
-<!--        选择网站-->
-<!--      </button>-->
-<!--      <ul class="dropdown-menu">-->
-<!--        <li><a class="dropdown-item" href="https://www.google.com">GOOGLE</a></li>-->
-<!--        <li><a class="dropdown-item" href="https://www.runoob.com">RUNOOB</a></li>-->
-<!--        <li><a class="dropdown-item" href="https://www.taobao.com">TAOBAO</a></li>-->
-<!--      </ul>-->
-<!--      <input type="text" class="form-control" placeholder="网站地址">-->
-<!--    </div>-->
 
 
   </div>
@@ -151,8 +139,6 @@ export default {
   top: 0;
   width: 100%;
   height: 100%;
-  /*background: #fff url("@/components/image/p1.png") no-repeat;*/
-  background-color: #000000;
 }
 
 </style>

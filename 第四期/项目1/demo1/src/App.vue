@@ -1,32 +1,27 @@
 <template>
-  <div id="app" >
+  <div id="app">
 <!--    头部-->
     <TouBu></TouBu>
 
-
-
-<!--    &lt;!&ndash;中部 路由缓存&ndash;&gt;-->
-<!--    <keep-alive include="IndexZhonBu" max="10">-->
-<!--      <router-view ></router-view>-->
-<!--    </keep-alive>-->
 
 <!--    路由缓存，全部缓存-->
     <keep-alive>
       <router-view ></router-view>
     </keep-alive>
-<!---->
 <!--    尾部-->
     <WeiBu/>
 
 
+<!--    登录功能-->
+    <login-v2></login-v2>
+
+
   </div>
 </template>
-<script src="three.r134.min.js"></script>
-<script src="vanta.birds.min.js"></script>
-<script>
 
-</script>
 <script>
+import LoginV2 from "@/components/login/LoginV2.vue";
+
 const  TouBu =()=>import  ('@/components/invariant/TouBu.vue')
 const  WeiBu =()=> import  ('@/components/invariant/WeiBu.vue')
 
@@ -37,6 +32,7 @@ import Clipboard from "clipboard";
 export default {
   name: 'App',
   components: {
+    LoginV2,
     TouBu,
     WeiBu
   },
@@ -44,32 +40,14 @@ export default {
     return{
       keepAlive:[
        '',
-
       ]
     }
   },created(){
 
-    //复制功能
-    let clipboard = new Clipboard('.copy');
-    clipboard.on('success', ()=> {
-
-      this.$notify({
-        message: '复制成功',
-        duration:1000,
-        type: 'success'
-      });
-
-    });
 
 
 
-    clipboard.on('error', ()=> {
-      this.$message({
-        message: '复制失败',
-        type: 'error',
-        duration:1000,
-      });
-    });
+
   }
 
 }
@@ -82,6 +60,20 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   margin-top: 6.3vh;
+}
+
+body {
+  background-image: url('imagetp.png');
+  background-attachment: fixed;
+  height: 100%;
+  width: 100%;
+  no-repeat:center top;
+
+  background-color: black; /* 设置备用背景颜色 */
+  background-size: 100% 100%;
+  background-repeat: no-repeat; /* 禁止背景图片重复 */
+
+  z-index: -1;
 }
 
 

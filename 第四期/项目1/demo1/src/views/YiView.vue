@@ -6,7 +6,10 @@
     <router-link to="/YiView/s3?id=1">第三个</router-link>
 
 <!--    二级路由-->
-    <router-view>      </router-view>
+    <router-view>
+
+
+    </router-view>
   </div>
 </template>
 

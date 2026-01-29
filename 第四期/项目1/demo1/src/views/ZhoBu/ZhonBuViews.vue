@@ -20,7 +20,7 @@
       <br>
       <br>
 <!--      路由进入的地方-->
-      <router-view>      </router-view>
+      <router-view>   </router-view>
 
     </div>
 </template>

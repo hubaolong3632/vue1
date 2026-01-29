@@ -2,26 +2,16 @@
 <!--  <LunBuoTuSon v-for="k of lbtModel" :key="k.id"></LunBuoTuSon>-->
 
   <div id="ZhonBu">
-    <ImageSan></ImageSan>
+<!--    <ImageSan></ImageSan>-->
 <!--    <hr>-->
 <!--    大图移动/轮播图-->
     <LunBuoTuSon :style="zhonDate.maBot2"></LunBuoTuSon>
 
 <!--    动态文字-->
-    <CoustomZUJian  :style="zhonDate.maBot1">
-<!--      <template v-slot:h1>-->
-<!--        我是具名插槽一-->
-<!--      </template>-->
-<!--      <template v-slot:h2>-->
-<!--        我是具名插槽二-->
-<!--      </template>-->
-<!--      <template v-slot:h3>-->
-<!--        我是具名插槽三-->
-<!--      </template>-->
-
-    </CoustomZUJian>
+    <CoustomZUJian  :style="zhonDate.maBot1"></CoustomZUJian>
 
 
+<!-- element 轮播图-->
     <image-shi></image-shi>
 
     <!--    炫酷时间-->
@@ -35,11 +25,7 @@
 <!--    数字-->
     <NumBer  :style="zhonDate.maBot1"> </NumBer>
 
-<!--  单图显示  -->
-<!--    &lt;!&ndash;    单张图片显示&ndash;&gt;-->
-<!--    <el-card shadow="always" :style="zhonDate.maBot1">-->
-<!--      <draw-one  ></draw-one>-->
-<!--    </el-card>-->
+
 
 <!--    四张图片显示-->
     <el-card shadow="always" :style="zhonDate.maBot1" v-for="image in  ImageErsum" :key="image">
@@ -49,7 +35,11 @@
     </el-card>
 
 
-
+    <!--  抽奖功能  -->
+    <el-card shadow="always" :style="zhonDate.maBot1">
+      <draw-one  ></draw-one>
+    </el-card>
+    <br>
 
     <!--    单张图片显示-->
     <el-card shadow="always" :style="zhonDate.maBot1">
@@ -62,8 +52,12 @@
 <!--    显示为空的-->
     <el-empty  :image-size="100"></el-empty>
 
-  </div>
 
+
+
+
+
+  </div>
 </template>
 
 <script>
@@ -106,7 +100,7 @@ export default {
   },
   data(){
     return {
-      ImageErsum:10, //控制imageer组件显示几个
+      ImageErsum:2, //控制imageer组件显示几个
       zhonDate:{
         maBot1:{"margin-bottom":"50px"},
         maBot2:{"margin-bottom":"15px"},

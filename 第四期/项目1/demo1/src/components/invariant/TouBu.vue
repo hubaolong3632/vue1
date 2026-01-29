@@ -4,16 +4,15 @@
 <!--  头部   fixed-top最上面-->
   <header style="height: 56px;background-color: rgba(255,255,255,0.54)" class="p-1  fixed-top with-underline" >
     <!--      这里的 作用是 让 页面的 宽度 适配 手机屏幕的 宽度，这样写 就能使 html 的 width 等于 对应手机 屏幕的 宽度。另外 还阻止用户 缩放 界面-->
-
 <!--    设置logo-->
     <el-row :gutter="20">
       <el-col :span="4" class="left-content p-1 ">
         <img   src="../image/logo/logo2.png" style="height:40% ;width:40%; cursor:pointer" @click="skip_index(headerDate[0])">
 <!--        <span class="index_tag__vNHRb"><span>内测版</span></span>-->
-    </el-col>
+      </el-col>
 
 <!--      设置文章显示-->
-      <el-col class="font_1 index_gradient-label__6zsG5 " :span="17"  >
+      <el-col class="font_1 index_gradient-label__6zsG5 " :span="15"  >
 
         <!--        设置文字显示-->
             <div @click="skip_index(header)" v-for="header of headerDate" :key="header.id" style="cursor: pointer;"  >
@@ -44,10 +43,13 @@
       </el-col>
 
 
-      <el-col :span="1" class="p-2">
-        <el-avatar class="el-icon-user-solid" :size="sizeList[1]" :src="circleUrl"></el-avatar>
+      <el-col :span="5" class="p-2" >
+
+        <div @click="startLogin()" style="display: flex;cursor: pointer">
+<!--          <el-avatar :size="sizeList[1]" :src="circleUrl"  style="cursor: pointer"></el-avatar>-->
+          <p class="p-1-1" style="padding-top: 5px;padding-left: 10px">登录</p>
+        </div>
       </el-col>
-<!--      <el-col :span="3"><i class="el-icon-s-custom"></i></el-col>-->
 
     </el-row>
   </header>
@@ -58,6 +60,9 @@
 </template>
 
 <script>
+import Bus from "@/utils/EventBus";
+import router from "@/router";
+
 export default {
 name: "TouBu",
   data() {
@@ -68,19 +73,26 @@ name: "TouBu",
             {id:3,name:"AI绘图",route:"/AIImage",list:[]},
             {id:4,name:"AI聊天",route:"/VoiceChar",list:[]},
             // {id:5,name:"ChatGpt3.5",route:"/ShoppingZhonBu",list:[]},
-            {id:6,name:"其他",route:"null",list:[{id:31,name:"联系我们",route:"/FIleZhonBu",list:[]},{id:32,name:"次数购买",route:"/FIleZhonBu",list:[]},{id:33,name:"GPT4",route:"/FIleZhonBu",list:[]},{id:34,name:"看图识物",route:"/FIleZhonBu",list:[]}]},
+            {id:6,name:"其他",route:"null",list:[
+                {id:30,name:"图床",route:"/tc",list:[]},
+                // {id:30,name:"图床",route:"/ccc",list:[]},
+                {id:31,name:"联系我们",route:"/FIleZhonBu",list:[]},{id:32,name:"次数购买",route:"/FIleZhonBu",list:[]},{id:34,name:"看图识物",route:"/FIleZhonBu",list:[]}]},
 
         ],
        //当前选中的
        xuanzhon:"",
        // home1: {name:"首页",route:"/FIleZhonBu",list:[]}, //主页
-       circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png", //默认头像
+       // circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png", //默认头像
+       circleUrl: require("@/components/image/logo/AI.png"), //默认头像
        sizeList: ["large", "medium", "small"] //头像大小
     };
   },
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
+    },
+    startLogin() {  //打开登录界面
+      Bus.$emit("centerDialogVisible") //携带参数返回给非父类
     },
 
     skip_index(h1){
@@ -105,7 +117,7 @@ name: "TouBu",
 }
 </script>
 
-<style >
+<style  >
 /*需要*/
 .el-dropdown {
   display: inline-block;
@@ -121,6 +133,18 @@ name: "TouBu",
 .el-icon-arrow-down {
   font-size: 10px;
   color: #1d38d9;
+}
+.p-1-1{
+  padding-top: 5px;
+  padding-left: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  background-color: #fff;
+  border: 3px solid #555;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: inline-block;
 }
 
 .index_gradient-label__6zsG5 {
@@ -161,7 +185,7 @@ name: "TouBu",
   border-radius: 0 0 5px 5px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.43);
 
-
+  position: fixed;
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.21), rgba(255, 255, 255, 0.16));
   /*background-image: linear-gradient(20deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.27), rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.24), #8000ff, #ff00ff);*/
 
@@ -206,23 +230,30 @@ name: "TouBu",
 }
 
 
+/*
 body {
+
   background: url('@/components/image/logo/imagetp.png');
   width: 100%;
   height: 100%;
-  background-repeat: repeat; /* 图片会在水平和垂直方向上重复平铺 */
-  /*background-size: contain; !* 确保整张背景图片在容器中完整显示 *!*/
+  background-repeat: repeat;
 }
 
 
+ */
+/*!*如果为手机端（竖屏）就切换成特定样式*!*/
+/*
+@media screen and (max-width: 430px)  {
+  body {
+    transform-origin: 0 0;
+    transform: rotateZ(90deg) translateY(-100%);
+  }
+}
 
-/*!*如果为手机端就切换成竖屏的*!*/
-/*@media screen and (orientation: portrait) {*/
-/*  !*竖屏样式*!*/
-/*  body {*/
-/*    transform-origin: 0 0;*/
-/*    transform: rotateZ(90deg) translateY(-100%);*/
-/*  }*/
-/*}*/
+ */
+
+
+
+
 </style>
 

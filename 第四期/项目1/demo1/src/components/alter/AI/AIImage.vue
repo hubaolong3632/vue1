@@ -1,19 +1,12 @@
 <template>
 <div>
 
-<!--  <el-row :gutter="20" >-->
-<!--    <el-col :span="6" style="margin-left: 10px"  >-->
-<!--    <ImageOrdelZuo></ImageOrdelZuo>-->
-<!--   </el-col>-->
-<!--    <el-col :span="17" >-->
-<!--    <ImageCreateYou></ImageCreateYou>-->
-<!--    </el-col>-->
-<!--  </el-row>-->
     <el-container>
       <el-aside width="350px" ><ImageOrdelZuo></ImageOrdelZuo></el-aside>
       <el-container>
-        <el-main ><ImageCreateYou></ImageCreateYou></el-main>
-
+        <el-main>
+          <ImageCreateYou></ImageCreateYou>
+        </el-main>
         <!--        <el-footer style="background-color: #47ff00">Footer</el-footer>-->
       </el-container>
     </el-container>
@@ -26,12 +19,12 @@
 <script>
 import ImageOrdelZuo from "@/components/alter/AI/AIImage/ImageOrdelZuo";
 import ImageCreateYou from "@/components/alter/AI/AIImage/ImageCreateYou";
+import LoginV2 from "@/components/login/LoginV2.vue";
 export default {
   name: "AIImage",
-  components: {ImageCreateYou, ImageOrdelZuo},
+  components: {LoginV2, ImageCreateYou, ImageOrdelZuo},
   data(){
     return {
-
     }
   }
 }

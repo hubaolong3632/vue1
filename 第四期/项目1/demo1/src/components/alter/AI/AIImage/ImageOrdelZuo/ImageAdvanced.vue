@@ -355,6 +355,7 @@ export default {
           "content":textContent
         },
         "social_uid":"image-101",
+        model: "gpt-4-all",
         "stream":true
       }
 
@@ -369,7 +370,8 @@ export default {
       };
       data.polish=true;
       data.runshe="请稍后正在匹配词";
-      const fetchPromise = fetch(requestData.ip()+"gptChat/gpt4.0.0613", requestOptions); // 创建fetch请求的Promise实例
+      // const fetchPromise = fetch(requestData.ip()+"gptChat/gpt4.0.0613", requestOptions); // 创建fetch请求的Promise实例
+      const fetchPromise = fetch(requestData.ip()+"gptChat/gpt4.0.all", requestOptions); // 创建fetch请求的Promise实例
 
       const timeoutPromise = new Promise((resolve, reject) => { // 创建超时的Promise实例
         setTimeout(() => {
@@ -386,7 +388,7 @@ export default {
 
           // innerTextGPT.innerText += new TextDecoder("utf-8").decode(result.value).replace(/\s/g,'\u00A0').replace(/{{END}}/g, '\n');
           let text=new TextDecoder("utf-8").decode(result.value).replace(/\s/g,'\u00A0').replace(/{{END}}/g, '\n');
-          // console.log(text)
+          console.log(text)
 
           this.textarea40+=text;
 
@@ -406,8 +408,6 @@ export default {
     },
   },
   created() {
-
-
     //监听父类的按钮消息如果按了就执行我这个
     Bus.$on("aa",(aa)=>{
         let data=this;

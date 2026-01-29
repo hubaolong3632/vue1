@@ -9,6 +9,7 @@ const AIImage          =()=>import( "@/components/alter/AI/AIImage");
 const VoiceChar        =()=>import( "@/components/alter/AI/VoiceChar");
 const ImageFast        =()=>import( "@/components/alter/AI/AIImage/ImageOrdelZuo/ImageFast");
 const ImageAdvanced    =()=>import( "@/components/alter/AI/AIImage/ImageOrdelZuo/ImageAdvanced");
+const TcV3    =()=>import( "@/components/invariant/ZhonBu/TcV3");
 
 const IndexZhonBu=()=>import("@/components/invariant/ZhonBu/IndexZhonBu");
 Vue.use(VueRouter) //加vue的路由插件
@@ -21,6 +22,7 @@ const router=new VueRouter({
         {name:"FIleZhonBu",path:"/FIleZhonBu",component:FIleZhonBu},
         //
         {name:"PhoneZhonBu",path:"/PhoneZhonBu",component:PhoneZhonBu},
+        {name:"tc",path:"/tc",component:TcV3},
         //购物
         {name:"ChatGptZhonBu",path:"/ChatGptZhonBu",component:ChatGptZhonBu},
         //ai画图

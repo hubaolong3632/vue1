@@ -1,36 +1,38 @@
 <template>
-<div>
-<!--    <hig-hlight-v1></hig-hlight-v1>-->
-<!--  <hig-hlight-v2></hig-hlight-v2>-->
+  <div>
+    <!--    <hig-hlight-v1></hig-hlight-v1>-->
+    <!--  <hig-hlight-v2></hig-hlight-v2>-->
     <!--设置电脑和手机默认都兼容-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+    <!--    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
 
-  <!--  <pre v-highlightjs>-->
-  <!--    <code class="html">-->
-  <!--      &lt;hahaha&gt;-->
-  <!--      -->
-  <!--      -->
-  <!--     </code>-->
-  <!--  </pre> -->
+    <!--  <pre v-highlightjs>-->
+    <!--    <code class="html">-->
+    <!--      &lt;hahaha&gt;-->
+    <!--      -->
+    <!--      -->
+    <!--     </code>-->
+    <!--  </pre> -->
 
     <el-container>
 
       <!--  左边-->
-      <el-aside  style="width:250px;">
-         <functional-zone @messageBol="messageBol" @drawingID="drawingIDClick" @gptrefresh="gptrefresh" @settingUp="settingUp" @gptSwitch="gptSwitch1"></functional-zone>
+      <el-aside style="width:250px;">
+        <functional-zone @messageBol="messageBol" @drawingID="drawingIDClick" @gptrefresh="gptrefresh"
+                         @settingUp="settingUp" @gptSwitch="gptSwitch1"></functional-zone>
       </el-aside>
 
-<!--      右边-->
-      <el-container  style="height: 93vh">
+      <!--      右边-->
+      <el-container style="height: 90vh">
 
         <!--      右边 上面   在这里设置选择-->
-        <div  style="overflow: auto;  height: 100vh"  ref="messageShow">
-          <el-main >
+        <div style="overflow: auto;  height: 100vh" ref="messageShow">
+          <el-main>
 
-            <div :style="{'margin-top':index==0?null:'100px'}"   class="tuBiao1" v-for="(time,index) of drawingClass" :key="time.id">
+            <div :style="{'margin-top':index===0?null:'100px'}" class="tuBiao1" v-for="(time,index) of drawingClass"
+                 :key="time.id">
               <!--              用户问题-->
-              <el-row :gutter="20" >
-                <el-col :span="2" >
+              <el-row :gutter="20">
+                <el-col :span="2">
 
                   <div class="el-icon-user" style="margin-top: 15px"></div>
 
@@ -39,25 +41,25 @@
                   <div style=" text-align: left;">
 
                     <!--  显示当前回答的文字-->
-                    <span style="font-size: 15px;color:#a9a8a8 ;" >
-                         <span v-if="time.bol==false">
+                    <span style="font-size: 15px;color:#a9a8a8 ;">
+                         <span v-if="time.bol===false">
 
-                            {{time.userMessage.slice(0,text.textSize)}}{{time.userMessage.length>text.textSize?".......":""}}
+                            {{time.userMessage.slice(0, text.textSize) }}{{ time.userMessage.length > text.textSize ? "......." : "" }}
                          </span>
-
                           <span v-else>
-                            {{time.userMessage}}
+                            {{ time.userMessage }}
                          </span>
                       </span>
 
 
                     <el-popover placement="top-start" trigger="hover" content="显示全部">
-                      <div  @click="time.bol=!time.bol"   class="el-icon-caret-bottom tuBiao" style="margin-left: 40px" slot="reference" v-if="time.userMessage.length>text.textSize"></div>
+                      <div @click="time.bol=!time.bol" class="el-icon-caret-bottom tuBiao" style="margin-left: 40px"
+                           slot="reference" v-if="time.userMessage.length>text.textSize"></div>
                     </el-popover>
                     <!-- 显示更多-->
                     &nbsp;&nbsp;
-                    <el-tag type="danger" v-if="time.edition==='系统信息'">{{time.edition}}</el-tag>
-                    <el-tag type="success" v-else>{{time.edition}} - {{time.contentName}}</el-tag>
+                    <el-tag type="danger" v-if="time.edition==='系统信息'">{{ time.edition }}</el-tag>
+                    <el-tag type="success" v-else>{{ time.edition }} - {{ time.contentName }}</el-tag>
 
                   </div>
                 </el-col>
@@ -66,17 +68,19 @@
               <el-divider></el-divider>
 
 
-              <el-row :gutter="20" >
+              <el-row :gutter="20">
                 <el-col :span="2">
 
 
-                  <el-popover placement="right-start" trigger="hover" content="复制回答文字" >
-                    <div class="el-icon-document-copy tuBiao copy" slot="reference" :data-clipboard-text="time.AIMessage.replace(/\u00A0/g, ' ').replace(/<br>/g,'\n')">
-                    </div>
+                  <el-popover placement="right-start" trigger="hover" content="复制回答文字">
+
+                    <!--复制功能-->
+                    <div class="el-icon-document-copy tuBiao copy" slot="reference" @click="copyPre(time.AIMessage)"></div>
+
 
                   </el-popover>
                   <br>
-                  <el-popover placement="right-start" trigger="hover" content="重新生成答案" >
+                  <el-popover placement="right-start" trigger="hover" content="重新生成答案">
                     <div class="el-icon-refresh-right tuBiao" slot="reference" @click="anew(time.userMessage)"></div>
                   </el-popover>
 
@@ -84,15 +88,14 @@
                 </el-col>
                 <el-col :span="22">
                   <div v-hljs>
+<!--                    存放用户回答的id的地方-->
                     <blockquote id="c1" ref="c1" style="font-size: 15px; text-align: left;" v-html="time.AIMessage">
-
                     </blockquote>
-<!--                    <pre><code>-->
 
-<!--                     <blockquote style="font-size: 15px;color:rgba(0,0,0,0.68); text-align: left;" v-html="time.AIMessage">-->
-<!--                    </blockquote>-->
 
-<!--                    </code></pre>-->
+
+
+
                   </div>
 
                   <div>
@@ -109,62 +112,56 @@
 
         </div>
 
-<!--        右边下面-->
-        <el-footer style="background-color: rgba(0,0,0,0.11);height: 100px ">
+        <!--        右边下面-->
+        <el-footer style="height: 100px ">
 
-            <el-row>
+          <el-row>
 
-              <el-col :span="20" class="style_drawing">
-<!--                <span @keyup.enter.shift="button_send"  @keyup.enter.ctrl.shift="button_send">-->
-                <span @keyup.shift.enter.exact="button_send()"  @keyup.ctrl.enter.exact="button_send()">
+            <el-col :span="24" class="style_drawing">
+                <span @keyup.shift.enter.exact="button_send()" @keyup.ctrl.enter.exact="button_send()">
                   <el-input
                       type="textarea"
                       :rows="4"
                       :placeholder="`请输入需要提问的内容 Ctrl+Enter 或者Shift+Enter发送...  \n当前信息:[ 窗口名称: ${this.drawingID.name},  聊天角色:${this.gpt.content.name}   ,上下文长度: ${this.gpt.MessageLength} , 当前模型: ${this.gpt.model} ]    `"
                       v-model="textarea">
-                </el-input>
+                  </el-input>
+
+                 <el-col :span="24" class="style_drawing">
+                        <el-row>
+                          <el-col :span="20" class="style_drawing">
+                                <el-button @click="button_send()" type="success" style="width: 100%" plain>发送</el-button>
+                          </el-col>
+                          <el-col :span="4" class="style_drawing">
+                          <div>
+                            <input type="file" ref="fileInput" style="display: none" @change="onFileChange">
+
+                             <el-button @click="file_send()" type="primary" plain>上传文件{{ fileSum }}</el-button>
+                            <!--                    <el-button @click="button_send_xiaoShuo()" type="primary" plain>生成小说</el-button>-->
+                          </div>
+
+                          </el-col>
+                        </el-row>
+                  </el-col>
+
+
+
+
+
                 </span>
-              </el-col>
-
-              <el-col :span="4" class="style_drawing">
-                <el-row>
-                  <el-button @click="button_send()" type="success" style="width: 100%" plain>发送</el-button>
-                </el-row>
-              </el-col>
-              <el-col :span="4" class="style_drawing">
-                <el-row>
-                  <!--                  <el-button @click="file_send()" type="info" plain>上传文件</el-button>-->
-                  <div>
-                    <input type="file" ref="fileInput" style="display: none" @change="onFileChange">
-                    <el-button @click="file_send()" type="primary" plain>上传文件{{fileSum}}</el-button>
-<!--                    <el-button @click="button_send_xiaoShuo()" type="primary" plain>生成小说</el-button>-->
-
-                    <!--                      <img :src="require('@/components/image/c1.png')" @click="triggerFileInput">-->
-                  </div>
-                </el-row>
-              </el-col>
+            </el-col>
 
 
-
-
-
-
-
-
-            </el-row>
-<!--          <button @click="drawingID=5564">修改</button>-->
-<!--          <button @click="drawingID=55624">修改2</button>-->
-
-
+          </el-row>
         </el-footer>
       </el-container>
 
     </el-container>
 
-      <character-zhon v-show="characterMessageBol" @messageBol="messageBol" @characterID="characterID"  @characterID_created="characterID_created"></character-zhon>
+    <character-zhon v-show="characterMessageBol" @messageBol="messageBol" @characterID="characterID"
+                    @characterID_created="characterID_created"></character-zhon>
 
 
-</div>
+  </div>
 </template>
 
 <script>
@@ -179,6 +176,7 @@ import CharacterZhon from "@/components/alter/AI/ChatGptZhon/characterZhon";
 import showdown from "showdown";
 import {marked} from 'marked';
 import {ref} from "vue";
+
 export default {
   name: "ChatGptZhonBu",
   components: {CharacterZhon, HigHlightV2, HigHlightV1, CheShi, FunctionalZone},
@@ -187,73 +185,103 @@ export default {
   },
   data() {
     return {
-      characterMessageBol:false,
-      fileSum:"",
-      placeholder:`请输入需要提问的内容 Ctrl+Enter 或者Shift+Enter发送  当前上下文长度... `,
+      characterMessageBol: false,
+      fileSum: "",
+      placeholder: `请输入需要提问的内容 Ctrl+Enter 或者Shift+Enter发送  当前上下文长度... `,
       textarea: '',
       // originalText: "这是一个超过50个字符的示例文本，用于演示下拉显示更多的功能。asa多的功能。asa多的功能。asa多的功能。asa多的功能。asaaaaaaaaaa",
       expanded: false,
       text: {
         textSize: 100,   //字体长度
       },
-      gpt:{
-        MessageLength:4, //聊天消息长度
-        content:{id:"gpt:hint-1",name:"抬杠聊天(受不了请切换角色扮演)",content:"我想让你装做一个很会拾杠的人(拾杠指的是唱反调，调侃和讽刺对方)，不管我说什么你都先挑刺反驳.但是你也会回答用户的问题"}, // 聊天的内容
-        model:localStorage.getItem("model")||"gpt-3.5-turbo-0125",
+      gpt: {
+        MessageLength: 4, //聊天消息长度
+        content: {
+          id: "gpt:hint-1",
+          name: "抬杠聊天(受不了请切换角色扮演)",
+          content: "我想让你装做一个很会拾杠的人(拾杠指的是唱反调，调侃和讽刺对方)，不管我说什么你都先挑刺反驳.但是你也会回答用户的问题"
+        }, // 聊天的内容
+        model: localStorage.getItem("model") || "gpt-3.5-turbo-0125", //设置模型
 
       },
       drawingID: "msg:1111",
-      drawingClass:[
-        {id:"msg_id:13242",bol:false,userMessage: "你好,我是你的人工智能", AIMessage: "请对我进行提问吧，我会你想要的任何东西", edition: "gpt-4.0"},
+      drawingClass: [
+        {
+          id: "msg_id:13242",
+          bol: false,
+          userMessage: "你好,我是你的人工智能",
+          AIMessage: "请对我进行提问吧，我会你想要的任何东西",
+          edition: "gpt-4.0"
+        },
 
       ],
-      gptSwitch:[
-        {id:1,name:"请选择下列模型",model:"gpt-3.5-turbo-0125"},
-        {id:2,name:"gpt4.0ALL(可联网)(分析文件)(生成图片)(缺点容易崩溃)(0.1$/次)",model:"gpt-4-all"},
-        {id:3,name:"gpt4.0 (更具时代变化的4.0)",model:"gpt-4-turbo"},
-        {id:3,name:"gpt4.022 (最新版4.0)",model:"gpt-4-turbo-2024-04-09"},
-
-        {id:11,name:"最新gpt4o模型plus版",model:"gpt-4o-plus"},
-        {id:12,name:"最新gpt4o模型普通版",model:"gpt-4o"},
+      gptSwitch: [
+        {id: 1, name: "请选择下列模型", model: "gpt-3.5-turbo-0125"},
+        {id: 11, name: "GPT4最好用 --4o", model: "gpt-4o"},
 
 
+        // {id: 11, name: "o1-pro", model: "o1-pro"},
 
-        {id:5,name:"claude-3-haiku-20240307 谷歌最强大模型(据说比4.0强)(可分析文件) (0.1$/次)",model:"claude-3-haiku-20240307"},
-        {id:6,name:"gpt3.5 (支持4千字上下文)(0.001$/次)",model:"gpt-3.5-plus"},
-        {id:7,name:"gpt3.5-16K (支持1w6千字上下文)(0.005$/次)",model:"gpt-3.5-turbo-16k-0613"},
-        {id:8,name:"llama3-70b-8192",model:"llama3-70b-8192"},
-        {id:9,name:"deepseek-coder",model:"deepseek-coder"},
+        {id: 6, name: "GPT4 --普通版", model: "gpt-4"},
+        {id: 2, name: "GPT4最强 --逆向4.0官网可联网分析文件生成图片", model: "gpt-4-all"},
+        // {id: 3, name: "GPT4最新 --最新的4.0大模型 ", model: "gpt-4-turbo"},
+        {id: 3, name: "谷歌4.0 ", model: "claude-3-5-haiku-20241022"},
+
+        // {id: 9, name: "GPT4最准确-o1大模型", model: "o1-preview"},
+        // {id: 9, name: "GPT4最准确-o1大模型 视图版", model: "openai/o1-preview"},
+
+        // {id: 6, name: "GPT3 --4千字输入(0.001$/次)", model: "gpt-3.5-turbo-0125"},
+        {id: 1111, name: "------------GPT3--------------", model: "gpt-3.5-turbo"},
+
+        {id: 6, name: "GPT3 --4千字输入(0.001$/次)", model: "gpt-3.5-turbo"},
+        {id: 6, name: "GPT3 --16k 可以放1万6千字", model: "gpt-3.5-turbo-16k"},
+
+        // {id: 6, name: "GPT3字少 --4千字输入(0.001$/次)", model: "gpt-3.5-turbo-0125"},
+        // {id:6,name:"GPT3 --4千字输入(0.001$/次)",model:"gpt-3.5-plus"},
+        // {id: 7, name: "GPT3字多 --1.6万字输入(0.005$/次)", model: "gpt-3.5-turbo-16k-0613"},
+
+        {id: 1111, name: "------------deepseek--------------", model: "deepseek-r1-250120"},
+        {id: 11, name: "deepseekR1 --深度推理模型", model: "deepseek-r1-250120"},
+        {id: 11, name: "deepseek  --不带推理", model: "deepseek-v3"},
+        {id: 1111, name: "------------不常用--------------", model: "gpt-3.5-turbo"},
+
+        {id: 12, name: "最新gpt4o模型普通版", model: "gpt-4o"},
+        // {id: 3, name: "gpt4  --2024模型", model: "gpt-4-turbo-2024-04-09"},
+        // {id: 5, name: "claude-3 --谷歌大模型", model: "claude-3-haiku-20240307"},
+
+        // {id: 8, name: "llama3 自建模型", model: "llama3-70b-8192"},
+        // {id: 9, name: "deepseek 自建模型", model: "deepseek-coder"},
       ]
 
     }
   },
 
-  methods:{
-    characterID_created(characterID){
-      this.gpt.content=characterID; //设置选择的值
+  methods: {
+    characterID_created(characterID) {
+      this.gpt.content = characterID; //设置选择的值
     },
 
     //获取那边传输过来的值
-    characterID(characterID){
-      this.gpt.content=characterID; //设置选择的值
-      this.textarea="emptyemptyempty"; //刷新缓存
+    characterID(characterID) {
+      this.gpt.content = characterID; //设置选择的值
+      this.textarea = "emptyemptyempty"; //刷新缓存
       this.button_send();
 
 
-     // console.log(this.gpt.content)
+      // console.log(this.gpt.content)
     },
 
     //关闭聊天
-    messageBol(timeBol){
-      console.log("状态",timeBol)
-      this.characterMessageBol=timeBol;
+    messageBol(timeBol) {
+      console.log("状态", timeBol)
+      this.characterMessageBol = timeBol;
     },
 
 
     //如果点击上传文件
     async onFileChange(e) {
       this.file = e.target.files[0];
-      if(this.file==null){
+      if (this.file == null) {
         return;
       }
       if (this.file.size > 20 * 1024 * 1024) { // 20MB 的限制
@@ -286,13 +314,13 @@ export default {
       console.log(data.data.url)
 
 
-      this.textarea =`${data.data.url}  \n ${this.textarea}`;
-      this.fileSum="";
+      this.textarea = `${data.data.url}  \n ${this.textarea}`;
+      this.fileSum = "";
 
 
     },
 
-    file_send(){ //点击上传按钮
+    file_send() { //点击上传按钮
 
       this.$notify({
         title: '上传提示',
@@ -303,25 +331,25 @@ export default {
     },
 
 
-    settingUp(){ //当点击长度设置的时候
+    settingUp() { //当点击长度设置的时候
       this.$prompt('请输入上下文长度1-10以内(用于聊天记录前几条数据，越多记住上下文的也越多,但是费用也会稍微贵一些) ', `上下文长度->当前长度:${this.gpt.MessageLength}`, {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
-      }).then(({ value }) => {
-        let sum=parseInt(value)
-        if(isNaN(sum)){
+      }).then(({value}) => {
+        let sum = parseInt(value)
+        if (isNaN(sum)) {
           this.$message({
             message: '长度设置失败:请输入1-10以内的数字',
             type: 'error'
           });
-        }else if(sum<1||sum>10){
-            this.$message({
-              message: '长度设置失败:请输入大于1并且小于10的数字',
-              type: 'error'
-            });
-        }else{
-          localStorage.setItem("MessageLength",value)
-          this.gpt.MessageLength=sum;
+        } else if (sum < 1 || sum > 10) {
+          this.$message({
+            message: '长度设置失败:请输入大于1并且小于10的数字',
+            type: 'error'
+          });
+        } else {
+          localStorage.setItem("MessageLength", value)
+          this.gpt.MessageLength = sum;
           this.$message({
             message: `长度设置成功-当前长度${this.gpt.MessageLength}`,
             type: 'success'
@@ -329,12 +357,10 @@ export default {
         }
 
 
-
-
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '取消设置-当前长度为:'+this.gpt.MessageLength
+          message: '取消设置-当前长度为:' + this.gpt.MessageLength
         });
       });
 
@@ -342,38 +368,38 @@ export default {
     },
 
     async button_send_xiaoShuo() {
-      let k=3; //章节控制
+      let k = 3; //章节控制
 
       this.$notify({
         title: '上传提示',
         message: `请确保角色扮演选择的是【小说大佬】并且已经让他指定生成了什么小说，点击这个就能连续${k}次生成小说！`,
         type: 'warning'
       });
-        while (k){
-          this.textarea = "继续给我下一章，并且要有故事情节和他们之间的对话，字数在1000字左右";
-          await this.button_send();
-          console.log("生成文章！")
-          k--;
-        }
+      while (k) {
+        this.textarea = "继续给我下一章，并且要有故事情节和他们之间的对话，字数在1000字左右";
+        await this.button_send();
+        console.log("生成文章！")
+        k--;
+      }
 
     },
 
     //当刷新缓存的时候 先保存之前保存的后面在吧保存的放回去
-    gptrefresh(){
-     let text= this.textarea
+    gptrefresh() {
+      let text = this.textarea
 
-      this.textarea="emptyemptyempty";
+      this.textarea = "emptyemptyempty";
       this.button_send();
-      this.textarea=text
+      this.textarea = text
     },
 
 
     //创建聊天
-    createChat(){
+    createChat() {
       this.$prompt('请输入创建聊天名称，可以随便取名', '创建聊天', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
-      }).then(({ value }) => {
+      }).then(({value}) => {
         this.saveChatSon(value)
         this.createMessage(this.drawing[0].id);
       }).catch(() => {
@@ -385,15 +411,15 @@ export default {
     },
 
     //gpt模型选择
-    gptSwitch1(){
-      let optionHtml="";
+    gptSwitch1() {
+      let optionHtml = "";
 
-      for(let time of this.gptSwitch){
-        optionHtml+=`<option ref="option1" value="${time.model}">${time.name}</option>`;
+      for (let time of this.gptSwitch) {
+        optionHtml += `<option ref="option1" value="${time.model}">${time.name}</option>`;
       }
 
 
-      let templateHtml=`
+      let templateHtml = `
      <select onchange="onGptModelSwitch(this)" id="fruits" style="padding: 5px; font-size: 16px; border-radius: 5px; background-color: #f2f2f2; color: #333;width: 100%" >
           ${optionHtml}
       </select>
@@ -402,14 +428,15 @@ export default {
 
       this.$alert(templateHtml, '模型选择', {
         dangerouslyUseHTMLString: true
-      }).catch(()=>{}) // 添加错误捕获;
+      }).catch(() => {
+      }) // 添加错误捕获;
     },
     //当修改模型的时候
-    onGptModelSwitch(model){
-      this.gpt.model=model.value;
-      localStorage.setItem("model",model.value) //设置模型
+    onGptModelSwitch(model) {
+      this.gpt.model = model.value;
+      localStorage.setItem("model", model.value) //设置模型
       this.gptrefresh();
-      console.log("当前选择的模型:",model.value)
+      console.log("当前选择的模型:", model.value)
       this.$notify({
         title: '成功',
         message: `当前模型:[${this.gpt.model}]`,
@@ -419,48 +446,45 @@ export default {
     },
 
 
-  //高亮标记
-  kk(item){
-    let bol=false;
-    let highlightBlocks = item.parentNode.querySelectorAll('pre code');
-    highlightBlocks.forEach((block) => {
-      if (!block.classList.contains('hljs')) {
-        hljs.highlightElement(block);
-        block.classList.add('hljs'); // 添加类名标记为已经高亮
-        bol=true;
-      }
-    });
+    //高亮标记
+    kk(item) {
+      let bol = false;
+      let highlightBlocks = item.parentNode.querySelectorAll('pre code');
+      highlightBlocks.forEach((block) => {
+        if (!block.classList.contains('hljs')) {
+          hljs.highlightElement(block);
+          block.classList.add('hljs'); // 添加类名标记为已经高亮
+          bol = true;
+        }
+      });
 
-
-  },
-   copyPre(perTag) {
-      let perTags = perTag.getElementsByTagName('code')[0];
-
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(perTags.innerText);
-      } else {
-        let textarea = document.createElement('textarea');
-        textarea.style.position = 'fixed';
-        textarea.style.opacity = 0;
-        textarea.value = perTags.innerText;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-      }
-
-
-
-
-      let tooltip = document.getElementById('tooltip');
-      tooltip.style.display = 'block'; // 显示提示框
-      setTimeout(function() {
-        tooltip.style.display = 'none'; // 2秒后隐藏提示框
-      }, 300);
-
-      console.log("复制成功")
 
     },
+    copyPre(perTag) {
+      let tempTextArea = document.createElement('textarea');
+      tempTextArea.value = perTag;
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      tempTextArea.setSelectionRange(0, 99999); // For mobile devices
+
+      try {
+        document.execCommand('copy');
+        this.$message({
+          message: '代码复制成功!',
+          type: 'success'
+        });
+      } catch (err) {
+        this.$message({
+          message: '复制失败，请手动复制!',
+          type: 'error'
+        });
+      }
+
+      document.body.removeChild(tempTextArea);
+      return perTag;
+    },
+
+
 
     //发送数据
     async button_send() {
@@ -471,7 +495,7 @@ export default {
         });
         return;
       }
-      if ((this.gpt.model==="gpt-4-all"||this.gpt.model==="gpt-4-turbo"||this.gpt.model==="gpt-4-turbo-2024-04-09")&&this.textarea.length>=5000) { //如果输入的内容为空
+      if ((this.gpt.model === "gpt-4-all" || this.gpt.model === "gpt-4-turbo" || this.gpt.model === "gpt-4-turbo-2024-04-09") && this.textarea.length >= 5000) { //如果输入的内容为空
         this.$message({
           message: '警告,使用4.0请输入5000字以下否则请联系管理员打开权限',
           type: 'warning'
@@ -486,14 +510,14 @@ export default {
           {
             id: "msg_id:" + id1,
             bol: false,
-            userMessage:this.textarea ,  //提问的问题
-            AIMessage:'', //回答
-            edition: this.textarea=="emptyemptyempty"?"系统信息":this.gpt.model,
-            contentName:this.gpt.content.name
+            userMessage: this.textarea,  //提问的问题
+            AIMessage: '', //回答
+            edition: this.textarea == "emptyemptyempty" ? "系统信息" : this.gpt.model,
+            contentName: this.gpt.content.name
           };
       //数组添加
       this.drawingClass.unshift(drawingClass)
-      drawingClass.AIMessage=`
+      drawingClass.AIMessage = `
       <style>
         @keyframes bubble {
           0% {
@@ -535,11 +559,9 @@ export default {
         "g3": {
           "role": "user",
           "content": this.textarea   //问题
-          // "content":"你是谁"
-
         },
         social_uid: this.drawingID.id, //问题id
-        model:this.gpt.model,
+        model: this.gpt.model,
         stream: true
       }
       const requestOptions = {
@@ -552,18 +574,13 @@ export default {
       };
 
       this.textarea = "";
-      // console.log(data1)
-
       //错误的
-      const fetchPromise = fetch(requestData.ip()+"gptChat/gpt4.0.all", requestOptions); // 创建fetch请求的Promise实例
+      const fetchPromise = fetch(requestData.ip() + "gptChat/gpt4.0.all", requestOptions); // 创建fetch请求的Promise实例
       const timeoutPromise = new Promise((resolve, reject) => { // 创建超时的Promise实例
         setTimeout(() => {
-            // this.$message.error('接口请求超时,请重新生成:错误原因：'+JSON.stringify(resolve));
 
-          reject(new Error('请求超时，错误原因:')+JSON.stringify(reject));
-          // drawingClass.AIMessage=new Error('请求超时，错误原因:')+JSON.stringify(reject);
+          reject(new Error('请求超时，错误原因:') + JSON.stringify(reject));
 
-        // }, 30000); // 设置超时时间为30秒
         }, 30000); // 设置超时时间为30秒
       });
       const response = await Promise.race([fetchPromise, timeoutPromise]); // 使用Promise.race()并行执行fetch请求和超时的Promise实例
@@ -573,45 +590,55 @@ export default {
         let result = await reader.read();
 
 
-
-
-      drawingClass.AIMessage="";
-       let k="";
+        drawingClass.AIMessage = "";
+        let k = "";
         let converter = new showdown.Converter();
-          while (!result.done) {
-            // let text = new TextDecoder("utf-8").decode(result.value).replace(/\s/g, '\u00A0').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/{{END}}/g, '\n');
-            let text = new TextDecoder("utf-8").decode(result.value);
+        while (!result.done) {
+          // let text = new TextDecoder("utf-8").decode(result.value).replace(/\s/g, '\u00A0').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/{{END}}/g, '\n');
+          let text = new TextDecoder("utf-8").decode(result.value);
 
 
-            k+=text;
+          k += text;
 
-            // 将文本转换为Markdown格式的HTML
-            // drawingClass.AIMessage = converter.makeHtml(k);
-            // drawingClass.AIMessage = madn(k);
-            drawingClass.AIMessage =marked.parse(k);
-            // drawingClass.AIMessage = converter.makeHtml(drawingClass.AIMessage+text);
+          // 将文本转换为Markdown格式的HTML
 
-
-            // console.log(drawingClass.AIMessage);
+          // drawingClass.AIMessage = marked.parse(k);
+          drawingClass.AIMessage = marked.parse(k);
 
 
-            result = await reader.read();
-          }
+
+
+          result = await reader.read();
+        }
 
         // 进行更新标签
         // let blocks = document.getElementById("c1").querySelectorAll('pre code');
+        // let blocks = document.getElementById("c1").querySelectorAll('pre');
+
+
+        // for (let b1 of blocks) {
+        //   b1.onclick = () => {
+        //     this.copyPre(b1.innerText);
+        //     console.log("复制功能",b1)
+        //     console.log("")
+        //   }
+        // }
+        //
+        // Array.prototype.forEach.call(blocks, hljs.highlightBlock);
+
+        // 进行更新标签
         let blocks = document.getElementById("c1").querySelectorAll('pre');
+        console.log("步入查询",blocks)
 
-
-          for(let b1 of blocks) {
-            b1.onclick = () => {
-              console.log("复制功能")
-            }
+        for (let b1 of blocks) {
+          b1.style.cursor = "pointer";
+          b1.onclick = () => {
+            this.copyPre(b1.innerText);
+            console.log("复制功能",b1)
+            console.log("")
           }
-
-        Array.prototype.forEach.call(blocks, hljs.highlightBlock);
-
-
+          hljs.highlightBlock(b1); // 使用highlightBlock对代码块进行高亮
+        }
 
 
 
@@ -635,6 +662,7 @@ export default {
     },
 
 
+
     async copy(item) {
 
       let clipboardObj = navigator.clipboard;
@@ -643,7 +671,7 @@ export default {
         let text = dom?.innerText || '';
 
         // 删除首行内容
-        text=text.trim();
+        text = text.trim();
         text = text.replace(/.*\n/, '');
         text = text.replace(/\u00A0/g, ' ').replace(/<br>/g, '\n');
 
@@ -657,30 +685,29 @@ export default {
       } catch (error) {
         this.$notify.error({
           title: '复制失败',
-          message:error
+          message: error
         });
         console.error('复制失败: ', error);
       }
     },
 
     //获取传递过来的id
-    drawingIDClick(drawingID){
-      console.log("传递过来的id为: ",drawingID)
-      this.drawingID=drawingID;
+    drawingIDClick(drawingID) {
+      console.log("传递过来的id为: ", drawingID)
+      this.drawingID = drawingID;
       //拿到对应的数据
-      this.drawingClass=JSON.parse(localStorage.getItem(drawingID.id))
+      this.drawingClass = JSON.parse(localStorage.getItem(drawingID.id))
     },
 
 
-
     //重新生成答案
-    anew(text){
-      this.textarea=text;
+    anew(text) {
+      this.textarea = text;
     },
 
     //设置显示文字数量
     displayText(text) {
-      if (text.length > this.text.textSize ) {
+      if (text.length > this.text.textSize) {
         return text.slice(0, this.text.textSize) + " ...";
       } else {
         return text;
@@ -688,23 +715,20 @@ export default {
     },
 
 
-
   },
   created() {
 
-    window.kk=this.kk;
-    window.copy=this.copy;
-    window.onGptModelSwitch=this.onGptModelSwitch;
+    window.kk = this.kk;
+    window.copy = this.copy;
+    window.onGptModelSwitch = this.onGptModelSwitch;
 
-   let gptMessageLength =localStorage.getItem("MessageLength")
-    this.MessageLength=gptMessageLength==null?3:gptMessageLength;
+    let gptMessageLength = localStorage.getItem("MessageLength")
+    this.MessageLength = gptMessageLength == null ? 3 : gptMessageLength;
 
     console.log(localStorage.getItem("model"))
 
 
-
-
-    console.log("长度为:",this.MessageLength)
+    console.log("长度为:", this.MessageLength)
 
     // hljs.addPlugin( {
     //   'after:highlightElement': ({el, result}) => {
@@ -715,32 +739,9 @@ export default {
   },
 
 
-  watch:{
+  watch: {
 
-    // drawingID:{
-    //   handler(xing){
-    //     console.log("修改了")
-    //    let boo=false;
-    //     for(let time of this.drawing){
-    //       if (time.id == xing) {
-    //         this.drawingClass=time;
-    //         boo=true;
-    //         break;
-    //       }
-    //     }
-    //
-    //     // //如果不存在这个数据
-    //     if(boo==false){
-    //       this.$message({
-    //         message: `当前聊天id:${xing} 没有查到`,
-    //         type: 'error'
-    //       });
-    //
-    //     }
-    //
-    //
-    //   }
-    // }
+
   },
 
 }
@@ -760,6 +761,7 @@ export default {
 .fade-enter-active, .fade-leave-active {
   transition: opacity 1s;
 }
+
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
@@ -770,7 +772,7 @@ blockquote {
   padding-left: 10px; /*设置左边的内边距*/
 }
 
-.tuBiao{
+.tuBiao {
   cursor: pointer;
   padding: 5px; /* 设置链接内边距 */
   margin-top: 10px;
@@ -778,25 +780,22 @@ blockquote {
   border: 1px solid transparent; /* 在默认状态下设置透明的1像素边框 */
 }
 
-.tuBiao:hover{
+.tuBiao:hover {
   border-color: #00ff00; /* 在Hover状态下改变边框颜色 */
   background-color: rgba(0, 0, 0, 0.07);
 }
 
 
-
-
-
-.tuBiao1{
+.tuBiao1 {
   border: 1px solid transparent; /* 在默认状态下设置透明的1像素边框 */
 }
 
 
-
-.tuBiao1:hover{
+.tuBiao1:hover {
   box-shadow: 0 0 5px 1px rgb(166, 163, 163),
-              0 0 5px 1px #00ff00,
-              0 0 5px 1px #47ff00; /* 在Hover状态下添加彩色的外部发光效果 */
+  0 0 5px 1px #00ff00,
+  0 0 5px 1px #47ff00; /* 在Hover状态下添加彩色的外部发光效果 */
   background-color: rgb(255, 255, 255);
 }
+
 </style>
