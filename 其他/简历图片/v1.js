@@ -1,7 +1,8 @@
 /**
  * Node 下运行：node v1.js
  * 遍历 img/ 下的一级子目录，生成 fileList.json（与 index.html 展示格式一致）。
- * 若已存在 fileList.json：只保留「磁盘上仍存在的文件夹」；已删掉的文件夹会从列表中移除；新增的文件夹追加在最后。
+ * - 只保留「磁盘上仍存在的文件夹」，已删的从列表移除。
+ * - 每个文件夹都会按磁盘重新扫描：内部文件若改了前缀/名称或顺序，会同步更新到 fileList.json。
  *
  * 命名规则：等级_显示名（如 -1_测试一、2_测试二）。等级越小越靠前；生成的 text/data.text 只用「_」后面的部分，不含此前缀。
  */
@@ -71,43 +72,59 @@ async function main() {
   const existingList = loadExistingList();
   const allFolderNames = await getFolderNames();
   const foldersOnDisk = new Set(allFolderNames);
+  const existingFolders = new Set(existingList.map(item => item.folder));
 
-  // 只保留磁盘上仍存在的文件夹，已删掉的从列表中移除
-  const keptList = existingList.filter(item => foldersOnDisk.has(item.folder));
+  // 已删掉的文件夹（仅用于日志）
   const removed = existingList.filter(item => !foldersOnDisk.has(item.folder));
+  const newFolderNames = allFolderNames.filter(name => !existingFolders.has(name));
 
-  const keptFolders = new Set(keptList.map(item => item.folder));
-  const newFolderNames = allFolderNames.filter(name => !keptFolders.has(name));
-
-  const newItems = [];
-  for (const folderName of newFolderNames) {
+  // 所有磁盘上的文件夹都重新扫描内部文件，保证文件名/顺序与磁盘一致
+  const result = [];
+  for (const folderName of allFolderNames) {
     const data = await getFilesInFolder(folderName);
     const { display } = parseLevelPrefix(folderName);
-    newItems.push({
+    result.push({
       text: display,
       folder: folderName,
       data
     });
   }
+  // 已按 getFolderNames 的等级排序，无需再 sort
 
-  // 合并后按「等级_」统一排序：等级越小越前，无前缀的排最后
-  const result = keptList.concat(newItems);
-  result.sort((a, b) => parseLevelPrefix(a.folder).sortKey - parseLevelPrefix(b.folder).sortKey);
   fs.writeFileSync(OUTPUT_JSON, JSON.stringify(result, null, 2), 'utf8');
 
-  console.log('已写入', OUTPUT_JSON);
+  // 输出日志
+  console.log('');
+  console.log('========== v1.js 扫描结果 ==========');
+  console.log('  目标目录:', TARGET_DIR);
+  console.log('  输出文件:', OUTPUT_JSON);
+  console.log('  当前磁盘文件夹数:', allFolderNames.length);
+  console.log('  已从列表移除（文件夹已删）:', removed.length);
+  console.log('  新增到列表的文件夹:', newFolderNames.length);
+  console.log('  最终列表项数:', result.length);
+  console.log('  （每个文件夹内文件均按磁盘重新扫描，前缀/名称/顺序已同步）');
+  console.log('--------------------------------------');
   if (removed.length) {
-    console.log('已从列表中移除（文件夹已删除）:', removed.map(i => i.folder).join(', '));
+    console.log('  已从列表中移除:');
+    removed.forEach((i) => console.log('    -', i.folder));
   }
-  if (newItems.length) {
-    console.log('新增文件夹:', newItems.map(i => i.folder).join(', '));
+  if (newFolderNames.length) {
+    console.log('  新增到列表:');
+    newFolderNames.forEach((name) => {
+      const item = result.find(r => r.folder === name);
+      console.log('    +', name, item ? '(' + item.data.length + ' 个文件)' : '');
+    });
   }
-  if (!removed.length && !newItems.length) {
-    console.log('无变化。');
+  if (!removed.length && !newFolderNames.length) {
+    console.log('  文件夹无增删；内部文件已按磁盘更新。');
   }
+  console.log('--------------------------------------');
+  console.log('  已写入', OUTPUT_JSON);
+  console.log('======================================');
+  console.log('');
 }
 
 main().catch(err => {
-  console.error(err);
+  console.error('v1.js 执行失败:', err.message);
   process.exit(1);
 });
