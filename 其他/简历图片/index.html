@@ -30,7 +30,7 @@
                 htmlDataTable += `
                     <div class="image-scroll-item">
                         <div class="project-img-container">
-                            <img src="${imgSrc}" class="img-fluid" onclick="enlargeImage(this.src, '${html.text.replace(/'/g, "\\'")}')" alt="">
+                            <img src="${imgSrc}" loading="lazy" class="img-fluid" onclick="enlargeImage(this.src, '${html.text.replace(/'/g, "\\'")}')" alt="${(text.text || '').replace(/"/g, '&quot;')}">
                             <div class="img-title">${text.text}</div>
                         </div>
                     </div>
