@@ -1,0 +1,172 @@
+/* 路由切换动画样式 */
+
+/* 淡入淡出效果 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* 滑动效果 */
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.5s ease;
+}
+
+.slide-enter-from {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+.slide-leave-to {
+  opacity: 0;
+  transform: translateX(50px);
+}
+
+/* 缩放效果 */
+.scale-enter-active,
+.scale-leave-active {
+  transition: all 0.5s ease;
+}
+
+.scale-enter-from,
+.scale-leave-to {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+/* 翻转效果 */
+.flip-enter-active,
+.flip-leave-active {
+  transition: all 0.6s ease;
+}
+
+.flip-enter-from {
+  opacity: 0;
+  transform: perspective(1000px) rotateY(90deg);
+}
+
+.flip-leave-to {
+  opacity: 0;
+  transform: perspective(1000px) rotateY(-90deg);
+}
+
+/* 工具卡片动画 */
+.tool-card-enter-active,
+.tool-card-leave-active {
+  transition: all 0.4s ease;
+}
+
+.tool-card-enter-from,
+.tool-card-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* 工具详情页面动画 */
+.tool-detail-enter-active,
+.tool-detail-leave-active {
+  transition: all 0.5s ease;
+}
+
+.tool-detail-enter-from {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.tool-detail-leave-to {
+  opacity: 0;
+  transform: translateY(-50px);
+}
+
+/* 分类标题动画 */
+.category-title-enter-active,
+.category-title-leave-active {
+  transition: all 0.4s ease;
+}
+
+.category-title-enter-from,
+.category-title-leave-to {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+/* 按钮动画 */
+.button-enter-active,
+.button-leave-active {
+  transition: all 0.3s ease;
+}
+
+.button-enter-from,
+.button-leave-to {
+  opacity: 0;
+  transform: scale(0.7);
+}
+
+/* 页面切换动画 */
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.6s ease;
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-40px);
+}
+
+/* 3D翻页效果 */
+.page-flip-enter-active,
+.page-flip-leave-active {
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-flip-enter-from {
+  opacity: 0;
+  transform: perspective(1000px) rotateY(90deg);
+}
+
+.page-flip-leave-to {
+  opacity: 0;
+  transform: perspective(1000px) rotateY(-90deg);
+}
+
+/* 滑动翻页效果 */
+.page-slide-enter-active,
+.page-slide-leave-active {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-slide-enter-from {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.page-slide-leave-to {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+/* 缩放翻页效果 */
+.page-zoom-enter-active,
+.page-zoom-leave-active {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-zoom-enter-from {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.page-zoom-leave-to {
+  opacity: 0;
+  transform: scale(1.2);
+} 

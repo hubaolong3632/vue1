@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9b408863-262b-4c24-9bb9-8a438036e1d4" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/其他/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他/简历图片/img/硬件/c4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他/简历图片/img/硬件/c6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/其他/简历图片/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/App.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/assets/base.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/assets/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/39361.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/c1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/c2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/c3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/c4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/c5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/fz/download.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/fz/fxyj.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/fz/yb.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/long/楷书.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/long/现代.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/long/甲骨文.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/long/篆书.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/long/行书.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/long/金文.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/十二生肖/jishe.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/十二生肖/laoshu.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/十二生肖/long.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/甲骨文图片/b1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/甲骨文图片/b2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/甲骨文图片/b3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/甲骨文图片/b4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/甲骨文图片/e1.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/甲骨文图片/e2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/甲骨文图片/e3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/甲骨文图片/f1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/甲骨文图片/f2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/甲骨文图片/f3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/甲骨文图片/f4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/img/甲骨文图片/f5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/router/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/router/ip.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/接单/s100/src/view/Home.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo1/public/imagetp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/image/fixation/c143.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/image/fixation/c175.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/image/fixation/c185.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/image/fixation/c198.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/image/fixation/c75.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/image/fixation/c9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/image/login/QQ_login.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/invariant/ZhonBu/TcV3.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/login/LoginV2.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/imagetp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/public/byms.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/components/Shiping/shiping_home.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/components/home/BodyControl_home.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/components/home/FacesRecognition_home.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/components/home/Index_home.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/components/home/Lidar_home.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/components/home/Perform_home.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/components/home/RgbIdentify_home.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/components/home/TagIdentification_home.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/components/home/TargetTracking_home.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/components/home/Vision_home.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/img/Group 40.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/img/bqsb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/img/byms.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/img/dog.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/img/jiqigou.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/img/logo/c1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/img/logo/imagetp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/img/mbzz.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/img/robot-dog.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/img/shang.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/img/wxjslogo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/img/xia.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/img/you.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/img/yssb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/img/zuo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/img/待开发.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/img/摄像机方向操控.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/img/机体遥控.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/img/激光雷达.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/router/ip.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/router/shiki.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/views/Index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/views/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/src/App.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/src/components/Tou/BottomV3.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/src/components/Tou/HeadV3.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/src/components/ZhoBu/CCV2.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/src/components/ZhoBu/DateFIle.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/src/components/ZhoBu/HomeV3.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/src/img/background/c1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/src/img/background/c11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/src/img/background/c211.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/src/img/background/c223.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/src/img/background/c224.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/src/img/background/c3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/src/img/c1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/src/img/login/login.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/src/img/login/sing.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/src/img/login/tou.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/src/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/src/router/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/src/router/ip.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/src/store.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/vite.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/其他/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/其他/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/其他/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vue1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/其他/.idea/vue1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/boostrap/bootstrap1.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/boostrap/bootstrap1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/c1.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/c1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/d3.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/d3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/demo1.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/demo1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/demo2.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/demo2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/demo4/c1.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/demo4/c1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/demo4/c1.js" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/demo4/c1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/demo4/c3.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/demo4/c3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/demo5.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/demo5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/image/c2.gif" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/image/c2.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/image/imagetp.png" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/image/imagetp.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/image/p9.png" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/image/p9.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/kaiguan.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/kaiguan.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/mode3.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/mode3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/动画/c1.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/动画/c1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/动画/c2.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/动画/c2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/动画/c3.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/动画/c3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/悬浮弹窗.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/悬浮弹窗.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/模糊背景/demo1.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/模糊背景/demo1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/浮屏广告.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/浮屏广告.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/火箭飞行.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/火箭飞行.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/高亮/d5.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/高亮/d5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/高亮/de1.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/高亮/de1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/高亮/de3.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/高亮/de3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/上课HTML/高亮/de4.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/上课HTML/高亮/de4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/比赛项目/V2/demo1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/比赛项目/V2/demo1/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第一题/c3.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第一题/c3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第一题/c4.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第一题/c4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第一题/demo1.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第一题/demo1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第一题/demo2.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第一题/demo2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第一题/demo3.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第一题/demo3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第一题/demo4_bind.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第一题/demo4_bind.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第一题/image/tp1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第一题/image/tp1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第一题/image/tp2.png" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第一题/image/tp2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第一题/image/tp3.png" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第一题/image/tp3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第一题/image/tp4.png" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第一题/image/tp4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第一题/image/tp5.png" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第一题/image/tp5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第三期/demo1_按钮点击事件.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第三期/demo1_按钮点击事件.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第三期/demo2_控制class和style.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第三期/demo2_控制class和style.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第三期/demo3_计算属性.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第三期/demo3_计算属性.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第三期/demo4_watch监听器.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第三期/demo4_watch监听器.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第三期/demo5_生命周期.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第三期/demo5_生命周期.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第二期/aaa.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第二期/aaa.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第二期/demo1.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第二期/demo1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第二期/demo2.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第二期/demo2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第二期/demo3.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第二期/demo3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第二期/demo4_forKey.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第二期/demo4_forKey.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第二期/demo5_v_model.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第二期/demo5_v_model.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第二期/tp.html" beforeDir="false" afterPath="$PROJECT_DIR$/其他/第二期/tp.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/比赛项目一/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/比赛项目一/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/demo3/demo3/src/views/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目1/demo1/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/demo1/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目1/demo1/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/alter/AI/AIImage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/alter/AI/AIImage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/alter/AI/AIImage/ImageOrdelZuo/ImageAdvanced.vue" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/alter/AI/AIImage/ImageOrdelZuo/ImageAdvanced.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/alter/ImageShi.vue" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/alter/ImageShi.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/alter/LunBuoTuSon.vue" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/alter/LunBuoTuSon.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/alter/custom/CoustomZUJian.vue" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/alter/custom/CoustomZUJian.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/alter/draw/TimeYi.vue" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/alter/draw/TimeYi.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/invariant/TouBu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/invariant/TouBu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/invariant/ZhonBu/ChatGptZhonBu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/invariant/ZhonBu/ChatGptZhonBu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/invariant/ZhonBu/IndexZhonBu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/components/invariant/ZhonBu/IndexZhonBu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目1/demo1/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目1/demo1/src/router/requestData.js" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/router/requestData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目1/demo1/src/views/SanView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/views/SanView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目1/demo1/src/views/YiView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/views/YiView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目1/demo1/src/views/ZhoBu/ZhonBuViews.vue" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/demo1/src/views/ZhoBu/ZhonBuViews.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目1/demo1/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/demo1/vue.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d1/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d1/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d1/babel.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d1/jsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d1/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d1/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d1/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/接单/s100/public/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d1/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d1/src/App.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d1/src/assets/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d1/src/components/LoginV1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d1/src/img/c1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d1/src/img/c2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d1/src/img/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d1/src/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d1/src/utio/ip.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d1/vue.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/接单/s100/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/.vscode/extensions.json" beforeDir="false" afterPath="$PROJECT_DIR$/接单/s100/.vscode/extensions.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/jsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/接单/s100/jsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/src/App.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/src/assets/base.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/src/assets/logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/接单/s100/src/assets/logo.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/src/assets/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/src/components/HelloWorld.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/src/components/icons/IconCommunity.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/src/components/icons/IconDocumentation.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/src/components/icons/IconEcosystem.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/src/components/icons/IconSupport.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/src/components/icons/IconTooling.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/src/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/src/router/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/src/views/AboutView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/src/views/ElemtUI.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/src/views/HomeView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/src/views/LuYou2.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/src/views/SanV3.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d2/vue/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/接单/s100/vite.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/.vscode/extensions.json" beforeDir="false" afterPath="$PROJECT_DIR$/第四期/项目1/网盘项目/wp/.vscode/extensions.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/接单/s100/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/接单/s100/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/jsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/接单/s100/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/App.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/assets/base.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/assets/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/assets/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/components/icons/IconCommunity.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/components/icons/IconDocumentation.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/components/icons/IconEcosystem.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/components/icons/IconSupport.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/components/icons/IconTooling.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/image/c1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/image/c2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/image/c4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/image/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/接单/s100/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/router/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/router/utio.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/views/HomeV3.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/views/LoginV3.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/views/MessageV3.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/views/ServiceV3.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/src/views/ShoppyV3.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/第四期/项目第二次/d3/vue/vite.config.js" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="Vue Composition API Component" />
+        <option value="Vue Options API Component" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2lrZ2j1EMQkrlsXYBYspxvpLw80" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/vue/vue1/其他/简历图片/img/QQ机器人&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.2.5\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;vue.recent.templates&quot;: [
+      &quot;Vue Composition API Component&quot;,
+      &quot;Vue Options API Component&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\vue\vue1\其他\简历图片\img\QQ机器人" />
+      <recent name="F:\vue\vue1\其他\简历图片\img\硬件" />
+      <recent name="F:\vue\vue1\其他\简历图片\img" />
+      <recent name="F:\vue\vue1\第四期\项目1\demo1\src\components\invariant" />
+      <recent name="F:\vue\vue1\第四期\项目1\demo1\public" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\vue\vue1\第四期\项目1\demo1\src" />
+      <recent name="F:\vue\vue1\第四期\项目1\demo1\src\components\image\login" />
+      <recent name="F:\vue\vue1\第四期\项目1\网盘项目\wp\src" />
+      <recent name="F:\vue\vue1\第四期\项目1\网盘项目\wp\src\img\login" />
+      <recent name="F:\vue\vue1\第四期\项目1\网盘项目\wp\src\img\tou" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.build (1)">
+    <configuration name="build (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/第四期/项目1/demo3/demo3/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/第四期/项目1/demo1/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="dev (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/第四期/项目1/demo3/demo3/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/接单/s100/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="serve (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/第四期/Esp32Vehicle/vehicle/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="serve" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.build (1)" />
+        <item itemvalue="npm.dev (1)" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.serve (1)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="9b408863-262b-4c24-9bb9-8a438036e1d4" name="更改" comment="" />
+      <created>1725939965909</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1725939965909</updated>
+      <workItem from="1725939968075" duration="1379000" />
+      <workItem from="1725941365114" duration="38333000" />
+      <workItem from="1726101209347" duration="1762000" />
+      <workItem from="1726125973242" duration="1945000" />
+      <workItem from="1726187006302" duration="12375000" />
+      <workItem from="1726273073501" duration="732000" />
+      <workItem from="1726275070062" duration="2335000" />
+      <workItem from="1726278204775" duration="36744000" />
+      <workItem from="1726668589992" duration="28905000" />
+      <workItem from="1726893255212" duration="619000" />
+      <workItem from="1727006460737" duration="595000" />
+      <workItem from="1727068453634" duration="705000" />
+      <workItem from="1727426324800" duration="4526000" />
+      <workItem from="1728456411704" duration="2104000" />
+      <workItem from="1728521899862" duration="28918000" />
+      <workItem from="1729164856264" duration="626000" />
+      <workItem from="1729167064972" duration="1000" />
+      <workItem from="1729823001822" duration="11630000" />
+      <workItem from="1729836948326" duration="2906000" />
+      <workItem from="1730024728669" duration="7338000" />
+      <workItem from="1730090401390" duration="693000" />
+      <workItem from="1730111909752" duration="18000" />
+      <workItem from="1730112410676" duration="820000" />
+      <workItem from="1730871790398" duration="1777000" />
+      <workItem from="1732163460154" duration="611000" />
+      <workItem from="1732773516966" duration="1203000" />
+      <workItem from="1733399639406" duration="866000" />
+      <workItem from="1734313489006" duration="4048000" />
+      <workItem from="1734340478679" duration="133000" />
+      <workItem from="1734408195551" duration="249000" />
+      <workItem from="1734408454286" duration="428000" />
+      <workItem from="1734412397343" duration="13000" />
+      <workItem from="1734415203477" duration="88000" />
+      <workItem from="1734497588628" duration="3422000" />
+      <workItem from="1735030607878" duration="667000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

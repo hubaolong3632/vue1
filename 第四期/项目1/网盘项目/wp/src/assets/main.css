@@ -1,0 +1,18 @@
+.el-upload-dragger {
+  background-color: #ffffff3d !important;
+  /*width: 50vw  !important;*/
+  height: 30vh;
+
+}
+
+html.dark {
+  /* 自定义深色背景颜色 */
+  --el-bg-color: #cb0e0e;
+}
+
+.is-drag{
+  /*display: none !important;*/
+}
+
+
+

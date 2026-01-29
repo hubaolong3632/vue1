@@ -1,0 +1,126 @@
+[
+  {
+    "icon": "https://yj.00000.work/img/c143.5709175a.png",
+    "title": "常用官网",
+    "data": [
+      {
+        "name": "邮寄AI官网",
+        "img": "https://files.00000.work/home/img/yj.png",
+        "url": "https://yj.00000.work/",
+        "introduce": "AI官网平台,用于ai的聊天和绘图功能",
+        "showDetails": false
+      },
+      {
+        "name": "AI手机版",
+        "img": "https://files.00000.work/home/img/c63.png",
+        "url": "https://0.00000.work/",
+        "introduce": "支持手机端的AI聊天简易版",
+        "showDetails": false
+      },
+      {
+        "name": "好评自动生成",
+        "img": "https://files.00000.work/home/img/c63.png",
+        "url": "https://img.00000.work/",
+        "introduce": "生成一句好评的功能",
+        "showDetails": false
+      },
+      {
+        "name": "拍照生成好评",
+        "img": "https://files.00000.work/home/img/c63.png",
+        "url": "https://img.00000.work/1",
+        "introduce": "拍照生成好评苹果手机使用",
+        "showDetails": false
+      },
+      {
+        "name": "个人简历",
+        "img": "https://files.00000.work/home/img/c63.png",
+        "url": "https://jianli.00000.work/",
+        "introduce": "个人的简历模板获奖荣誉",
+        "showDetails": false
+      },
+      {
+        "name": "机器狗",
+        "img": "https://files.00000.work/home/img/c63.png",
+        "url": "https://sc.00000.work/#/",
+        "introduce": "机器狗控制程序用于控制机器狗移动以及机器狗的表演",
+        "showDetails": false
+      },
+      {
+        "name": "文件图床",
+        "img": "https://files.00000.work/home/img/c63.png",
+        "url": "https://tc.00000.work/",
+        "introduce": "用于保存文件的图床直接放入直接上传",
+        "showDetails": false
+      }
+    ]
+  },{
+  "icon": "https://yj.00000.work/img/c143.5709175a.png",
+  "title": "歌曲的节目界面",
+  "data": [
+    {
+      "name": "节目单首页",
+      "img": "https://files.00000.work/home/img/c63.png",
+      "url": "http://sin.00000.work:10010/index.html",
+      "introduce": "节目单首页用于评委评分界面",
+      "showDetails": false
+    },
+    {
+      "name": "节目单后台",
+      "img": "https://files.00000.work/home/img/c63.png",
+      "url": "http://sin.00000.work:10010/后台.html",
+      "introduce": "后台用于发起投票统计投票",
+      "showDetails": false
+    },
+    {
+      "name": "排行榜",
+      "img": "https://files.00000.work/home/img/c63.png",
+      "url": "http://sin.00000.work:10010/排行榜.html",
+      "introduce": "查看当前排行榜每个节目的排名",
+      "showDetails": false
+    }
+
+  ]
+}
+  ,{
+  "icon": "https://yj.00000.work/img/c143.5709175a.png",
+  "title": "饮料贩卖机",
+  "data": [
+
+    {
+      "name": "饮料贩卖机首页",
+      "img": "https://files.00000.work/home/img/c63.png",
+      "url": "https://csb.00000.work/?uid=10001",
+      "introduce": "饮料贩卖机手机端付款界面，后面跟uid去查找",
+      "showDetails": false
+    },    {
+      "name": "饮料贩卖机后台",
+      "img": "https://files.00000.work/home/img/c63.png",
+      "url": "https://csb.00000.work/socket",
+      "introduce": "强制控制饮料机启动和停止，以及拿到订单数据",
+      "showDetails": false
+    }
+  ]
+},
+
+  {
+  "icon": "https://yj.00000.work/img/c143.5709175a.png",
+  "title": "其他",
+  "data": [
+
+    {
+      "name": "雷锋精神",
+      "img": "https://files.00000.work/home/img/c63.png",
+      "url": "https://lf.00000.work/",
+      "introduce": "雷锋精神的一个网站",
+      "showDetails": false
+    },{
+      "name": "倍思特官网",
+      "img": "https://files.00000.work/home/img/c63.png",
+      "url": "https://www.bstlaw.cn/web/yeji.html",
+      "introduce": "倍思特公司的官网制作的网页",
+      "showDetails": false
+    }
+  ]
+}
+
+]
